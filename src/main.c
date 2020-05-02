@@ -4,18 +4,14 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-void	print_map(int **array, int line)
+void	print_map(char **array)
 {
-	int	i;
-	int	j;
+	int	line;
 
-	i = -1;
-	while (++i < line)
+	line = -1;
+	while (array[++line])
 	{
-		j = -1;
-		while (array[i][++j] != -1)
-			printf("%d", array[i][j]);
-		printf("\n");
+		printf("%s\n", array[line]);
 	}
 }
 
@@ -43,10 +39,11 @@ int	main(int ac, char **av)
 		return (ERROR);
 	if (parse_map(&info) == ERROR)
 		return (ERROR);
-	if (raycasting(&info) == ERROR)
+	/* print_map(info.map); */
+	if (draw(&info) == ERROR)
 		return (free_struct(&info, ERROR));
-	(void)ac;
-	(void)av;
+	mlx_loop(info.mlx_ptr);
+      	ft_lstclear(&info.begin, free_list);
 	free_struct(&info, SUCCESS);
 	return (0);
 }

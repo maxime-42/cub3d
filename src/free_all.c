@@ -1,9 +1,13 @@
 #include "../include/cub3d.h"
 
-int	free_struct(t_info *info, int code_return)
+int		free_struct(t_info *info, int code_return)
 {
 	if (info->map)
-		free_array((int **)info->map, info->nline_map);
+	{
+		/* free_array((char **)info->map); */
+		free(info->map);
+		info->map = 0;
+	}
 	if (info->texture[0])
 		free(info->texture[0]);
 	if (info->texture[1])
@@ -17,25 +21,11 @@ int	free_struct(t_info *info, int code_return)
 	return (code_return);
 }
 
-
-void	free_list(void *line)
+void		free_list(void *line)
 {
 	if ((char *)line)
 	{
 		free((char *)line);
 		line = 0;
 	}
-}
-
-void	free_array(int **array, int line)
-{
-	line -= 1;
-	while (line >= 0)
-	{
-		free(array[line]);
-		array[line] = 0;
-		line--;
-	}
-	free(array);
-	array = 0;
 }

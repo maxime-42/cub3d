@@ -13,28 +13,16 @@ int	open_window(t_info *info)
 		ft_putstr_fd("Error\nfaile connexion to minilibx", STDOUT);
 		return (ERROR);
 	}
+	info->pixel.mlx_ptr = info->mlx_ptr;
 	if (!(win_mlx = mlx_new_window(info->mlx_ptr, height, width, "Hello")))
 	{
 		ft_putstr_fd("Error\nfaile open window", STDOUT);
 		return (ERROR);
 	}
 	info->win_mlx = win_mlx;
-	(void)info;
+	info->pixel.win_mlx = win_mlx;
+	info->pixel.x = 0;
+	info->pixel.y = 0;
+	info->pixel.size = 30;
 	return (SUCCESS);
-}
-
-void	color_window(t_info *info)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (++i < info->window_height)
-	{
-		j = -1;
-		while (++j < info->window_width)
-		{
-			mlx_pixel_put(info->mlx_ptr, info->win_mlx, j, i, 16722944);
-		}
-	}
 }

@@ -4,7 +4,6 @@ int		free_struct(t_info *info, int code_return)
 {
 	if (info->map)
 	{
-		/* free_array((char **)info->map); */
 		free(info->map);
 		info->map = 0;
 	}

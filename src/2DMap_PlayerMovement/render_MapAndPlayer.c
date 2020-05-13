@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void	square(int start, int size, int color)
+static void	square(int start, int size, int color)
 {
 	int	y;
 	int	x;
@@ -27,7 +27,7 @@ void	renderMap(char **map)
 
 	y = -1;
 	color = 0;
-o	while (map[++y])
+	while (map[++y])
 	{
 		x = -1;
 		start = 0;
@@ -60,6 +60,4 @@ void	renderPlayer(t_player *player)
 		py =  sin(player->rotationAngle) * line + player->y;
 		g_image_data[px + (g_width * py)] = 0x0078FF;
 	}
-
 }
- 

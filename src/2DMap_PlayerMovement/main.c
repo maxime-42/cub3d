@@ -1,5 +1,6 @@
 #include "cub3d.h"
 
+
 void	twoDMap_PlayerMovement(t_info *info)
 {
 	if (!(g_mlx_ptr = mlx_init()))

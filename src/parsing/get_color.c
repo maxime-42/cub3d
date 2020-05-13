@@ -32,7 +32,7 @@ static int	get_value_color(int *color, char *line1, char *fmt)
 			return (ERROR);
 		line1 = line2 + 1;
 	}
-	return (SUCCES);
+	return (SUCCESS);
 }
 
 int		get_color(t_info *info)
@@ -52,5 +52,5 @@ int		get_color(t_info *info)
 		return (free_color(color_f, color_c));
 	free(color_f);
 	free(color_c);
-	return (SUCCES);
+	return (SUCCESS);
 }

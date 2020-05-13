@@ -15,7 +15,6 @@ int	parse_map(t_info *info)
 		return (free_struct(info, ERROR));
 	if (check_character_map(info->begin) == ERROR)
 	{
-		ft_putstr_fd("Error\nBad a character in map\n", STDOUT);
 		ft_lstclear(&info->begin, &free_list);
 		return (free_struct(info, ERROR));
 	}

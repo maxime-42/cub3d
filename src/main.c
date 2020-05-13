@@ -4,23 +4,11 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-static int	setup(t_info *info)
-{
-	if (open_window(info) == ERROR)
-		return (ERROR);
-	info->player.turnDirection = 0;
-	info->player.walkDirection = 0;
-	info->player.radius = 10;
-	info->player.rotationAngle = M_PI / 2;
-	info->player.moveSpeed = 3.0;
-	info->player.rotationSpeed = 3 * (M_PI / 180);
-	return (SUCCESS);
-}
 
-int	main(int ac, char **av)
+int			main(int ac, char **av)
 {
 	t_info	info;
-	int	keyCode;
+	int		keyCode = 0;
 
 	info.map = 0;
 	if (ac != 2)
@@ -29,14 +17,14 @@ int	main(int ac, char **av)
 		return (ERROR);
 	if (parse_map(&info) == ERROR)
 		return (ERROR);
-	if (setup(&info) == ERROR)
-	{
-		ft_lstclear(&info.begin, &free_list);
-		return (free_struct(&info, ERROR));
-	}
 	g_info = &info;
-	/* renderMap((char **)info.map, &info.pixel); */
-	/* mlx_key_hook(info.pixel.win_mlx, &keyPressed, &keyCode); */
-	mlx_loop(info.mlx_ptr);
+	twoDMap_PlayerMovement(&info);
+	mlx_put_image_to_window(g_mlx_ptr, g_win_mlx, g_img_ptr, 0, 0);
+	mlx_hook(g_win_mlx, 2, (1L << 0), &keyPressed, &keyCode);
+	/* printf("hellow\n"); */
+	mlx_hook(g_win_mlx, 3, (1L << 1), &keyRelease, &keyCode);
+	mlx_loop(g_mlx_ptr);
+	(void)keyCode;
+	(void)g_info;
 	return (0);
 }

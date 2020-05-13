@@ -20,7 +20,7 @@ static	int	check_texture(char *texture[4], int line, char *direction)
 	{
 		return (ERROR);
 	}
-	return (SUCCES);
+	return (SUCCESS);
 }
 
 int		get_texture(t_info *info)
@@ -46,5 +46,5 @@ int		get_texture(t_info *info)
 		return (free_texture(info->texture));
 	if (check_texture(info->texture, 3, "EA ./") == ERROR)
 		return (free_texture(info->texture));
-	return (SUCCES);
+	return (SUCCESS);
 }

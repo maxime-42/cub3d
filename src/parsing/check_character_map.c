@@ -1,136 +1,118 @@
 #include "cub3d.h"
 
-static int	last_char(char **befor_line, char *current_line, int *stock_index)
+static int	lastChar(char **linePrev, int previous, char *lineCurrent, int current)
 {
-	int	befor;
-	int	current;
-
-	current = stock_index[0];
-	befor = stock_index[2];
-	if (!*current_line)
-		return (ERROR);
-	if (current_line[current] != WALL)
-		return (ERROR);
-	if (befor > current)
+	if (lineCurrent[current] != WALL)
 	{
-		if (befor_line[0][current] != WALL)
-			return (ERROR);
+		ft_putstr_fd("Error\nlast character not 1\n", STDOUT);
+		return (ERROR);
 	}
-	else if (current > befor)
+	if (previous > current)
 	{
-		if (current_line[befor] != WALL)
+		if (linePrev[0][current] != WALL)
+		{
+			ft_putstr_fd("Error\n1-character adj not 1\n", STDOUT);
 			return (ERROR);
+		}
 	}
-	befor_line[0] = current_line;
-	stock_index[2] = current;
-	return (SUCCESS);
+	else if (current > previous)
+	{
+		if (lineCurrent[previous] != WALL)
+		{
+			ft_putstr_fd("Error\n2-character adj not 1\n", STDOUT);
+			return (ERROR);
+		}
+	}
+	linePrev[0] = lineCurrent;
+	return (current);
 }
 
-static int	is_valide_char(char *current_line, int *stock_index)
+static int	valideCharacter(char character)
 {
-	int	index_current;
 	static	int direction = 0;
 
-	index_current = stock_index[0];
-	while (ft_isspace(current_line[index_current]))
-		index_current++;
-	if (!stock_index[0] && current_line[index_current] != WALL)
-		return (ERROR);
-	if (ft_strchr("012 ", current_line[index_current]))
-		;
-	else if (ft_strchr("NSEW", current_line[index_current]))
+	if (!ft_strchr("012NSEW ", character))
+	{
+		ft_putstr_fd("Error\nunknown character\n", STDOUT);
+		return(ERROR);
+	}
+	if (ft_strchr("NSEW", character))
 	{
 		if (!direction)
 			direction = 1;
 		else
+		{
+			ft_putstr_fd("Error\nTo many direction\n", STDOUT);
 			return (ERROR);
+		}
 	}
-	else
-		return (ERROR);
-	stock_index[0] = index_current;
-	if (current_line[index_current] != '\0')
-		stock_index[1] = index_current;
-	else if (current_line[index_current] == '\0')
-		stock_index[0] -= 1;
 	return (SUCCESS);
 }
 
-static int	first_line(char *current_line, char **befor_line, int *index_befor)
+static int	checkFirstLine(char *currentLine)
 {
+	int	previous;
 
-	int	index_current;
-
-	*index_befor = 0;
-	index_current = 0;
-	while (ft_isspace(current_line[index_current]))
-		index_current += 1;
-	if (current_line[index_current] != WALL)
+	previous = 0;
+	while (ft_isspace(currentLine[previous]))
+		previous++;
+	if (currentLine[previous] != WALL)
 		return (ERROR);
-	while (current_line[index_current])
+	while (currentLine[previous])
 	{
-		if (current_line[index_current] != WALL)
-			return (ERROR);
-		else
-			*index_befor = index_current;
-		index_current += 1;
+		if (!ft_strchr("1", '1'))
+		{
+			ft_putstr_fd("Error\n", STDOUT);
+			ft_putstr_fd("it takes just 1 for the first line\n", 1);
+			return(ERROR);
+		}
+		previous++;
 	}
-	while (ft_isspace(current_line[index_current]))
-		index_current += 1;
-	if (current_line[index_current] != '\0')
-		return (ERROR);
-	befor_line[0] = current_line;
-	(void)index_current;
-	return (SUCCESS);
+	return (previous - 1);
 }
 
-static int	last_line(char *befor_line, char *current_line, int *stock_index)
+static int	lastLine(char *linePrev, int previous, char *line)
 {
-	int	index_current;
+	int	indexLine;
 
-	index_current = 0;
-	while (ft_isspace(current_line[index_current]))
-		index_current += 1;
-	if (current_line[index_current] != WALL)
-		return (ERROR);
-	while (current_line[index_current])
+	indexLine = 0;
+	while (line[indexLine + 1])
 	{
-		if (!ft_strchr("1 ", current_line[index_current]))
+		if (!ft_strchr("1 ", line[indexLine++]))
+		{
+			ft_putstr_fd("Error\n", STDOUT);
+			ft_putstr_fd("it takes just 1 for the last line\n", 1);
 			return (ERROR);
-		if (current_line[index_current] == WALL)
-			stock_index[1] = index_current;
-		index_current++;
+		}
 	}
-	if (last_char(&befor_line, current_line, stock_index) == ERROR)
+	if ((previous = lastChar(&linePrev, previous, line, indexLine)) == ERROR)
 		return (ERROR);
-	(void)befor_line;
 	return (SUCCESS);
 }
 
 int		check_character_map(t_list *begin)
 {
-	char	*current_line;
-	char	*befor_line;
-	int	stock_index[3];
+	char	*line;
+	int	current;
+	char	*linePrev;
+	int	previous;
 
-	current_line = 0;
-	befor_line = 0;
-	stock_index[0] = 0;
-	if (first_line(begin->content, &befor_line, &stock_index[2]) == ERROR)
+	line = 0;
+	if ((previous = checkFirstLine(linePrev = begin->content)) == ERROR)
 		return (ERROR);
 	while ((begin = begin->next))
 	{
-		stock_index[0] = -1;
-		current_line = (char *)begin->content;
-		while (current_line[++stock_index[0]])
+		current = 0;
+		line = (char *)begin->content;
+		while (line[current + 1])
 		{
-			if (is_valide_char(current_line, stock_index) == ERROR)
+			if (valideCharacter(line[current++]) == ERROR)
 				return (ERROR);
 		}
-		stock_index[0] -= 1;
-		if (last_char(&befor_line, current_line, stock_index) == ERROR)
+		if ((previous = lastChar(&linePrev, previous, line, current)) == ERROR)
 			return (ERROR);
 	}
-	if (last_line(befor_line, current_line, stock_index) == ERROR)
+	if (lastLine(linePrev, previous, line) == ERROR)
 		return (ERROR);
 	return (SUCCESS);
 }

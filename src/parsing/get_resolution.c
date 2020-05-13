@@ -34,10 +34,10 @@ int		get_resolution(t_info *info)
 	if (line1[0] == 'R' && line1[1] == ' ')
 	{
 		line2 = ft_strchr(line1 + 2, ' ');
-		if ((info->window_height = get_value_resol(line1 + 2, line2)) == ERROR)
+		if ((g_width = get_value_resol(line1 + 2, line2)) == ERROR)
 			return (free_line(line1));
 		line3 = ft_strchr(++line2, '\0');
-		if ((info->window_width = get_value_resol(line2, line3)) == ERROR)
+		if ((g_height = get_value_resol(line2, line3)) == ERROR)
 			return (free_line(line1));
 	}
 	else

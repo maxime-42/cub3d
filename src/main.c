@@ -21,7 +21,6 @@ int			main(int ac, char **av)
 	twoDMap_PlayerMovement(&info);
 	mlx_put_image_to_window(g_mlx_ptr, g_win_mlx, g_img_ptr, 0, 0);
 	mlx_hook(g_win_mlx, 2, (1L << 0), &keyPressed, &keyCode);
-	/* printf("hellow\n"); */
 	mlx_hook(g_win_mlx, 3, (1L << 1), &keyRelease, &keyCode);
 	mlx_loop(g_mlx_ptr);
 	(void)keyCode;

@@ -11,6 +11,7 @@ CFLAGS= -I$(INC) -O3 -I../minilibx-linux
 NAME= cub3d
 
 SRC	=	./src/main.c\
+		./src/free_all.c\
 		./src/parsing/main.c\
 		./src/parsing/get_resolution.c\
 		./src/parsing/get_texture.c\
@@ -19,12 +20,21 @@ SRC	=	./src/main.c\
 		./src/parsing/put_map_in_list.c\
 		./src/parsing/check_character_map.c\
 		./src/parsing/get_fd.c\
-		./src/free_all.c\
 		./src/parsing/put_map_in_array.c\
-		./src/2DMap_PlayerMovement/event_keyboard.c\
-		./src/2DMap_PlayerMovement/render_MapAndPlayer.c\
-		./src/2DMap_PlayerMovement/createImage.c\
-		./src/2DMap_PlayerMovement/main.c\
+		./src/create_window_And_Image/createWindow.c\
+		./src/create_window_And_Image/createImage.c\
+		./src/draw_Map_And_Player/drawMap.c\
+		./src/playerMovement/initPalyer.c\
+		./src/draw_Map_And_Player/drawSquare.c\
+		./src/draw_Map_And_Player/drawPlayer.c\
+		./src/event/eventKeyboard.c\
+		./src/playerMovement/playerMovement.c\
+		./src/playerMovement/hasWallAt.c\
+		./src/cast_All_Rays/cast_All_Rays.c\
+		./src/cast_All_Rays/draw_Ray.c\
+		./src/cast_All_Rays/rayHorizontal.c\
+		./src/cast_All_Rays/ray_Facing.c\
+		./src/cast_All_Rays/distanceBetweenPoints.c\
 
 OBJ = $(SRC:.c=.o)
 

@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int	get_fd(t_info *info, char *name_file)
+int	get_file_descriptor(t_info *info, char *name_file)
 {
 	if ((info->fd = open(name_file, O_RDONLY)) < 0)
 	{

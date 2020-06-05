@@ -6,11 +6,11 @@
 
 static int		gameLoop(t_info *info)
 {
+	playerMovement();
 	createImage();
 	drawMap(g_info->map);
 	drawPlayer();
-	playerMovement();
-	cast_All_Rays();
+	/* cast_All_Rays(); */
 	/* mlx_clear_window(g_mlx_ptr, g_win_mlx); */
 	mlx_put_image_to_window(g_mlx_ptr, g_win_mlx, g_img_ptr, 0, 0);
 	mlx_destroy_image(g_mlx_ptr, g_img_ptr);
@@ -32,10 +32,10 @@ int				main(int ac, char **av)
 	if (parsing_map(&info) == ERROR)
 		return (ERROR);
 	g_info = &info;
-	g_map = (char **)info.map;
 	g_win_mlx = 0;
 	g_img_ptr = 0;
 	g_win_mlx = 0;
+	g_map = (char **)info.map;
 	createWindow();
 	initPlayer(info);
 	mlx_hook(g_win_mlx, 2, (1L << 0), &keyPressed, &g_info->keyCode);

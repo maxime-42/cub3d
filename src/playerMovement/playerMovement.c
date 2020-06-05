@@ -2,19 +2,21 @@
 
 void			playerMovement(void)
 {
-	double		moveStep;
-	int			tmpX;
-	int			tmpY;
+	float		moveStep;
+	int		newPlayerX;
+	int		newPlayerY;
 
-	tmpY = 0;
-	tmpX = 0;
+	newPlayerY = 0;
+	newPlayerX = 0;
 	g_player.rotationAngle += g_player.turnDirection * g_player.rotationSpeed;
 	moveStep = g_player.walkDirection * g_player.moveSpeed;
-	tmpX = g_player.x + cos(g_player.rotationAngle) * moveStep;
-	tmpY = g_player.y + sin(g_player.rotationAngle) * moveStep;
-	if (!hasWallAt(tmpY, tmpX))
+	newPlayerX = g_player.x + cos(g_player.rotationAngle) * moveStep;
+	newPlayerY = g_player.y + sin(g_player.rotationAngle) * moveStep;
+	if (!hasWallAt(newPlayerY, newPlayerX))
 	{
-		g_player.y = tmpY;
-		g_player.x = tmpX;
+		g_player.y = newPlayerY;
+		g_player.x = newPlayerX;
 	}
+	(void)newPlayerX;
+	(void)newPlayerY;
 }

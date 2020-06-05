@@ -28,9 +28,9 @@ typedef struct		s_player
 	int				radius;
 	int				turnDirection;
 	int				walkDirection;
-	double			rotationAngle;
-	double			moveSpeed;
-	double			rotationSpeed;
+	float			rotationAngle;
+	float			moveSpeed;
+	float			rotationSpeed;
 }					t_player;
 
 typedef struct		s_info

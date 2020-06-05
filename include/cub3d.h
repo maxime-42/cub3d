@@ -16,7 +16,7 @@
 # define TILE_SIZE 30
 
 # define UP_ARROW 65362
-# define DOW_ARROW 65364
+# define DOWN_ARROW 65364
 # define LEFT_ARROW 65361
 # define RIGHT_ARROW 65363
 # define QUIT 65307

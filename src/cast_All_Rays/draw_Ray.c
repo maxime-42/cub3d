@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void		draw_Ray(double angle, float lenght)
+void		draw_Ray(double angle, float lenght, int color)
 {
 	int		py;
 	int		px;
@@ -11,7 +11,7 @@ void		draw_Ray(double angle, float lenght)
 	px = 0;
 	while (++line < lenght)
 	{
-		g_image_data[px + (g_width * py)] = 0xF10B0B;
+		g_image_data[px + (WINDOW_WIDTH * py)] = color;
 		px = cos(angle) * line + g_player.x;
 		py = sin(angle) * line + g_player.y;
 	}

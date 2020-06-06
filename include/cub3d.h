@@ -13,7 +13,7 @@
 
 # define COLOR_FREE_SPACE 0xFFFFFF
 # define COLOR_WALL_SPACE 0x0
-# define TILE_SIZE 30
+# define TILE_SIZE 32
 
 # define UP_ARROW 65362
 # define DOWN_ARROW 65364
@@ -24,10 +24,13 @@
 # define STDOUT 1
 # define WALL '1'
 
+
+# define WINDOW_WIDTH (int)ft_strlen(g_info->begin->content) * TILE_SIZE
+# define WINDOW_HEIGHT g_info->height * TILE_SIZE
+
 # define FOV_ANGLE  60 * (M_PI / 180)
 # define WALL_STRIP_WIDTH  1
-# define NUM_RAYS g_window_width / WALL_STRIP_WIDTH
-
+# define NUM_RAYS WINDOW_WIDTH / WALL_STRIP_WIDTH
 
 /*variable globals*/
 t_info				*g_info;
@@ -36,14 +39,14 @@ void				*g_mlx_ptr;
 void				*g_img_ptr;
 void				*g_win_mlx;
 int					*g_image_data;
-int					g_width;//largeur de la fenetre
-int					g_height;//hauteur de la fenetre
-int					g_window_width;//initialiser dans les le fichier initPlayer
-int					g_window_height;//initialiser dans les le fichier initPlayer
+int					g_screen_width;//largeur de la fenetre
+int					g_screen_height;//hauteur de la fenetre
+/* int					g_window_width;//initialiser dans les le fichier initPlayer */
+/* int					g_window_height;//initialiser dans les le fichier initPlayer */
 char				**g_map;
 t_ray				g_ray;
 
-int					get_resolution(t_info *info);
+int					get_Screen_Size(t_info *info);
 int					get_texture(t_info *info);
 int					get_sprint(t_info *info);
 int					get_color(t_info *ctrl);
@@ -73,9 +76,9 @@ float				distanceBetweenPoints(int x1, int y1, int x2, int y2);
 void				dda_algorithm();
 void				playerMovement(void);
 void				createWindow(void);
-void				drawSquare(int line, int size, int color);
+void				drawRect(int line, int size, int color);
 void				initPlayer();
 void				freeContentNode(void *line);
-void				draw_Ray(double angle, float lenght);
+void				draw_Ray(double angle, float lenght, int colore);
 void				ray_Facing();
 #endif

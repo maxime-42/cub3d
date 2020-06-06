@@ -3,7 +3,7 @@
 int	parsing_map(t_info *info)
 {
 	info->begin = 0;
-	if (get_resolution(info) == ERROR)
+	if (get_Screen_Size(info) == ERROR)
 		return (free_struct(info, ERROR));
 	if (get_texture(info) == ERROR)
 		return (free_struct(info, ERROR));

@@ -7,14 +7,14 @@ static void	findWall(int nextHorzTouchY, int nextHorzTouchX)
 
 	map = g_info->map;
 	lenght = 0;
-	while (nextHorzTouchX >= 0 && nextHorzTouchX <= g_window_width && nextHorzTouchY >= 0 && nextHorzTouchY <= g_window_height)
+	while (nextHorzTouchX >= 0 && nextHorzTouchX <= WINDOW_WIDTH && nextHorzTouchY >= 0 && nextHorzTouchY <= WINDOW_HEIGHT)
 	{
 		if (hasWallAt(nextHorzTouchY, nextHorzTouchX))
 		{
 			g_ray.wallHitX = nextHorzTouchX;
 			g_ray.wallHitY = nextHorzTouchY;
 			lenght = distanceBetweenPoints(g_player.x, g_player.y, g_ray.wallHitX, g_ray.wallHitY);
-			draw_Ray(g_ray.rayAngle, lenght);
+			draw_Ray(g_ray.rayAngle, lenght, 0xF10B0B);
 			break;
 		}
 		nextHorzTouchX += g_ray.xstep;

@@ -23,7 +23,7 @@ static int	get_value_resol(char *line1, char *line2)
 	return (nb);
 }
 
-int		get_resolution(t_info *info)
+int		get_Screen_Size(t_info *info)
 {
 	char	*line1;
 	char	*line2;
@@ -34,10 +34,10 @@ int		get_resolution(t_info *info)
 	if (line1[0] == 'R' && line1[1] == ' ')
 	{
 		line2 = ft_strchr(line1 + 2, ' ');
-		if ((g_width = get_value_resol(line1 + 2, line2)) == ERROR)
+		if ((g_screen_width = get_value_resol(line1 + 2, line2)) == ERROR)
 			return (free_line(line1));
 		line3 = ft_strchr(++line2, '\0');
-		if ((g_height = get_value_resol(line2, line3)) == ERROR)
+		if ((g_screen_height = get_value_resol(line2, line3)) == ERROR)
 			return (free_line(line1));
 	}
 	else

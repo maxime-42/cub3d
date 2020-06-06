@@ -13,7 +13,7 @@ NAME= cub3d
 SRC	=	./src/main.c\
 		./src/free_all.c\
 		./src/parsing/main.c\
-		./src/parsing/get_resolution.c\
+		./src/parsing/get_screen_size.c\
 		./src/parsing/get_texture.c\
 		./src/parsing/get_sprint.c\
 		./src/parsing/get_color.c\
@@ -25,7 +25,7 @@ SRC	=	./src/main.c\
 		./src/create_window_And_Image/createImage.c\
 		./src/draw_Map_And_Player/drawMap.c\
 		./src/playerMovement/initPalyer.c\
-		./src/draw_Map_And_Player/drawSquare.c\
+		./src/draw_Map_And_Player/drawRect.c\
 		./src/draw_Map_And_Player/drawPlayer.c\
 		./src/event/eventKeyboard.c\
 		./src/playerMovement/playerMovement.c\

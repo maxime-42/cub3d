@@ -7,7 +7,7 @@ void	createImage(void)
 	int	endian;
 
 	endian = 0;
-	if (!(g_img_ptr = mlx_new_image(g_mlx_ptr, g_width, g_height)))
+	if (!(g_img_ptr = mlx_new_image(g_mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT)))
 	{
 		ft_putstr_fd("Error\nfaile to get image pointer", STDOUT);
 		freeAll(ERROR);

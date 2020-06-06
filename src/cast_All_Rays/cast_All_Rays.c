@@ -40,7 +40,7 @@ void		cast_All_Rays()
 		g_ray.rayAngle = normalizeAngle(g_ray.rayAngle);
 		ray_Facing();
 		rayHorizontal();
-		/* draw_Ray(g_ray.rayAngle, 30); */
+		/* draw_Ray(g_ray.rayAngle, 30, 0xF10B0B); */
 		g_ray.rayAngle += FOV_ANGLE / NUM_RAYS;
 		columnId++;
 	}

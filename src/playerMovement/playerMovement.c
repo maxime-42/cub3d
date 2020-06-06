@@ -3,8 +3,8 @@
 void			playerMovement(void)
 {
 	float		moveStep;
-	int		newPlayerX;
-	int		newPlayerY;
+	int			newPlayerX;
+	int			newPlayerY;
 
 	newPlayerY = 0;
 	newPlayerX = 0;

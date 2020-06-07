@@ -13,7 +13,7 @@ void	drawRect(int line_Column, int size, int color)
 	int	x;
 
 	y = -1;
-	while (++y < size)//parcout line_Column
+	while (++y < size)//parcout line
 	{
 		x = -1;
 		while (++x < size)// paracourt de la colone
@@ -22,5 +22,25 @@ void	drawRect(int line_Column, int size, int color)
 		}
 		line_Column = line_Column - x;//on reprend la valeur de la colone initial
 		line_Column = line_Column + WINDOW_WIDTH;// passer a la line suivant
+	}
+}
+
+
+void	Rect(int corX, int corY, int width, int height, int color)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (i < height)
+	{
+		while (j < width)
+		{
+			g_image_data[(i + corY - width/2) * WINDOW_WIDTH + (j + corX - height/2)] = color;
+			j++;
+		}
+		j = 0;
+		i++;
 	}
 }

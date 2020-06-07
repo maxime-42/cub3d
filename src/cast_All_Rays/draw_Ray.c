@@ -18,3 +18,24 @@ void		draw_Ray(double angle, float lenght, int color)
 }
 
 
+
+void	ft_drawline(int corX, int corY, float distance, int color, float angle)
+{
+	float i;
+	int x;
+	int y;
+	int longeur;
+
+	longeur = 0;
+	i = 0;
+	x = 0;
+	y = 0;
+	while (i < distance)
+	{
+		g_image_data[(corY + y) * WINDOW_WIDTH + (corX + x)]= color;
+		x = cos(angle) * longeur;
+		y = sin(angle) * longeur;
+		longeur++;
+		i++;
+	}
+}

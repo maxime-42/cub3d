@@ -3,8 +3,8 @@
 void			playerMovement(void)
 {
 	float		moveStep;
-	int			newPlayerX;
-	int			newPlayerY;
+	float		newPlayerX;
+	float		newPlayerY;
 
 	newPlayerY = 0;
 	newPlayerX = 0;
@@ -19,4 +19,27 @@ void			playerMovement(void)
 	}
 	(void)newPlayerX;
 	(void)newPlayerY;
+}
+
+
+void	ft_movePlayer()
+{
+	float moveStep;
+
+	float newX = 0;
+	float newY = 0;
+
+	g_player.rotationAngle += g_player.turnDirection * g_player.rotationSpeed;
+	moveStep = g_player.walkDirection * g_player.moveSpeed;
+
+	//normalizeAngle(param);
+
+	newX = g_player.x + cos(g_player.rotationAngle) * moveStep;
+	newY = g_player.y + sin(g_player.rotationAngle) * moveStep;
+
+	if(hasWallAt(newY, newX) == 0)
+	{
+		g_player.x = newX;
+		g_player.y = newY;
+	}
 }

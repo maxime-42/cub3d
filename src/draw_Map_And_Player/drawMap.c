@@ -25,3 +25,48 @@ void	drawMap(char **map)
 		}
 	}
 }
+
+void	ft_renderMap()
+{
+
+	int i;
+	int j;
+	int k;
+	int l;
+	int	lx;
+	int	ly;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	l = 0;
+	while (i < MAP_NUM_ROWS)
+	{
+		j = 0;
+		while (j < MAP_NUM_COLS)
+		{
+			if (g_map[i][j] == '1')
+			{
+				lx = j * TILE_SIZE ;
+				ly = i * TILE_SIZE ;
+				l = 0;
+				while (l < TILE_SIZE )
+				{
+					while(k < TILE_SIZE )
+					{
+						g_image_data[ly * WINDOW_WIDTH + lx] = 0xFFFFFF;
+						lx++;
+						k++;
+					}
+					lx = j * TILE_SIZE ;
+					ly++;
+					k = 0;
+					l++;
+				}
+			}
+			j++;
+		}
+
+		i++;
+	}
+}

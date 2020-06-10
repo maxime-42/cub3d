@@ -22,9 +22,8 @@ typedef struct		s_ray
 
 typedef struct		s_player
 {
-	int				x;
-	int				y;
-	int				test;
+	float			x;
+	float			y;
 	int				radius;
 	int				turnDirection;
 	int				walkDirection;
@@ -38,13 +37,14 @@ typedef struct		s_info
 	char			*texture[5];
 	int				nline_map;
 	int				column;// je l'utiliser que durant le parsing
-	int				height;//nombre de line de la map
+	int				height;//je l'utiliser que durant   le parsing
 	char			*sprint;
 	void			*map;
 	t_list			*begin;
 	int				color_c[3];
 	int				color_f[3];
 	int				fd;
+	char			orientation;
 	int				keyCode;
 }					t_info;
 

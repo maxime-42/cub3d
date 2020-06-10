@@ -39,7 +39,10 @@ static int	valideCharacter(char character)
 	if (ft_strchr("NSEW", character))
 	{
 		if (!direction)
+		{
 			direction = 1;
+			g_info->orientation = character;
+		}
 		else
 		{
 			ft_putstr_fd("Error\nTo many direction\n", STDOUT);
@@ -51,19 +54,22 @@ static int	valideCharacter(char character)
 
 static int	checkFirstLine(char *currentLine)
 {
-	int	previous;
+	int		previous;
 
 	previous = 0;
 	while (ft_isspace(currentLine[previous]))
 		previous++;
 	if (currentLine[previous] != WALL)
+	{
+		ft_putstr_fd("Error\nThe first line have to begin with 1\n", STDOUT);
 		return (ERROR);
+	}
 	while (currentLine[previous])
 	{
 		if (!ft_strchr("1", '1'))
 		{
 			ft_putstr_fd("Error\n", STDOUT);
-			ft_putstr_fd("it takes just 1 for the first line\n", 1);
+			ft_putstr_fd("it takes just 1 for the first line and column\n", 1);
 			return(ERROR);
 		}
 		previous++;
@@ -73,7 +79,7 @@ static int	checkFirstLine(char *currentLine)
 
 static int	lastLine(char *linePrev, int previous, char *line)
 {
-	int	indexLine;
+	int		indexLine;
 
 	indexLine = 0;
 	while (line[indexLine + 1])
@@ -90,21 +96,22 @@ static int	lastLine(char *linePrev, int previous, char *line)
 	return (SUCCESS);
 }
 
-int		check_character_map(t_list *begin)
+int			check_character_map(t_list *begin)
 {
 	char	*line;
-	int	current;
+	int		current;
 	char	*linePrev;
-	int	previous;
+	int		previous;
 
 	line = 0;
+	g_info->orientation = '\0';
 	if ((previous = checkFirstLine(linePrev = begin->content)) == ERROR)
 		return (ERROR);
 	while ((begin = begin->next))
 	{
 		current = 0;
 		line = (char *)begin->content;
-		while (line[current + 1])
+		while (line[current] && line[current + 1])
 		{
 			if (valideCharacter(line[current++]) == ERROR)
 				return (ERROR);

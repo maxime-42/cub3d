@@ -1,5 +1,14 @@
 #include "cub3d.h"
 
+void	print_list(t_list *tmp)
+{
+	while (tmp)
+	{
+		printf("%s\n", (char *)tmp->content);
+		tmp = tmp->next;
+	}
+}
+
 int	parsing_map(t_info *info)
 {
 	info->begin = 0;
@@ -14,14 +23,15 @@ int	parsing_map(t_info *info)
 	if (put_map_in_list(&info->begin, info->fd) == ERROR)
 		return (free_struct(info, ERROR));
 	if (check_character_map(info->begin) == ERROR)
-	{
-		ft_lstclear(&info->begin, &freeContentNode);
-		return (free_struct(info, ERROR));
-	}
+		return(freeAll(ERROR));
 	if (put_map_in_array(info, info->begin) == ERROR)
+		return(freeAll(ERROR));
+	if (put_the_same_number_of_column(info->begin) == ERROR)
+		return(freeAll(ERROR));
+	if (!g_info->orientation)
 	{
-		ft_lstclear(&info->begin, &freeContentNode);
-		return (free_struct(info, ERROR));
+		ft_putstr_fd("Error\nThere is not an orientation character\n", STDOUT);
+		return(freeAll(ERROR));
 	}
 	return (SUCCESS);
 }

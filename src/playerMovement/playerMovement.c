@@ -32,6 +32,8 @@ void	ft_movePlayer()
 	g_player.rotationAngle += g_player.turnDirection * g_player.rotationSpeed;
 	moveStep = g_player.walkDirection * g_player.moveSpeed;
 
+	/* printf("g_player.turnDirection = %d\n", g_player.turnDirection); */
+	/* printf("g_player.rotationAngle = %f\n", g_player.rotationAngle); */
 	//normalizeAngle(param);
 
 	newX = g_player.x + cos(g_player.rotationAngle) * moveStep;

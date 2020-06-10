@@ -15,7 +15,7 @@ static int		gameLoop(t_info *info)
 	/* cast_All_Rays(); */
 	/* mlx_clear_window(g_mlx_ptr, g_win_mlx); */
 	mlx_put_image_to_window(g_mlx_ptr, g_win_mlx, g_img_ptr, 0, 0);
-	mlx_destroy_image(g_mlx_ptr, g_img_ptr);
+	/* mlx_destroy_image(g_mlx_ptr, g_img_ptr); */
 	g_img_ptr = 0;
 	(void)info;
 	return (0);
@@ -28,6 +28,10 @@ int				main(int ac, char **av)
 
 	info.keyCode = 0;
 	info.map = 0;
+	g_info = &info;
+	g_mlx_ptr = 0;
+	g_win_mlx = 0;
+	g_img_ptr = 0;
 	if (ac != 2)
 	{
 		write(1, "Error\nnumber argument\n", 24);
@@ -37,7 +41,6 @@ int				main(int ac, char **av)
 		return (ERROR);
 	if (parsing_map(&info) == ERROR)
 		return (ERROR);
-	g_info = &info;
 	g_map = (char **)info.map;
 	createWindow();
 	initPlayer(info);

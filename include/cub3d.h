@@ -34,7 +34,7 @@
 # define WALL_STRIP_WIDTH  1
 # define NUM_RAYS WINDOW_WIDTH / WALL_STRIP_WIDTH
 
-/*variable globals*/
+////////*variable globals*////////////////////////////
 t_info				*g_info;
 t_player			g_player;
 void				*g_mlx_ptr;
@@ -43,6 +43,7 @@ void				*g_win_mlx;
 int					*g_image_data;
 int					g_screen_width;//largeur de la fenetre
 int					g_screen_height;//hauteur de la fenetre
+//////////////////////////////////////////////////////
 /* int					g_window_width;//initialiser dans les le fichier initPlayer */
 /* int					g_window_height;//initialiser dans les le fichier initPlayer */
 char				**g_map;
@@ -87,4 +88,5 @@ void	ft_renderMap();
 void	ft_movePlayer();
 void	ft_drawline(int corX, int corY, float distance, int color, float angle);
 void	Rect(int corX, int corY, int width, int height, int color);
+int				put_the_same_number_of_column(t_list *begin);
 #endif

@@ -7,7 +7,6 @@
 static int		gameLoop(t_info *info)
 {
 	playerMovement(&g_player);
-	/* ft_movePlayer(); */
 	createImage();
 	drawMap(g_info->map);
 	drawPlayer();

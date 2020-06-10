@@ -7,6 +7,7 @@
 #include "../minilibx-linux/mlx.h"
 #include "../minilibx-linux/mlx_int.h"
 #include "struct.h"
+#include "raycasting.h"
 
 # define SUCCESS 0
 # define ERROR -1
@@ -34,7 +35,7 @@
 # define WALL_STRIP_WIDTH  1
 # define NUM_RAYS WINDOW_WIDTH / WALL_STRIP_WIDTH
 
-////////*variable globals*////////////////////////////
+////////*variable globals////////////////////////////
 t_info				*g_info;
 t_player			g_player;
 void				*g_mlx_ptr;
@@ -44,11 +45,11 @@ int					*g_image_data;
 int					g_screen_width;//largeur de la fenetre
 int					g_screen_height;//hauteur de la fenetre
 //////////////////////////////////////////////////////
-/* int					g_window_width;//initialiser dans les le fichier initPlayer */
-/* int					g_window_height;//initialiser dans les le fichier initPlayer */
+
 char				**g_map;
 t_ray				g_ray;
 
+//////////////////////parsig///////////////////////
 int					get_Screen_Size(t_info *info);
 int					get_texture(t_info *info);
 int					get_sprint(t_info *info);
@@ -60,33 +61,7 @@ int					check_character_map(t_list *begin);
 void				free_list(void *line);
 int					free_struct(t_info *info, int code_return);
 int					put_map_in_array(t_info *info, t_list *begin);
-int					parsing_map(t_info *info);
-int					draw(t_info *info);
-int					keyPressed(int keyCode);
-int					get_file_descriptor(t_info *info, char *name_file);
-void				createImage();
 int					freeAll(int codeReturn);
-void				drawMap(char **map);
-void				drawPlayer();
-void				get_PositionPlayer(char **map, int *y, int *x);
-int					keyRelease(int keyCode);
-void				print_map(char **array);
-void				rayHorizontal();
-void				cast_All_Rays();
-int					hasWallAt(int y, int x);
-double				normalizeAngle(double angle);
-float				distanceBetweenPoints(int x1, int y1, int x2, int y2);
-void				dda_algorithm();
-void				playerMovement(void);
-void				createWindow(void);
-void				drawRect(int line, int size, int color);
-void				initPlayer();
-void				freeContentNode(void *line);
-void				draw_Ray(double angle, float lenght, int colore);
-void				ray_Facing();
-void	ft_renderMap();
-void	ft_movePlayer();
-void	ft_drawline(int corX, int corY, float distance, int color, float angle);
-void	Rect(int corX, int corY, int width, int height, int color);
-int				put_the_same_number_of_column(t_list *begin);
+int					parsing_map(t_info *info);
+
 #endif

@@ -5,68 +5,44 @@ je dessine la map avec des petits carré de la taille de TILE_SIZE
 chaque caractere de la map est representer pas un carré de la taille de TILE_SIZE
 */
 
-void	drawMap(char **map)
+static	void	utilis(int *ly, int *lx, int j)
 {
-	int	y;
-	int	x;
-	int	column;
+	int			y;
+	int			x;
 
 	y = -1;
-	while (map[++y])
+	while (++y < TILE_SIZE)
 	{
 		x = -1;
-		column = 0;
-		column += (WINDOW_WIDTH * TILE_SIZE * y);
-		while (map[y][++x])
+		while (++x < TILE_SIZE)
 		{
-			if (map[y][x] == '0' || ft_strchr("NSEW", map[y][x]))
-				drawRect(column, TILE_SIZE, COLOR_FREE_SPACE);
-			column += TILE_SIZE;
+			g_image_data[*ly * WINDOW_WIDTH + *lx] = 0xFFFFFF;
+			*lx += 1;
 		}
+		*ly += 1;
+		*lx = j * TILE_SIZE;
 	}
 }
 
-void	ft_renderMap()
+void	drawMap(char **map)
 {
-
-	int i;
-	int j;
-	int k;
-	int l;
+	int y;
+	int x;
 	int	lx;
 	int	ly;
 
-	i = 0;
-	j = 0;
-	k = 0;
-	l = 0;
-	while (i < MAP_NUM_ROWS)
+	y = -1;
+	while (++y < MAP_NUM_ROWS)
 	{
-		j = 0;
-		while (j < MAP_NUM_COLS)
+		x= -1;
+		while (++x < MAP_NUM_COLS)
 		{
-			if (g_map[i][j] == '1')
+			if (map[y][x] == '0' || ft_strchr("NSEW", map[y][x]))
 			{
-				lx = j * TILE_SIZE ;
-				ly = i * TILE_SIZE ;
-				l = 0;
-				while (l < TILE_SIZE )
-				{
-					while(k < TILE_SIZE )
-					{
-						g_image_data[ly * WINDOW_WIDTH + lx] = 0xFFFFFF;
-						lx++;
-						k++;
-					}
-					lx = j * TILE_SIZE ;
-					ly++;
-					k = 0;
-					l++;
-				}
+				lx = x * TILE_SIZE ;
+				ly = y * TILE_SIZE ;
+				utilis(&ly, &lx, x);
 			}
-			j++;
 		}
-
-		i++;
 	}
 }

@@ -1,11 +1,13 @@
 #include "cub3d.h"
 
-void	drawPlayer()
+void	drawPlayer(t_player *player)
 {
-	//representer le joueur par un carré
+	int	color;
+
+	color = 0x0078FF;
 	/* drawRect(g_player.x + (WINDOW_WIDTH * g_player.y), g_player.radius, 0x0078FF); */
-	Rect(g_player.x, g_player.y, g_player.radius, g_player.radius,  0x0078FF);
+	Rect(player->x, player->y, player->radius, player->radius,  0x0078FF);
 	//line d'orientation du joueur
-	/* draw_Ray(g_player.rotationAngle, TILE_SIZE * 2, 0x0078FF); */
-	ft_drawline(g_player.x, g_player.y, 30, 0x0078FF, g_player.rotationAngle);
+	/* draw_Ray(player->rotationAngle, TILE_SIZE * 2, 0x0078FF); */
+	drawline(player->y, player->x, 30, color, player->rotationAngle);
 }

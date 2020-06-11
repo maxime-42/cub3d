@@ -28,12 +28,12 @@
 # define MAP_NUM_ROWS  g_info->height
 # define MAP_NUM_COLS  (int)ft_strlen(g_info->begin->content)
 
-# define WINDOW_WIDTH (MAP_NUM_COLS * TILE_SIZE)
-# define WINDOW_HEIGHT (MAP_NUM_ROWS * TILE_SIZE)
+# define WINDOW_WIDTH MAP_NUM_COLS * TILE_SIZE
+# define WINDOW_HEIGHT MAP_NUM_ROWS * TILE_SIZE
 
 # define FOV_ANGLE  60 * (M_PI / 180)
 # define WALL_STRIP_WIDTH  1
-# define NUM_RAYS WINDOW_WIDTH / WALL_STRIP_WIDTH
+# define NUM_RAYS (WINDOW_WIDTH / WALL_STRIP_WIDTH)
 
 ////////*variable globals////////////////////////////
 t_info				*g_info;
@@ -63,5 +63,6 @@ int					free_struct(t_info *info, int code_return);
 int					put_map_in_array(t_info *info, t_list *begin);
 int					freeAll(int codeReturn);
 int					parsing_map(t_info *info);
+void				freeContentNode(void *line);
 
 #endif

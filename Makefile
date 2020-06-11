@@ -33,7 +33,6 @@ SRC	=	./src/main.c\
 		./src/cast_All_Rays/cast_All_Rays.c\
 		./src/cast_All_Rays/draw_Ray.c\
 		./src/cast_All_Rays/rayHorizontal.c\
-		./src/cast_All_Rays/ray_Facing.c\
 		./src/cast_All_Rays/distanceBetweenPoints.c\
 		./src/parsing/put_the_same_number_of_column.c\
 

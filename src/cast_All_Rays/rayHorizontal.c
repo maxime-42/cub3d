@@ -4,7 +4,9 @@ static void	findWall(int nextHorzTouchY, int nextHorzTouchX)
 {
 	float	lenght;
 	char	**map;
+	int			color;
 
+	color =  0xff0000;
 	map = g_info->map;
 	lenght = 0;
 	while (nextHorzTouchX >= 0 && nextHorzTouchX <= WINDOW_WIDTH && nextHorzTouchY >= 0 && nextHorzTouchY <= WINDOW_HEIGHT)
@@ -14,12 +16,14 @@ static void	findWall(int nextHorzTouchY, int nextHorzTouchX)
 			g_ray.wallHitX = nextHorzTouchX;
 			g_ray.wallHitY = nextHorzTouchY;
 			lenght = distanceBetweenPoints(g_player.x, g_player.y, g_ray.wallHitX, g_ray.wallHitY);
-			draw_Ray(g_ray.rayAngle, lenght, 0xF10B0B);
+			/* draw_Ray(g_ray.rayAngle, lenght, 0xF10B0B); */
+			drawline(g_ray.wallHitY, g_ray.wallHitX, lenght, color, g_ray.rayAngle);
 			break;
 		}
 		nextHorzTouchX += g_ray.xstep;
 		nextHorzTouchY += g_ray.ystep;
     }
+	(void)lenght;
 	(void)map;
 }
 

@@ -9,7 +9,7 @@ void				drawMap(char **map);
 void				drawPlayer(t_player *player);
 void				get_PositionPlayer(char **map, int *y, int *x);
 int					keyRelease(int keyCode);
-void				rayHorizontal();
+void				rayHorizontal(t_ray *ray);
 int					hasWallAt(float y, float x);
 float				normalizeAngle(float angle);
 float				distanceBetweenPoints(float x1, float y1, float x2, float y2);

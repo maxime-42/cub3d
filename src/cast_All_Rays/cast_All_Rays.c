@@ -35,7 +35,7 @@ void		cast_All_Rays(t_player *player, t_ray *ray)
 	{
 		g_ray.rayAngle = normalizeAngle(g_ray.rayAngle);
 		ray_Facing(ray);
-		rayHorizontal();
+		rayHorizontal(ray);
 		/* drawline(player->y, player->x, TILE_SIZE * 2, color, ray->rayAngle); */
 		ray->rayAngle += FOV_ANGLE / NUM_RAYS;
 		columnId++;

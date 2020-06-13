@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static void	next_Horz_Intercept(float nextHorzTouchY, float nextHorzTouchX)
+static void	next_Horz_Intercept(float nextHorzTouchY, float nextHorzTouchX, float ystep, float xstep)
 {
 	float	lenght;
 
@@ -11,6 +11,7 @@ static void	next_Horz_Intercept(float nextHorzTouchY, float nextHorzTouchX)
 		{
 			g_ray.wallHitX = nextHorzTouchX;
 			g_ray.wallHitY = nextHorzTouchY;
+		    g_ray.foundHorzWallHit = 1;
 			/* printf("nextHorzTouchY = %f\n", nextHorzTouchY); */
 			/* printf("nextHorzTouchX = %f\n", nextHorzTouchX); */
 			lenght = distanceBetweenPoints(g_player.x, g_player.y, g_ray.wallHitX, g_ray.wallHitY);
@@ -19,36 +20,38 @@ static void	next_Horz_Intercept(float nextHorzTouchY, float nextHorzTouchX)
 			/* draw_Ray(g_ray.rayAngle, lenght, 0xff0000); */
 			return ;
 		}
-		nextHorzTouchX += g_ray.xstep;
-		nextHorzTouchY += g_ray.ystep;
+		nextHorzTouchX += xstep;
+		nextHorzTouchY += ystep;
     }
 }
 
-void		rayHorizontal()
+void		rayHorizontal(t_ray *ray)
 {
 	float	nextHorzTouchY;
 	float	nextHorzTouchX;
+	float	ystep;
+	float	xstep;
 
 	// Find the y-coordinate of the closest horizontal grid intersenction
-	g_ray.yintercept = floor(g_player.y / TILE_SIZE) * TILE_SIZE;
-	if (g_ray.isRayFacingDown)
-		g_ray.yintercept += TILE_SIZE;
+	ray->yintercept = floor(g_player.y / TILE_SIZE) * TILE_SIZE;
+	if (ray->isRayFacingDown)
+		ray->yintercept += TILE_SIZE;
 	// Find the x-coordinate of the closest horizontal grid intersection
-	g_ray.xintercept = g_player.x + ((g_ray.yintercept - g_player.y) / tan(g_ray.rayAngle));
+	ray->xintercept = g_player.x + ((ray->yintercept - g_player.y) / tan(ray->rayAngle));
 
 	// Calculate the increment xstep and ystep
-	g_ray.ystep = TILE_SIZE;
-	if (g_ray.isRayFacingUp)
-		g_ray.ystep *= -1;
+	ystep = TILE_SIZE;
+	if (ray->isRayFacingUp)
+		ystep *= -1;
 
-	g_ray.xstep = TILE_SIZE / tan(g_ray.rayAngle);
-	if (g_ray.isRayFacingLeft && g_ray.xstep > 0)
-		g_ray.xstep *= -1;
-	if (g_ray.isRayFacingRight && g_ray.xstep < 0)
-		g_ray.xstep *= -1;
-	nextHorzTouchX = g_ray.xintercept;
-	nextHorzTouchY = g_ray.yintercept;
-	if (g_ray.isRayFacingUp)
+	xstep = TILE_SIZE / tan(ray->rayAngle);
+	if (ray->isRayFacingLeft && xstep > 0)
+		xstep *= -1;
+	if (ray->isRayFacingRight && xstep < 0)
+		xstep *= -1;
+	nextHorzTouchX = ray->xintercept;
+	nextHorzTouchY = ray->yintercept;
+	if (ray->isRayFacingUp)
 		nextHorzTouchY--;
-	next_Horz_Intercept(nextHorzTouchY, nextHorzTouchX);
+	next_Horz_Intercept(nextHorzTouchY, nextHorzTouchX, ystep, xstep);
 }

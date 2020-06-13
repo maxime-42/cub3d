@@ -6,19 +6,18 @@
 
 static int		gameLoop(t_info *info)
 {
-	playerMovement(&g_player);
 	createImage();
+	playerMovement(&g_player);
 	drawMap(g_info->map);
 	drawPlayer(&g_player);
 	cast_All_Rays(&g_player, &g_ray);
 	/* mlx_clear_window(g_mlx_ptr, g_win_mlx); */
 	mlx_put_image_to_window(g_mlx_ptr, g_win_mlx, g_img_ptr, 0, 0);
-	/* mlx_destroy_image(g_mlx_ptr, g_img_ptr); */
+	mlx_destroy_image(g_mlx_ptr, g_img_ptr);
 	g_img_ptr = 0;
 	(void)info;
 	return (0);
 }
-
 
 int				main(int ac, char **av)
 {

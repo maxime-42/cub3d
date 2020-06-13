@@ -11,18 +11,18 @@ void		draw_Ray(double angle, float lenght, int color)
 	px = 0;
 	while (++line < lenght)
 	{
-		g_image_data[px + ((WINDOW_WIDTH / 2) * py)] = color;
+		g_image_data[px + ((WINDOW_WIDTH) * py)] = color;
 		px = cos(angle) * line + g_player.x;
 		py = sin(angle) * line + g_player.y;
 	}
 }
 
-void	drawline(int corY, int corX, float distance, int color, float angle)
+void		drawline(int corY, int corX, float distance, int color, float angle)
 {
-	float i;
-	int x;
-	int y;
-	int longeur;
+	float	i;
+	int		x;
+	int		y;
+	int		longeur;
 
 	longeur = 0;
 	i = 0;

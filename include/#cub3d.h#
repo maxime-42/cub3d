@@ -63,7 +63,7 @@ void				free_list(void *line);
 int					free_struct(t_info *info, int code_return);
 int					put_map_in_array(t_info *info, t_list *begin);
 int					freeAll(int codeReturn);
-int					parsing_map(t_info *info);
+ int					parsing_map(t_info *info);
 void				freeContentNode(void *line);
 
 #endif

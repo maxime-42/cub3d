@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int			hasWallAt(int y, int x)
+int			hasWallAt(float y, float x)
 {
 	int		mapGridIndexX;
 	int		mapGridIndexY;

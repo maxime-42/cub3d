@@ -35,6 +35,7 @@ SRC	=	./src/main.c\
 		./src/cast_All_Rays/rayHorizontal.c\
 		./src/cast_All_Rays/distanceBetweenPoints.c\
 		./src/parsing/put_the_same_number_of_column.c\
+		./src/cast_All_Rays/init_Struct_Ray.c\
 
 OBJ = $(SRC:.c=.o)
 

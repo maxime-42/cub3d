@@ -12,10 +12,9 @@ void		ray_Facing(t_ray *ray)
 		ray->isRayFacingLeft = 1;
 }
 
-double	normalizeAngle(double angle)
+float		normalizeAngle(float angle)
 {
 	angle = remainder(angle, (2 * M_PI));
-	/* angle = fmod(angle, (2 * M_PI)); */
 	if (angle < 0)
 	{
 		angle = (2 * M_PI) + angle;
@@ -23,27 +22,24 @@ double	normalizeAngle(double angle)
 	return (angle);
 }
 
-void			cast_All_Rays(t_player *player, t_ray *ray)
+void		cast_All_Rays(t_player *player, t_ray *ray)
 {
-	int			columnId;
-	int			color;
+	int		columnId;
 
-	color =  0xff0000;
 	columnId = 0;
+
+	init_Struct_Ray(ray);
 	ray->rayAngle = g_player.rotationAngle - (FOV_ANGLE / 2);
-	/* printf("NUM_RAYS = %d\n", NUM_RAYS); */
-	/* printf("MAP_NUM_COLS = %d\n", MAP_NUM_COLS); */
-	while(columnId < NUM_RAYS)
-	/* while(1 < NUM_RAYS) */
+	/* while(columnId < NUM_RAYS) */
+	while(columnId < 1)
 	{
 		g_ray.rayAngle = normalizeAngle(g_ray.rayAngle);
-		/* ray_Facing(); */
-		/* rayHorizontal(); */
-		drawline(player->y, player->x, TILE_SIZE * 2, color, ray->rayAngle);
+		ray_Facing(ray);
+		rayHorizontal();
+		/* drawline(player->y, player->x, TILE_SIZE * 2, color, ray->rayAngle); */
 		ray->rayAngle += FOV_ANGLE / NUM_RAYS;
 		columnId++;
 	}
 	(void)player;
 	(void)ray;
-	(void)color;
 }

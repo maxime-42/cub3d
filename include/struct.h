@@ -3,20 +3,21 @@
 
 typedef struct		s_ray
 {
-	int				xintercept;
-	int				yintercept;
-	int				xstep;
-	int				ystep;
-	int				wallHitX;
-	int				wallHitY;
-	int				vertWallHitX;
-	int				vertWallHitY;
-	double			rayAngle;
+	float			xintercept;
+	float			yintercept;
+	float			xstep;
+	float			ystep;
+	float			wallHitX;
+	float			wallHitY;
+	float			vertWallHitX;
+	float			vertWallHitY;
+	float			rayAngle;
 	int				isRayFacingDown;
 	int				isRayFacingUp;
 	int				isRayFacingRight;
 	int				isRayFacingLeft;
 	int				foundVertWallHit;
+	int				foundHorzWallHit;
 	int				distance;
 }					t_ray;
 

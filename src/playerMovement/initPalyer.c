@@ -9,5 +9,5 @@ void	initPlayer()
 	g_player.walkDirection = 0;
 	g_player.rotationAngle = M_PI / 2;
 	g_player.moveSpeed = 5;
-	g_player.rotationSpeed = 2 * (M_PI / 180);
+	g_player.rotationSpeed = 5 * (M_PI / 180);
 }

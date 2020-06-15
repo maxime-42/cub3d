@@ -30,7 +30,7 @@ void		cast_All_Rays(t_player *player, t_ray *ray)
 	init_Struct_Ray(ray);
 	ray->rayAngle = g_player.rotationAngle - (FOV_ANGLE / 2);
 	while(columnId < NUM_RAYS)
-	/* while(columnId < 1) */
+	/* while(columnId < 2) */
 	{
 		g_ray.rayAngle = normalizeAngle(g_ray.rayAngle);
 		ray_Facing(ray);
@@ -38,7 +38,7 @@ void		cast_All_Rays(t_player *player, t_ray *ray)
 		rayVertical(ray);
 		the_Smallest_Of_The_Distances(ray, player);
 		drawline(player->y, player->x, ray->distance, 0xff0000, ray->rayAngle);
-		ray->rayAngle += FOV_ANGLE / NUM_RAYS;
+		ray->rayAngle += (FOV_ANGLE / NUM_RAYS);
 		columnId++;
 	}
 	(void)player;

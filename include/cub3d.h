@@ -35,6 +35,8 @@
 # define WALL_STRIP_WIDTH  1
 # define NUM_RAYS WINDOW_WIDTH / WALL_STRIP_WIDTH
 
+#define MAX_VALUE 2147483647
+
 
 ////////*variable globals////////////////////////////
 t_info				*g_info;

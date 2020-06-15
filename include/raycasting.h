@@ -9,7 +9,6 @@ void				drawMap(char **map);
 void				drawPlayer(t_player *player);
 void				get_PositionPlayer(char **map, int *y, int *x);
 int					keyRelease(int keyCode);
-void				rayHorizontal(t_ray *ray);
 int					hasWallAt(float y, float x);
 float				normalizeAngle(float angle);
 float				distanceBetweenPoints(float x1, float y1, float x2, float y2);
@@ -24,5 +23,8 @@ int					put_the_same_number_of_column(t_list *begin);
 void				cast_All_Rays(t_player *player, t_ray *ray);
 void				init_Struct_Ray(t_ray *ray);
 /* void		draw_Ray(double angle, float lenght, int color); */
-void		draw_Ray(double angle, float lenght, int color);
+void			draw_Ray(double angle, float lenght, int color);
+void				the_Smallest_Of_The_Distances(t_ray *ray, t_player *player);
+void				rayVertical(t_ray *ray);
+void				rayHorizontal(t_ray *ray);
 #endif

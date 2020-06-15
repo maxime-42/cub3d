@@ -2,21 +2,21 @@
 
 static void	next_Horz_Intercept(float nextHorzTouchY, float nextHorzTouchX, float ystep, float xstep)
 {
-	float	lenght;
+	/* float	lenght; */
 
 	while (nextHorzTouchX >= 0 && nextHorzTouchX <= WINDOW_WIDTH &&
 	nextHorzTouchY >= 0 && nextHorzTouchY <= WINDOW_HEIGHT)
 	{
 		if (hasWallAt(nextHorzTouchY, nextHorzTouchX))
 		{
-			g_ray.wallHitX = nextHorzTouchX;
-			g_ray.wallHitY = nextHorzTouchY;
+			g_ray.horzWallHitY = nextHorzTouchY;
+			g_ray.horzWallHitX = nextHorzTouchX;
 		    g_ray.foundHorzWallHit = 1;
 			/* printf("nextHorzTouchY = %f\n", nextHorzTouchY); */
 			/* printf("nextHorzTouchX = %f\n", nextHorzTouchX); */
-			lenght = distanceBetweenPoints(g_player.x, g_player.y, g_ray.wallHitX, g_ray.wallHitY);
+			/* lenght = distanceBetweenPoints(g_player.x, g_player.y, g_ray.wallHitX, g_ray.wallHitY); */
 			/* printf("lenght = %f\n", lenght); */
-			drawline(g_player.y, g_player.x, lenght, 0xff0000, g_ray.rayAngle);
+			/* drawline(g_player.y, g_player.x, lenght, 0xff0000, g_ray.rayAngle); */
 			/* draw_Ray(g_ray.rayAngle, lenght, 0xff0000); */
 			return ;
 		}

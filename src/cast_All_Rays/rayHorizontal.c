@@ -2,28 +2,21 @@
 
 static void	next_Horz_Intercept(float nextHorzTouchY, float nextHorzTouchX, float ystep, float xstep)
 {
-	/* float	lenght; */
-
-	while (nextHorzTouchX >= 0 && nextHorzTouchX <= WINDOW_WIDTH &&
-	nextHorzTouchY >= 0 && nextHorzTouchY <= WINDOW_HEIGHT)
+	while (nextHorzTouchX >= 0 && nextHorzTouchX <= WINDOW_WIDTH &&	nextHorzTouchY >= 0 && nextHorzTouchY <= WINDOW_HEIGHT)
 	{
 		if (hasWallAt(nextHorzTouchY, nextHorzTouchX))
 		{
 			g_ray.horzWallHitY = nextHorzTouchY;
 			g_ray.horzWallHitX = nextHorzTouchX;
 		    g_ray.foundHorzWallHit = 1;
-			/* printf("nextHorzTouchY = %f\n", nextHorzTouchY); */
-			/* printf("nextHorzTouchX = %f\n", nextHorzTouchX); */
-	/* lenght = distanceBetweenPoints(g_player.x, g_player.y, g_ray.horzWallHitX, g_ray.horzWallHitY); */
-			/* printf("lenght = %f\n", lenght); */
-			/* drawline(g_player.y, g_player.x, lenght, 0xff0000, g_ray.rayAngle); */
-			/* g_ray.distance = lenght; */
-			/* draw_Ray(g_ray.rayAngle, lenght, 0xff0000); */
+			float lenght = distanceBetweenPoints(g_player.x, g_player.y, g_ray.horzWallHitX, g_ray.horzWallHitY);
+			drawline(g_player.y, g_player.x, lenght, 0xff0000, g_ray.rayAngle);
 			return ;
 		}
 		nextHorzTouchX += xstep;
 		nextHorzTouchY += ystep;
     }
+
 }
 
 void		rayHorizontal(t_ray *ray)

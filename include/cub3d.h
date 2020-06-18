@@ -32,11 +32,11 @@
 # define WINDOW_HEIGHT (MAP_NUM_ROWS * TILE_SIZE)
 
 # define FOV_ANGLE (60 * (M_PI / 180))
-# define WALL_STRIP_WIDTH  1
+# define WALL_STRIP_WIDTH  50
 # define NUM_RAYS (WINDOW_WIDTH / WALL_STRIP_WIDTH)
 
 #define MAX_VALUE 2147483647
-
+# define MINIMAP_SCALE_FACTOR 1
 
 ////////*variable globals////////////////////////////
 t_info				*g_info;

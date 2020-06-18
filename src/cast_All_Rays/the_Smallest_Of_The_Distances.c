@@ -18,7 +18,6 @@ void		the_Smallest_Of_The_Distances(t_ray *ray, t_player *player)
 								ray->vertWallHitX, ray->vertWallHitY);
 	else
 		vertHitDistance = MAX_VALUE;
-
 	if (horzHitDistance < vertHitDistance)
 	{
 		ray->wallHitX = ray->horzWallHitX;

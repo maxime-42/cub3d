@@ -35,7 +35,6 @@ SRC	=	./src/main.c\
 		./src/cast_All_Rays/rayHorizontal.c\
 		./src/cast_All_Rays/distanceBetweenPoints.c\
 		./src/parsing/put_the_same_number_of_column.c\
-		./src/cast_All_Rays/init_Struct_Ray.c\
 		./src/cast_All_Rays/rayVertical.c\
 		./src/cast_All_Rays/the_Smallest_Of_The_Distances.c\
 

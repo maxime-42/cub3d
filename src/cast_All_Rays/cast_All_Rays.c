@@ -1,29 +1,29 @@
 #include "cub3d.h"
 
-void	init_Struct_Ray(t_ray *ray)
+static	void	init_Struct_Ray(t_ray *ray)
 {
-	ray->isRayFacingUp = 0;
-	/* ray->yintercept = 0; */
-	/* ray->xintercept = 0; */
-	ray->isRayFacingDown = 0;
-	ray->isRayFacingRight = 0;
-	ray->isRayFacingLeft = 0;
+	ray->xintercept = 0;
+	ray->yintercept = 0;
+	ray->xstep = 0;
+	ray->ystep = 0;
+	ray->wallHitX = 0;
+	ray->wallHitY = 0;
 	ray->wasHitVertical = 0;
-    ray->wallHitX = 0;
-    ray->wallHitY = 0;
-	ray->vertWallHitY = 0;
 	ray->vertWallHitX = 0;
+	ray->vertWallHitY = 0;
 	ray->horzWallHitY = 0;
 	ray->horzWallHitX = 0;
-	ray->distance = 0;
-	/* ray->ystep = 0; */
-	/* ray->xstep = 0; */
 	/* ray->rayAngle = 0; */
-    ray->foundHorzWallHit = 0;
 	ray->foundVertWallHit = 0;
+	ray->foundHorzWallHit = 0;
+	ray->isRayFacingDown = 0;
+	ray->isRayFacingUp = 0;
+	ray->isRayFacingRight = 0;
+	ray->isRayFacingLeft = 0;
+	ray->distance = 0;
 }
 
-void		ray_Facing(t_ray *ray)
+static void		ray_Facing(t_ray *ray)
 {
 	if (ray->rayAngle > 0 && ray->rayAngle < M_PI)
 		ray->isRayFacingDown = 1;
@@ -35,7 +35,7 @@ void		ray_Facing(t_ray *ray)
 		ray->isRayFacingLeft = 1;
 }
 
-float		normalizeAngle(float angle)
+static float	normalizeAngle(float angle)
 {
 	angle = remainder(angle, (2 * M_PI));
 	if (angle < 0)
@@ -45,20 +45,39 @@ float		normalizeAngle(float angle)
 	return (angle);
 }
 
-void	render3d_projection(t_ray *ray, int columnId)
+static void		the_Smallest_Of_The_Distances(t_ray *ray, t_player *player)
 {
-	float	rayDistance;
-	float	distanceProjectionPlane;
-	float	wallStripHeight;
-	float	x;
-	float	y;
+	float		horzHitDistance;
+	float		vertHitDistance;
 
-	rayDistance = ray->distance;
-	distanceProjectionPlane = (WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2);
-	wallStripHeight = (TILE_SIZE / rayDistance) * distanceProjectionPlane;
-	x = columnId * WALL_STRIP_WIDTH;
-	y = (WINDOW_HEIGHT / 2) - (wallStripHeight / 2);
-	Rect(x, y, WALL_STRIP_WIDTH, wallStripHeight, 0xD3D0D0);
+	horzHitDistance = 0;
+	vertHitDistance = 0;
+	if (ray->foundHorzWallHit == 1)
+		horzHitDistance = distanceBetweenPoints(player->x, player->y,
+								ray->horzWallHitX, ray->horzWallHitY);
+	else
+		horzHitDistance = MAX_VALUE;
+
+	if (ray->foundVertWallHit == 1)
+		vertHitDistance = distanceBetweenPoints(player->x, player->y,
+								ray->vertWallHitX, ray->vertWallHitY);
+	else
+		vertHitDistance = MAX_VALUE;
+	if (horzHitDistance < vertHitDistance)
+	{
+		ray->wallHitX = ray->horzWallHitX;
+		ray->wallHitY = ray->horzWallHitY;
+		ray->distance = horzHitDistance;
+	}
+	else
+	{
+		ray->wallHitX = ray->vertWallHitX;
+		ray->wallHitY = ray->vertWallHitY;
+		ray->distance = vertHitDistance;
+	}
+	if (vertHitDistance < horzHitDistance)
+		ray->wasHitVertical = 1;
+	/* ft_drawline(player->y, player>x, ray->distance, 0xff0000, rayAngle); */
 }
 
 void		cast_All_Rays(t_player *player, t_ray *ray)
@@ -67,8 +86,7 @@ void		cast_All_Rays(t_player *player, t_ray *ray)
 
 	columnId = 0;
 	ray->rayAngle = g_player.rotationAngle - (FOV_ANGLE / 2);
-	while(columnId < NUM_RAYS)
-	/* while(columnId < 5) */
+	while (columnId < NUM_RAYS)
 	{
 		ray->rayAngle = normalizeAngle(ray->rayAngle);
 		init_Struct_Ray(ray);

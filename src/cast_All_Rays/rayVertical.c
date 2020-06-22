@@ -1,20 +1,19 @@
 #include "cub3d.h"
 
-static void	next_Vert_Intercept(float nextVertTouchY, float nextVertTouchX,
-								float ystep, float xstep)
+static void	next_Vert_Intercept(t_ray *ray, float nextVertTouchY, float nextVertTouchX)
 {
 	while (nextVertTouchX >= 0 && nextVertTouchX <= WINDOW_WIDTH
 	&& nextVertTouchY >= 0 && nextVertTouchY <= WINDOW_HEIGHT)
 	{
 		if (hasWallAt(nextVertTouchY, nextVertTouchX))
 		{
-			g_ray.foundVertWallHit = 1;
-			g_ray.vertWallHitX = nextVertTouchX;
-			g_ray.vertWallHitY = nextVertTouchY;
+			ray->foundVertWallHit = 1;
+			ray->vertWallHitX = nextVertTouchX;
+			ray->vertWallHitY = nextVertTouchY;
 			return ;
 		}
-		nextVertTouchX += xstep;
-		nextVertTouchY += ystep;
+		nextVertTouchX += ray->xstep;
+		nextVertTouchY += ray->ystep;
 	}
 }
 
@@ -22,8 +21,7 @@ void		rayVertical(t_ray *ray)
 {
 	float	nextVertTouchX;
 	float	nextVertTouchY;
-	float	xstep;
-	float	ystep;
+
 
 	// Find the x coordinate of the closest vertical grid intersection
 	ray->xintercept = floor(g_player.x / TILE_SIZE) * TILE_SIZE;
@@ -34,18 +32,18 @@ void		rayVertical(t_ray *ray)
 	ray->yintercept = g_player.y + (ray->xintercept - g_player.x) * tan(ray->rayAngle);
 
 	//Calculate the increment for xstep and ystep
-	xstep = TILE_SIZE;
+	ray->xstep = TILE_SIZE;
 	if (ray->isRayFacingLeft)
-		xstep *= -1;
+		ray->xstep *= -1;
 
-	ystep = TILE_SIZE * tan(ray->rayAngle);
-	if (ray->isRayFacingUp && ystep > 0)
-		ystep *= -1;
-	if (ray->isRayFacingDown && ystep < 0)
-		ystep *= -1;
+	ray->ystep = TILE_SIZE * tan(ray->rayAngle);
+	if (ray->isRayFacingUp && ray->ystep > 0)
+		ray->ystep *= -1;
+	if (ray->isRayFacingDown && ray->ystep < 0)
+		ray->ystep *= -1;
 	nextVertTouchX = ray->xintercept;
 	nextVertTouchY = ray->yintercept;
-	if (ray->isRayFacingLeft)////
+	if (ray->isRayFacingLeft)
 		nextVertTouchX--;
-	next_Vert_Intercept(nextVertTouchY, nextVertTouchX, ystep, xstep);
+	next_Vert_Intercept(ray, nextVertTouchY, nextVertTouchX);
 }

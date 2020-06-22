@@ -13,7 +13,6 @@ static	void	init_Struct_Ray(t_ray *ray)
 	ray->vertWallHitY = 0;
 	ray->horzWallHitY = 0;
 	ray->horzWallHitX = 0;
-	/* ray->rayAngle = 0; */
 	ray->foundVertWallHit = 0;
 	ray->foundHorzWallHit = 0;
 	ray->isRayFacingDown = 0;
@@ -80,9 +79,9 @@ static void		the_Smallest_Of_The_Distances(t_ray *ray, t_player *player)
 	/* ft_drawline(player->y, player>x, ray->distance, 0xff0000, rayAngle); */
 }
 
-void		cast_All_Rays(t_player *player, t_ray *ray)
+void			cast_All_Rays(t_player *player, t_ray *ray)
 {
-	int		columnId;
+	int			columnId;
 
 	columnId = 0;
 	ray->rayAngle = g_player.rotationAngle - (FOV_ANGLE / 2);

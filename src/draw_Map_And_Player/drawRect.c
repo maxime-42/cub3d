@@ -25,7 +25,6 @@ void	drawRect(int line_Column, int size, int color)
 	}
 }
 
-
 void	Rect(int corX, int corY, int width, int height, int color)
 {
 	int i;

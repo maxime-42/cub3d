@@ -14,9 +14,9 @@ typedef struct		s_ray
 	float			vertWallHitY;
 	float			horzWallHitY;
 	float			horzWallHitX;
+	float			rayAngle;
 	int				foundVertWallHit;
 	int				foundHorzWallHit;
-	float			rayAngle;
 	int				isRayFacingDown;
 	int				isRayFacingUp;
 	int				isRayFacingRight;

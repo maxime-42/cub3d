@@ -27,7 +27,7 @@ SRC	=	./src/main.c\
 		./src/playerMovement/initPalyer.c\
 		./src/draw_Map_And_Player/drawRect.c\
 		./src/draw_Map_And_Player/drawPlayer.c\
-		./src/event/eventKeyboard.c\
+		./src/playerMovement/eventKeyboard.c\
 		./src/playerMovement/playerMovement.c\
 		./src/playerMovement/hasWallAt.c\
 		./src/cast_All_Rays/cast_All_Rays.c\

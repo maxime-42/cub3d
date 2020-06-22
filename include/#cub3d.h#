@@ -38,8 +38,6 @@
 # define MAX_VALUE 2147483647
 # define MINIMAP_SCALE_FACTOR 0.2
 
-/* # define MINIMAP_SCALE_FACTOR 1  */
-
 ////////*variable globals////////////////////////////
 t_info				*g_info;
 t_player			g_player;

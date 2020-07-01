@@ -1,5 +1,6 @@
 #ifndef _STRUCT_H
 # define _STRUCT_H
+# define SIZE_PATH 64
 
 typedef struct		s_ray
 {
@@ -49,7 +50,15 @@ typedef struct		s_info
 	int				color_f[3];
 	int				fd;
 	char			orientation;
-	int				keyCode;
 }					t_info;
+
+typedef struct		s_texture
+{
+	char			path[SIZE_PATH];
+	void			*texture_ptr;
+	int				*wallTexture;
+	int				height;
+	int				width;
+}					t_texture;
 
 #endif

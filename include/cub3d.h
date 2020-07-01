@@ -32,16 +32,17 @@
 # define WINDOW_HEIGHT (MAP_NUM_ROWS * TILE_SIZE)
 
 # define FOV_ANGLE (60 * (M_PI / 180))
-# define WALL_STRIP_WIDTH  1
+# define WALL_STRIP_WIDTH 1
 # define NUM_RAYS (WINDOW_WIDTH / WALL_STRIP_WIDTH)
 
 # define MAX_VALUE 2147483647
 # define MINIMAP_SCALE_FACTOR 0.2
 
-/* # define MINIMAP_SCALE_FACTOR 1  */
+# define NUM_TEXTURE 4
 
 ////////*variable globals////////////////////////////
 t_info				*g_info;
+t_texture			g_texture[NUM_TEXTURE];
 t_player			g_player;
 void				*g_mlx_ptr;
 void				*g_img_ptr;
@@ -56,7 +57,6 @@ t_ray				g_ray;
 
 //////////////////////parsig///////////////////////
 int					get_Screen_Size(t_info *info);
-int					get_texture(t_info *info);
 int					get_sprint(t_info *info);
 int					get_color(t_info *ctrl);
 int					put_map_in_list(t_list **begin, int fd);
@@ -69,5 +69,7 @@ int					put_map_in_array(t_info *info, t_list *begin);
 int					freeAll(int codeReturn);
 int					parsing_map(t_info *info);
 void				freeContentNode(void *line);
-
+int					free_texture(t_texture texture[NUM_TEXTURE]);
+int					checkTexture(int fd, t_texture texture[NUM_TEXTURE]);
+void				getTexture(t_texture texture[NUM_TEXTURE]);
 #endif

@@ -12,7 +12,6 @@ int				keyPressed(int keyCode)
 		g_player.turnDirection = -1;
 	else if (keyCode == QUIT)
 		exit(freeAll(SUCCESS));
-	g_info->keyCode = keyCode;
 	return (0);
 }
 

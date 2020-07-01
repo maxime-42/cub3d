@@ -17,19 +17,19 @@ static void	next_Vert_Intercept(t_ray *ray, float nextVertTouchY, float nextVert
 	}
 }
 
-void		rayVertical(t_ray *ray)
+void		rayVertical(t_ray *ray, t_player *player)
 {
 	float	nextVertTouchX;
 	float	nextVertTouchY;
 
 
 	// Find the x coordinate of the closest vertical grid intersection
-	ray->xintercept = floor(g_player.x / TILE_SIZE) * TILE_SIZE;
+	ray->xintercept = floor(player->x / TILE_SIZE) * TILE_SIZE;
 	if (ray->isRayFacingRight)
 		ray->xintercept += TILE_SIZE;
 
 	// Find the y coordinate of the closest vertical grid intersection
-	ray->yintercept = g_player.y + (ray->xintercept - g_player.x) * tan(ray->rayAngle);
+	ray->yintercept = player->y + (ray->xintercept - player->x) * tan(ray->rayAngle);
 
 	//Calculate the increment for xstep and ystep
 	ray->xstep = TILE_SIZE;

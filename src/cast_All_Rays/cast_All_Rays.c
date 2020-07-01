@@ -76,7 +76,6 @@ static void		the_Smallest_Of_The_Distances(t_ray *ray, t_player *player)
 	}
 	if (vertHitDistance < horzHitDistance)
 		ray->wasHitVertical = 1;
-	/* ft_drawline(player->y, player>x, ray->distance, 0xff0000, rayAngle); */
 }
 
 void			cast_All_Rays(t_player *player, t_ray *ray)
@@ -90,8 +89,8 @@ void			cast_All_Rays(t_player *player, t_ray *ray)
 		ray->rayAngle = normalizeAngle(ray->rayAngle);
 		init_Struct_Ray(ray);
 		ray_Facing(ray);
-		rayHorizontal(ray);
-		rayVertical(ray);
+		rayHorizontal(ray, player);
+		rayVertical(ray, player);
 		the_Smallest_Of_The_Distances(ray, player);
 		drawline(player->y * MINIMAP_SCALE_FACTOR, player->x * MINIMAP_SCALE_FACTOR, ray->distance * MINIMAP_SCALE_FACTOR, 0xff0000, ray->rayAngle);
 		render3d_projection(ray, columnId);

@@ -8,16 +8,6 @@ int		free_struct(t_info *info, int code_return)
 		free(info->map);
 		info->map = 0;
 	}
-	if (info->texture[0])
-		free(info->texture[0]);
-	if (info->texture[1])
-		free(info->texture[1]);
-	if (info->texture[2])
-		free(info->texture[2]);
-	if (info->texture[3])
-		free(info->texture[3]);
-	if (info->sprint)
-		free(info->sprint);
 	return (code_return);
 }
 
@@ -32,6 +22,9 @@ void		freeContentNode(void *line)
 
 int		freeAll(int codeReturn)
 {
+	int	i;
+
+	i = -1;
 	close(g_info->fd);
 	ft_lstclear(&g_info->begin, &freeContentNode);
 	free_struct(g_info, codeReturn);
@@ -41,6 +34,11 @@ int		freeAll(int codeReturn)
 		mlx_destroy_window(g_mlx_ptr, g_win_mlx);
 		if (g_img_ptr)
 			mlx_destroy_image (g_mlx_ptr, g_img_ptr);
+		if (g_texture[0].texture_ptr)
+		{
+			while (++i < NUM_TEXTURE)
+				mlx_destroy_image (g_mlx_ptr, g_texture[i].texture_ptr);
+		}
 	}
 	g_mlx_ptr = 0;
 	g_win_mlx = 0;

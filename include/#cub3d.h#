@@ -32,14 +32,17 @@
 # define WINDOW_HEIGHT (MAP_NUM_ROWS * TILE_SIZE)
 
 # define FOV_ANGLE (60 * (M_PI / 180))
-# define WALL_STRIP_WIDTH  1
+# define WALL_STRIP_WIDTH 1
 # define NUM_RAYS (WINDOW_WIDTH / WALL_STRIP_WIDTH)
 
 # define MAX_VALUE 2147483647
 # define MINIMAP_SCALE_FACTOR 0.2
 
+# define NUM_TEXTURE 4
+
 ////////*variable globals////////////////////////////
 t_info				*g_info;
+t_texture			g_texture[NUM_TEXTURE];
 t_player			g_player;
 void				*g_mlx_ptr;
 void				*g_img_ptr;

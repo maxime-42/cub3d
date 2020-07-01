@@ -19,29 +19,27 @@
 /* 	} */
 /* } */
 
-void	draw_Wall(int wallTop, int wallBottom, int columnId, int wallStripHeight)
+void		draw_Wall(int wallTop, int wallBottom, int columnId, int wallStripHeight)
 {
-	int	top;
-	/* int textureOffsetX; */
-	/* int textureOffsetY; */
-	/* int texelColor; */
-	/* int distanceFromTop; */
+	int		top;
+	int		textureOffsetX;
+	int		textureOffsetY;
+	int		texelColor;
+	int		distanceFromTop;
 
 	top = wallTop;
-	/* /\* printf("widht = %d\n", g_texture[0].width); *\/ */
-	/* /\* printf("height = %d\n", g_texture[0].height);	 *\/ */
-	/* if (g_ray.wasHitVertical == 1) */
-	/* 	textureOffsetX = (int)(g_ray.wallHitY * g_texture[0].width / TILE_SIZE) % g_texture[0].width; */
-	/* else */
-	/* 	textureOffsetX = (int)g_ray.wallHitX * g_texture[0].width; */
+	if (g_ray.wasHitVertical == 1)
+		textureOffsetX = (int)(g_ray.wallHitY * g_texture[0].width / TILE_SIZE) % g_texture[0].width;
+	else
+		textureOffsetX = (int)g_ray.wallHitX * g_texture[0].width;
 	while (top < wallBottom)
 	{
-		/* distanceFromTop = top + (wallStripHeight / 2) - (WINDOW_HEIGHT / 2); */
-		/* textureOffsetY = distanceFromTop * ((float)g_texture[0].height / wallStripHeight); */
+		distanceFromTop = top + (wallStripHeight / 2) - (WINDOW_HEIGHT / 2);
+		textureOffsetY = distanceFromTop * ((float)g_texture[0].height / wallStripHeight);
 
-		/* texelColor = g_texture[0].wallTexture[(g_texture[0].width * textureOffsetY) + textureOffsetX]; */
-		g_image_data[(top * WINDOW_WIDTH) + columnId] = 0xD3D0D0;
-		/* g_image_data[(top * WINDOW_WIDTH) + columnId] = texelColor; */
+		texelColor = g_texture[0].wallTexture[(g_texture[0].width * textureOffsetY) + textureOffsetX];
+		/* g_image_data[(top * WINDOW_WIDTH) + columnId] = 0xD3D0D0; */
+		g_image_data[(top * WINDOW_WIDTH) + columnId] = texelColor;
 		top++;
 	}
 	(void)wallStripHeight;

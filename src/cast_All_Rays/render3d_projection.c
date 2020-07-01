@@ -31,7 +31,7 @@ void		draw_Wall(int wallTop, int wallBottom, int columnId, int wallStripHeight)
 	if (g_ray.wasHitVertical == 1)
 		textureOffsetX = (int)(g_ray.wallHitY * g_texture[0].width / TILE_SIZE) % g_texture[0].width;
 	else
-		textureOffsetX = (int)g_ray.wallHitX * g_texture[0].width;
+		textureOffsetX = (int)(g_ray.wallHitX * g_texture[0].width / TILE_SIZE) % g_texture[0].width;
 	while (top < wallBottom)
 	{
 		distanceFromTop = top + (wallStripHeight / 2) - (WINDOW_HEIGHT / 2);

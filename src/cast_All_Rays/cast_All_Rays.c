@@ -54,6 +54,7 @@ static void		the_Smallest_Of_The_Distances(t_ray *ray, t_player *player)
 	if (ray->foundHorzWallHit == 1)
 		horzHitDistance = distanceBetweenPoints(player->x, player->y,
 								ray->horzWallHitX, ray->horzWallHitY);
+
 	else
 		horzHitDistance = MAX_VALUE;
 
@@ -64,6 +65,7 @@ static void		the_Smallest_Of_The_Distances(t_ray *ray, t_player *player)
 		vertHitDistance = MAX_VALUE;
 	if (horzHitDistance < vertHitDistance)
 	{
+
 		ray->wallHitX = ray->horzWallHitX;
 		ray->wallHitY = ray->horzWallHitY;
 		ray->distance = horzHitDistance;

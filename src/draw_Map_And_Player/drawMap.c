@@ -1,10 +1,5 @@
 #include "cub3d.h"
 
-/*drawMap
-je dessine la map avec des petits carré de la taille de TILE_SIZE
-chaque caractere de la map est representer pas un carré de la taille de TILE_SIZE
-*/
-
 static	void	utilis(int *ly, int *lx, int j)
 {
 	int			y;
@@ -24,12 +19,12 @@ static	void	utilis(int *ly, int *lx, int j)
 	}
 }
 
-void	drawMap(char **map)
+void		drawMap(char **map)
 {
-	int y;
-	int x;
-	int	lx;
-	int	ly;
+	int		y;
+	int		x;
+	int		lx;
+	int		ly;
 
 	y = -1;
 	while (++y < MAP_NUM_ROWS)

@@ -2,8 +2,8 @@
 
 static void	playerRect(int corX, int corY, int width, int height, int color)
 {
-	int i;
-	int j;
+	int		i;
+	int		j;
 
 	i = 0;
 	j = 0;

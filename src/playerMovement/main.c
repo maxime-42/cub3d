@@ -11,10 +11,12 @@ int			hasWallAt(float y, float x)
 	}
 	mapGridIndexX = floor(x / TILE_SIZE);
 	mapGridIndexY = floor(y / TILE_SIZE);
+	if (ft_strchr("NSEW", g_map[mapGridIndexY][mapGridIndexX]))
+		return (0);
 	return (g_map[mapGridIndexY][mapGridIndexX] != '0');
 }
 
-int				keyPressed(int keyCode)
+int			keyPressed(int keyCode)
 {
     if (keyCode == UP_ARROW)
 		g_player.walkDirection = +1;
@@ -29,7 +31,7 @@ int				keyPressed(int keyCode)
 	return (0);
 }
 
-int				keyRelease(int keyCode)
+int			keyRelease(int keyCode)
 {
     if (keyCode == UP_ARROW)
         g_player.walkDirection = 0;
@@ -61,14 +63,14 @@ void		playerMovement(t_player *player)
 	}
 }
 
-void	initPlayer()
+void		initPlayer(t_player *player)
 {
-	g_player.x = WINDOW_WIDTH / 2;
-	g_player.y = WINDOW_HEIGHT / 2;
-x	g_player.radius = 5;
-	g_player.turnDirection = 0;
-	g_player.walkDirection = 0;
-	g_player.rotationAngle = M_PI / 2;
-	g_player.moveSpeed = 5;
-	g_player.rotationSpeed = 5 * (M_PI / 180);
+	player->x = WINDOW_WIDTH / 2;
+	player->y = WINDOW_HEIGHT / 2;
+	player->radius = 5;
+	player->turnDirection = 0;
+	player->walkDirection = 0;
+	playerPosition(player);
+	player->moveSpeed = 10;
+	player->rotationSpeed = 10 * (M_PI / 180);
 }

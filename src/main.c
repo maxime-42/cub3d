@@ -1,8 +1,4 @@
 #include "cub3d.h"
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
 
 static	void	createImage(void)
 {
@@ -38,9 +34,9 @@ static int		gameLoop(t_info *info)
 	/* printf("y = %d\n", y); */
 	createImage();
 	playerMovement(&g_player);
+	cast_All_Rays(&g_player, &ray);
 	drawMap(g_info->map);
 	drawPlayer(&g_player);
-	cast_All_Rays(&g_player, &ray);
 	/* cast_All_Rays(&g_player, &g_ray); */
 	/* mlx_clear_window(g_mlx_ptr, g_win_mlx); */
 	mlx_put_image_to_window(g_mlx_ptr, g_win_mlx, g_img_ptr, 0, 0);
@@ -91,7 +87,7 @@ int				main(int ac, char **av)
 	getTexture(g_texture);
 	createWindow();
 	g_map = (char **)info.map;
-	initPlayer();
+	initPlayer(&g_player);
 	mlx_hook(g_win_mlx, 2, (1L << 0), &keyPressed, &keyCode);
 	mlx_hook(g_win_mlx, 3, (1L << 1), &keyRelease, &keyCode);
 	mlx_loop_hook(g_mlx_ptr, &gameLoop, &info);

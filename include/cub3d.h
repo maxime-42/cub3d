@@ -40,7 +40,10 @@
 
 # define NUM_TEXTURE 4
 
+# define IS_SPRITE 2
+
 ////////*variable globals////////////////////////////
+t_sprite			g_sprite;
 t_info				*g_info;
 t_texture			g_texture[NUM_TEXTURE];
 t_player			g_player;
@@ -72,4 +75,5 @@ void				freeContentNode(void *line);
 int					free_texture(t_texture texture[NUM_TEXTURE]);
 int					checkTexture(int fd, t_texture texture[NUM_TEXTURE]);
 void				getTexture(t_texture texture[NUM_TEXTURE]);
+int					get_path_sprite(int fd, t_sprite *sprite);
 #endif

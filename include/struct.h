@@ -35,6 +35,7 @@ typedef struct		s_player
 	float			rotationAngle;
 	float			moveSpeed;
 	float			rotationSpeed;
+	char			position;
 }					t_player;
 
 typedef struct		s_info
@@ -54,11 +55,31 @@ typedef struct		s_info
 
 typedef struct		s_texture
 {
-	char			path[SIZE_PATH];
+	char			*path;
 	void			*texture_ptr;
 	int				*wallTexture;
 	int				height;
 	int				width;
 }					t_texture;
+
+typedef struct s_sprite
+{
+	char	*path;
+	void	*sprite_ptr;
+	int	*wallSprite;
+	int	height;
+	int	width;
+	int	textureOffsetX;
+	int	textureOffsetY;
+}			t_sprite;
+
+typedef struct s_wall
+{
+	float	correctWallDistance;
+	float	distanceProjectionPlane;
+	int		wallStripHeight;
+	int		wallTop;
+	int		wallBottom;
+}				t_wall;
 
 #endif

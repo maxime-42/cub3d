@@ -16,7 +16,7 @@ int	parsing_map(t_info *info)
 		return (free_struct(info, ERROR));
 	if (checkTexture(info->fd, g_texture) == ERROR)
 		return (free_struct(info, ERROR));
-	if (get_sprint(info))
+	if (get_path_sprite(info->fd, &g_sprite))
 		return (free_struct(info, ERROR));
 	if (get_color(info) == ERROR)
 		return (free_struct(info, ERROR));

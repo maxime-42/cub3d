@@ -22,20 +22,20 @@ SRC	=	./src/main.c\
 		./src/parsing/get_fd.c\
 		./src/parsing/put_map_in_array.c\
 		./src/draw_Map_And_Player/drawMap.c\
-		./src/playerMovement/initPalyer.c\
 		./src/draw_Map_And_Player/drawRect.c\
 		./src/draw_Map_And_Player/drawPlayer.c\
-		./src/playerMovement/eventKeyboard.c\
-		./src/playerMovement/playerMovement.c\
-		./src/playerMovement/hasWallAt.c\
-		./src/cast_All_Rays/cast_All_Rays.c\
+		./src/playerMovement/main.c\
+		./src/playerMovement/playerPosition.c\
+		./src/cast_All_Rays/main.c\
 		./src/cast_All_Rays/draw_Ray.c\
 		./src/cast_All_Rays/rayHorizontal.c\
 		./src/cast_All_Rays/distanceBetweenPoints.c\
-		./src/cast_All_Rays/render3d_projection.c\
 		./src/parsing/put_the_same_number_of_column.c\
 		./src/cast_All_Rays/rayVertical.c\
-		./src/getTexture/getTexture.c\
+		./src/render_3d/main.c\
+		./src/render_3d/texture.c\
+		./src/sprite/sprite.c\
+
 
 OBJ = $(SRC:.c=.o)
 

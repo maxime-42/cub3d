@@ -37,7 +37,10 @@ int		freeAll(int codeReturn)
 		if (g_texture[0].texture_ptr)
 		{
 			while (++i < NUM_TEXTURE)
+			{
+				free(g_texture[i].path);
 				mlx_destroy_image (g_mlx_ptr, g_texture[i].texture_ptr);
+			}
 		}
 	}
 	g_mlx_ptr = 0;

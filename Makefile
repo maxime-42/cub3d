@@ -21,9 +21,7 @@ SRC	=	./src/main.c\
 		./src/parsing/check_character_map.c\
 		./src/parsing/get_fd.c\
 		./src/parsing/put_map_in_array.c\
-		./src/draw_Map_And_Player/drawMap.c\
-		./src/draw_Map_And_Player/drawRect.c\
-		./src/draw_Map_And_Player/drawPlayer.c\
+		./src/draw_Map_And_Player/miniMap.c\
 		./src/playerMovement/main.c\
 		./src/playerMovement/playerPosition.c\
 		./src/cast_All_Rays/main.c\

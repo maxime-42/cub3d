@@ -61,7 +61,7 @@ static void	playerRect(int corX, int corY, int width, int height, int color)
 	}
 }
 
-static void		line(int corY, int corX, float distance, int color, float angle)
+static void		positionLine(int corY, int corX, float distance, int color, float angle)
 {
 	float	i;
 	int		x;
@@ -85,6 +85,6 @@ static void		line(int corY, int corX, float distance, int color, float angle)
 void		drawPlayer(t_player *player)
 {
 	playerRect(player->x * MINIMAP_SCALE_FACTOR, player->y * MINIMAP_SCALE_FACTOR, player->radius, player->radius,  0x0078FF);
-	line(player->y *  MINIMAP_SCALE_FACTOR, player->x *MINIMAP_SCALE_FACTOR,
+	positionLine(player->y *  MINIMAP_SCALE_FACTOR, player->x *MINIMAP_SCALE_FACTOR,
 	20, 0xff0000, player->rotationAngle);
 }

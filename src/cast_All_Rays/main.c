@@ -34,7 +34,7 @@ static void		ray_Facing(t_ray *ray)
 		ray->isRayFacingLeft = 1;
 }
 
-static float	normalizeAngle(float angle)
+float	normalizeAngle(float angle)
 {
 	angle = remainder(angle, (2 * M_PI));
 	if (angle < 0)

@@ -23,6 +23,7 @@ SRC	=	./src/main.c\
 		./src/parsing/put_map_in_array.c\
 		./src/draw_Map_And_Player/miniMap.c\
 		./src/playerMovement/main.c\
+		./src/playerMovement/hasWallAt.c\
 		./src/playerMovement/playerPosition.c\
 		./src/cast_All_Rays/main.c\
 		./src/cast_All_Rays/draw_Ray.c\
@@ -33,6 +34,7 @@ SRC	=	./src/main.c\
 		./src/render_3d/main.c\
 		./src/render_3d/texture.c\
 		./src/sprite/sprite.c\
+		./src/screenshot/bmp_exporter.c\
 
 
 OBJ = $(SRC:.c=.o)

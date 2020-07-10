@@ -36,6 +36,7 @@ typedef struct		s_player
 	float			moveSpeed;
 	float			rotationSpeed;
 	char			position;
+	int				translation;
 }					t_player;
 
 typedef struct		s_info
@@ -81,5 +82,24 @@ typedef struct s_wall
 	int		wallTop;
 	int		wallBottom;
 }				t_wall;
+
+typedef struct		s_bmp_file
+{
+	char			byteType[2];
+	unsigned int	byteSize;
+	unsigned int	byteReserved;
+	unsigned int	byteOffset;
+	unsigned		HeaderSize;
+	int				ImageWidth;
+	int				ImageHeight;
+	unsigned short	ColorPlanes;
+	unsigned short	BitsPerPixel;
+	unsigned int	compression;
+	unsigned int	ImageSize;
+	int				biXPelsPerMeter;
+	int				biYPelsPerMeter;
+	unsigned int	TotalColors;
+	unsigned int	ImportantColors;
+}				   t_bmp_file;
 
 #endif

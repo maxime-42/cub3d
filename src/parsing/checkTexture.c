@@ -46,7 +46,6 @@ int			checkTexture(int fd, t_texture texture[NUM_TEXTURE])
 			free(line);
 			return (ERROR);
 		}
-			printf("texture[count].path = %s\n", texture[count].path);
 	}
 	return (SUCCESS);
 }

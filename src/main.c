@@ -1,5 +1,7 @@
 #include "cub3d.h"
 
+char	*filename = "myscreen";
+
 static	void	createImage(void)
 {
 	int	bpp;
@@ -39,6 +41,11 @@ static int		gameLoop(t_info *info)
 	drawPlayer(&g_player);
 	/* cast_All_Rays(&g_player, &g_ray); */
 	/* mlx_clear_window(g_mlx_ptr, g_win_mlx); */
+	if (filename)
+	{
+		bmp_exporter(filename);
+		freeAll(SUCCESS);
+	}
 	mlx_put_image_to_window(g_mlx_ptr, g_win_mlx, g_img_ptr, 0, 0);
 	///mlx_destroy_image(g_mlx_ptr, g_img_ptr);
 	g_img_ptr = 0;
@@ -55,6 +62,7 @@ static void		init_mlx()
 		exit(freeAll(ERROR));
 	}
 }
+
 
 static void		createWindow(void)
 {
@@ -76,7 +84,7 @@ int				main(int ac, char **av)
 	g_info = &info;
 	if (ac != 2)
 	{
-		write(1, "Error\nnumber argument\n", 24);
+		ft_putstr_fd("Error\nError\nnumber argument\n", STDOUT);
 		return (ERROR);
 	}
 	if (get_file_descriptor(&info, av[1]) == ERROR)

@@ -96,8 +96,8 @@ typedef struct		s_bmp_file
 	unsigned short	BitsPerPixel;
 	unsigned int	compression;
 	unsigned int	ImageSize;
-	int				biXPelsPerMeter;
-	int				biYPelsPerMeter;
+	int				bitsXPelsPerMeter;
+	int				bitsYPelsPerMeter;
 	unsigned int	TotalColors;
 	unsigned int	ImportantColors;
 }				   t_bmp_file;

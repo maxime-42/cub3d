@@ -25,8 +25,8 @@ static void		create_header(t_bmp_file *infoBmpFile)
 	infoBmpFile->BitsPerPixel = 32;
 	infoBmpFile->compression = 0;
 	infoBmpFile->ImageSize = (WINDOW_WIDTH * WINDOW_HEIGHT * 4);
-	infoBmpFile->biXPelsPerMeter = WINDOW_WIDTH;
-	infoBmpFile->biXPelsPerMeter = WINDOW_HEIGHT;;
+	infoBmpFile->bitsXPelsPerMeter = 2835;
+	infoBmpFile->bitsXPelsPerMeter = 2835;
 	infoBmpFile->TotalColors = 0;
 	infoBmpFile->ImportantColors = 0;
 }
@@ -44,8 +44,8 @@ static void		write_header(int fd, t_bmp_file infoBmpFile)
 	write(fd, &infoBmpFile.BitsPerPixel, 2);
 	write(fd, &infoBmpFile.compression, 4);
 	write(fd, &infoBmpFile.ImageSize, 4);
-	write(fd, &infoBmpFile.biXPelsPerMeter, 4);
-	write(fd, &infoBmpFile.biYPelsPerMeter, 4);
+	write(fd, &infoBmpFile.bitsXPelsPerMeter, 4);
+	write(fd, &infoBmpFile.bitsYPelsPerMeter, 4);
 	write(fd, &infoBmpFile.TotalColors, 4);
 	write(fd, &infoBmpFile.ImportantColors, 4);
 }
@@ -57,12 +57,14 @@ static void		write_file(int fd)
 	int		i;
 	int		j;
 
-	image_size = WINDOW_WIDTH * WINDOW_HEIGHT;
-	if (!(pixel_array = malloc(sizeof(char) * image_size)))
+	image_size = WINDOW_WIDTH * WINDOW_HEIGHT * 4;
+	if (!(pixel_array = malloc(sizeof(char) * image_size * 4)))
 		freeAll(ERROR);
+	/* ft_memset(pixel_array, 0, image_size * 4); */
+	/* pixel_array[image_size] = '\0'; */
 	i = 0;
 	j = 0;
-	while (i < image_size)
+	while (i < (image_size / 4))
 	{
 		pixel_array[j++] = 	g_image_data[i] & 255;
 		pixel_array[j++] = (g_image_data[i] & 255 << 8) >> 8;

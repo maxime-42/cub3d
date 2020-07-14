@@ -16,12 +16,12 @@
 # define COLOR_WALL_SPACE 0x0
 # define TILE_SIZE 32
 
-# define UP_ARROW 65362
-# define DOWN_ARROW 65364
+# define UP_ARROW 119
+# define DOWN_ARROW 115
 # define LEFT_ARROW 65361
 # define RIGHT_ARROW 65363
-# define TRANSLATION_RIGHT 65365
-# define TRANSLATION_LEFT 65366
+# define TRANSLATION_RIGHT 100
+# define TRANSLATION_LEFT 97
 # define QUIT 65307
 
 # define STDOUT 1
@@ -43,6 +43,11 @@
 # define NUM_TEXTURE 4
 
 # define IS_SPRITE 2
+
+# define ANGLE_DOWN 0.5 * M_PI;
+# define ANGLE_EAST 0;
+# define ANGLE_WEST M_PI;
+# define ANGLE_UP 1.5 * M_PI;
 
 ////////*variable globals////////////////////////////
 t_sprite			g_sprite;

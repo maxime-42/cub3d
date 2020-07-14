@@ -2,8 +2,8 @@
 
 static	void	utilis(int *ly, int *lx, int j)
 {
-	int			y;
-	int			x;
+	int	y;
+	int	x;
 
 	y = -1;
 	while (++y < TILE_SIZE * MINIMAP_SCALE_FACTOR)
@@ -19,7 +19,7 @@ static	void	utilis(int *ly, int *lx, int j)
 	}
 }
 
-void		drawMap(char **map)
+static	void	drawMap(char **map)
 {
 	int		y;
 	int		x;
@@ -61,7 +61,7 @@ static void	playerRect(int corX, int corY, int width, int height, int color)
 	}
 }
 
-static void		positionLine(int corY, int corX, float distance, int color, float angle)
+static void	orientation_line(int corY, int corX, float distance, int color, float angle)
 {
 	float	i;
 	int		x;
@@ -82,9 +82,10 @@ static void		positionLine(int corY, int corX, float distance, int color, float a
 	}
 }
 
-void		drawPlayer(t_player *player)
+void		miniMap(t_player *player, char **map)
 {
+	drawMap(map);
 	playerRect(player->x * MINIMAP_SCALE_FACTOR, player->y * MINIMAP_SCALE_FACTOR, player->radius, player->radius,  0x0078FF);
-	positionLine(player->y *  MINIMAP_SCALE_FACTOR, player->x *MINIMAP_SCALE_FACTOR,
-	20, 0xff0000, player->rotationAngle);
+	orientation_line(player->y * MINIMAP_SCALE_FACTOR, player->x *MINIMAP_SCALE_FACTOR,
+	15, 0xff0000, player->rotationAngle);
 }

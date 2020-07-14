@@ -33,46 +33,48 @@ static void		create_header(t_bmp_file *infoBmpFile)
 
 static void		write_header(int fd, t_bmp_file infoBmpFile)
 {
-	write(fd, &infoBmpFile.byteType, 2);
-	write(fd, &infoBmpFile.byteSize, 4);
-	write(fd, &infoBmpFile.byteReserved, 4);
-	write(fd, &infoBmpFile.byteOffset, 4);
-	write(fd, &infoBmpFile.HeaderSize, 4);
-	write(fd, &infoBmpFile.ImageWidth, 4);
-	write(fd, &infoBmpFile.ImageHeight, 4);
-	write(fd, &infoBmpFile.ColorPlanes, 2);
-	write(fd, &infoBmpFile.BitsPerPixel, 2);
-	write(fd, &infoBmpFile.compression, 4);
-	write(fd, &infoBmpFile.ImageSize, 4);
-	write(fd, &infoBmpFile.bitsXPelsPerMeter, 4);
-	write(fd, &infoBmpFile.bitsYPelsPerMeter, 4);
-	write(fd, &infoBmpFile.TotalColors, 4);
-	write(fd, &infoBmpFile.ImportantColors, 4);
+	 int	r;  
+
+	 r = 0;
+	r = write(fd, &infoBmpFile.byteType, 2);
+	r = write(fd, &infoBmpFile.byteSize, 4);
+	r = write(fd, &infoBmpFile.byteReserved, 4);
+	r = write(fd, &infoBmpFile.byteOffset, 4);
+	r = write(fd, &infoBmpFile.HeaderSize, 4);
+	r = write(fd, &infoBmpFile.ImageWidth, 4);
+	r = write(fd, &infoBmpFile.ImageHeight, 4);
+	r = write(fd, &infoBmpFile.ColorPlanes, 2);
+	r = write(fd, &infoBmpFile.BitsPerPixel, 2);
+	r = write(fd, &infoBmpFile.compression, 4);
+	r = write(fd, &infoBmpFile.ImageSize, 4);
+	r = write(fd, &infoBmpFile.bitsXPelsPerMeter, 4);
+	r = write(fd, &infoBmpFile.bitsYPelsPerMeter, 4);
+	r = write(fd, &infoBmpFile.TotalColors, 4);
+	r = write(fd, &infoBmpFile.ImportantColors, 4);
+	(void)r;
 }
 
-static void		write_file(int fd)
+static void		write_file(int fd, int ImageSize)
 {
-	char	*pixel_array;
-	int		image_size;
+	char		*pixel_array;
 	int		i;
 	int		j;
 
-	image_size = WINDOW_WIDTH * WINDOW_HEIGHT * 4;
-	if (!(pixel_array = malloc(sizeof(char) * image_size * 4)))
+
+	if (!(pixel_array = malloc(sizeof(char) * ImageSize)))
 		freeAll(ERROR);
-	/* ft_memset(pixel_array, 0, image_size * 4); */
-	/* pixel_array[image_size] = '\0'; */
 	i = 0;
 	j = 0;
-	while (i < (image_size / 4))
+	ImageSize /= 4;
+	while (i < ImageSize)
 	{
-		pixel_array[j++] = 	g_image_data[i] & 255;
+		pixel_array[j++] = g_image_data[i] & 255;
 		pixel_array[j++] = (g_image_data[i] & 255 << 8) >> 8;
 		pixel_array[j++] = (g_image_data[i] & 255 << 16) >> 16;
 		pixel_array[j++] = 0;
 		i++;
 	}
-	write(fd, pixel_array, image_size);
+	j = write(fd, pixel_array, ImageSize *= 4);
 	free(pixel_array);
 }
 
@@ -84,7 +86,8 @@ void			bmp_exporter(char *fileName)
 	fd = create_file(fileName);
 	create_header(&infoBmpFile);
 	write_header(fd, infoBmpFile);
-	write_file(fd);
+	write_file(fd, infoBmpFile.ImageSize);
 	close(fd);
 	(void)infoBmpFile;
+
 }

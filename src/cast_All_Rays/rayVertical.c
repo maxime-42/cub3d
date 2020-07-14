@@ -2,10 +2,15 @@
 
 static void	next_Vert_Intercept(t_ray *ray, float nextVertTouchY, float nextVertTouchX)
 {
+	float	tmp;
+
 	while (nextVertTouchX >= 0 && nextVertTouchX <= WINDOW_WIDTH
 	&& nextVertTouchY >= 0 && nextVertTouchY <= WINDOW_HEIGHT)
 	{
-		if (hasWallAt(nextVertTouchY, nextVertTouchX))
+		tmp = 0;
+		if (ray->isRayFacingLeft)
+			tmp = 1;
+		if (hasWallAt(nextVertTouchY, nextVertTouchX - tmp))
 		{
 			ray->foundVertWallHit = 1;
 			ray->vertWallHitX = nextVertTouchX;
@@ -43,7 +48,7 @@ void		rayVertical(t_ray *ray, t_player *player)
 		ray->ystep *= -1;
 	nextVertTouchX = ray->xintercept;
 	nextVertTouchY = ray->yintercept;
-	if (ray->isRayFacingLeft)
-		nextVertTouchX--;
+	/* if (ray->isRayFacingLeft) */
+	/* 	nextVertTouchX--; */
 	next_Vert_Intercept(ray, nextVertTouchY, nextVertTouchX);
 }

@@ -2,9 +2,14 @@
 
 static void	next_Horz_Intercept(t_ray *ray, float nextHorzTouchY, float nextHorzTouchX)
 {
+	float	tmp;
+
 	while (nextHorzTouchX >= 0 && nextHorzTouchX <= WINDOW_WIDTH &&	nextHorzTouchY >= 0 && nextHorzTouchY <= WINDOW_HEIGHT)
 	{
-		if (hasWallAt(nextHorzTouchY, nextHorzTouchX))
+		tmp = 0;
+		if (ray->isRayFacingUp)
+			tmp = 1;
+		if (hasWallAt(nextHorzTouchY - tmp, nextHorzTouchX))
 		{
 			ray->horzWallHitY = nextHorzTouchY;
 			ray->horzWallHitX = nextHorzTouchX;
@@ -40,7 +45,7 @@ void		rayHorizontal(t_ray *ray, t_player *player)
 		ray->xstep *= -1;
 	nextHorzTouchX = ray->xintercept;
 	nextHorzTouchY = ray->yintercept;
-	if (ray->isRayFacingUp)
-		nextHorzTouchY--;
+	/* if (ray->isRayFacingUp) */
+	/* 	nextHorzTouchY--; */
 	next_Horz_Intercept(ray, nextHorzTouchY, nextHorzTouchX);
 }

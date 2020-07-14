@@ -51,6 +51,7 @@ typedef struct		s_info
 	int				color_c[3];
 	int				color_f[3];
 	int				fd;
+	int			size_line;  
 	char			orientation;
 }					t_info;
 
@@ -58,20 +59,27 @@ typedef struct		s_texture
 {
 	char			*path;
 	void			*texture_ptr;
-	int				*wallTexture;
-	int				height;
-	int				width;
+	int			*wallTexture;
+	int			height;
+	int			width;
 }					t_texture;
 
-typedef struct s_sprite
+typedef struct		s_sprite
 {
-	char	*path;
-	void	*sprite_ptr;
-	int	*wallSprite;
-	int	height;
-	int	width;
-	int	textureOffsetX;
-	int	textureOffsetY;
+	float		diry;
+	float		dirx;
+	float		plany;
+	float		planx;
+  	int		*data;
+	void		*ptr;
+	int		size_l;
+	float		distance;
+	float		buffer[NUM_RAYS];
+	float		angle;
+	int		width;
+	int		bpp;
+	int		endian;
+	int		height;
 }			t_sprite;
 
 typedef struct s_wall

@@ -1,24 +1,6 @@
 #include "cub3d.h"
 
-static void	get_sprite(t_sprite *sprite)
-{
-	int		bpp;
-	int		size_line;
-	int		endian;
-
-	sprite->sprite_ptr = mlx_xpm_file_to_image(g_mlx_ptr, sprite->path, &sprite->width, &sprite->height);
-	sprite->data = (int *)mlx_get_data_addr(sprite->sprite_ptr, &bpp, &size_line, &endian);
-	if (!sprite->sprite_ptr)
-	{
-		ft_putstr_fd("Error\nFailer sprite ptr\n", STDOUT);
-		exit (freeAll(ERROR));
-	}
-}
-
-
-
-
-void	putsprite(t_param *param)
+void			putsprite(t_sprite *sprite)
 {
   	int		textureoffsetx;
 	int		distancefromtop;
@@ -30,16 +12,16 @@ void	putsprite(t_param *param)
 	int		id = 0;
 
 	sprite->distance = distanceBetweenPoints(player->x, player->y, sprite->x, sprite->y);
-	distanceprojection = (WINDOW_WIDTH / 2) / tan(FOV / 2);
+	distanceprojection = (WINDOW_WIDTH / 2) / tan(FOV_ANGLE / 2);
 	sprite_size = (TILE_SIZE * 0.5 / sprite->distance ) * distanceprojection;
-	if (ft_spritevisible(param, sprite_size) == 1)
+	if (spritevisible(sprite, player, sprite_size) == 1)
 	{
-		float spriteX = param->sprite.x[id] - param->player.x;
-		float spriteY = param->sprite.y[id] - param->player.y;
+		float spriteX = sprite->x - player->x;
+		float spriteY = sprite->y - player->y;
 	//	printf("spriteX = %f     spriteY = %f\n",spriteX, spriteY);
-		float invDet = 1.0 / (sprite->planx * sprite->diry - sprite->dirx * param->plany);
-		float transformX = invDet * (sprite->dirY * spriteX - sprite->dirx * spritey);
-		float transformY = invDet * (-param->plany * spritex + param->planx * spritey);
+		float invDet = 1.0 / (sprite->planx * sprite->diry - sprite->dirx * sprite->plany);
+		float transformX = invDet * (sprite->dirY * spriteX - sprite->dirx * sprite->y);
+		float transformY = invDet * (-sprite->plany * spritex + sprite->planx * sprite->y);
 		int spriteScreenX = (int)((WINDOW_WIDTH / 2) * (1 + -transformX / transformY));
 		int spriteHeight = sprite_size;
 		int drawStartY = -spriteHeight / 2 + WINDOW_HEIGHT / 2;
@@ -53,7 +35,7 @@ void	putsprite(t_param *param)
 		if(drawStartX < 0)
 		  drawStartX = 0;
 		int drawEndX = spriteWidth / 2 + spriteScreenX;
-		if(drawEndX >= WINDOW_WIDTH) drawEndX = WIN_WIDTH - 1;
+		if(drawEndX >= WINDOW_WIDTH) drawEndX = WINDOW_WIDTH - 1;
 			sprite = drawStartX;
 		while (sprite < drawEndX)
 		{
@@ -63,10 +45,10 @@ void	putsprite(t_param *param)
 				while (y < drawEndY)
 				{
 					textureoffsetx = (int)(256 * (sprite - (-sprite_size / 2 + spriteScreenX)) * param->sprite.width / sprite_size) / 256;
-					distancefromtop = (y) * 256 - WIN_HEIGHT * 128 + sprite_size * 128;
-					textureoffsety = ((distancefromtop * param->sprite.height) / sprite_size) / 256;
-					int color = sprite->data[(textureoffsety * param->sprite.width) + textureoffsetx];
-					sprite->data[y * WIN_WIDTH + sprite] = color;
+					distancefromtop = (y) * 256 - WINDOW_HEIGHT * 128 + sprite_size * 128;
+					textureoffsety = ((distancefromtop * sprite->height) / sprite_size) / 256;
+					int color = sprite->data[(textureoffsety * sprite->width) + textureoffsetx];
+					sprite->data[y * WINDOW_WIDTH + sprite] = color;
 					y++;
 				}
 				sprite++;

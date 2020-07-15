@@ -42,6 +42,16 @@ int		freeAll(int codeReturn)
 				mlx_destroy_image (g_mlx_ptr, g_texture[i].texture_ptr);
 			}
 		}
+		if (g_sprite.ptr)
+		{
+			free(g_sprite.path);
+			g_sprite.path = 0;
+			if (g_sprite.ptr)
+			{
+				mlx_destroy_image (g_mlx_ptr, g_sprite.ptr);
+				g_sprite.ptr = 0;
+			}
+		}
 	}
 	g_mlx_ptr = 0;
 	g_win_mlx = 0;

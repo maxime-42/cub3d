@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-char	*filename = "toto";
+char	*filename = 0;
 
 void		initPlayer(t_player *player)
 {
@@ -98,6 +98,7 @@ int			main(int ac, char **av)
 
 	info.map = 0;
 	g_texture[0].texture_ptr = 0;
+	g_sprite.ptr = 0;
 	g_info = &info;
 	if (ac == 3)
 		filename = "myscreenShoot";
@@ -115,6 +116,7 @@ int			main(int ac, char **av)
 	createWindow();
 	g_map = (char **)info.map;
 	initPlayer(&g_player);
+	init_sprite(&g_sprite, g_map, g_player.rotationAngle);	
 	if (!filename)
 	{
 		mlx_hook(g_win_mlx, 2, (1L << 0), &keyPressed, &keyCode);

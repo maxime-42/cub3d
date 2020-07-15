@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int	ft_spritevisible(t_sprite *sprite, float sprite_size)
+int	spritevisible(t_sprite *sprite, t_player *player, float sprite_size)
 {
 	float	vectX;
 	float	vectY;
@@ -12,13 +12,13 @@ int	ft_spritevisible(t_sprite *sprite, float sprite_size)
 	float 	spriteangle_end;
 	float	playerangle;
 
-	vectX = sprite.x - player.x;
-	vectY = sprite.y - player.y;
-	vectX_end = (param->sprite.x + sprite_size) - param->player.x;
-	vectY_end = (param->sprite.y + sprite_size) - param->player.y;
-	playertospriteangle  = atan2(vectY, vectX);
+	vectX = sprite->x - player->x;
+	vectY = sprite->y - player->y;
+	vectX_end = (sprite->x + sprite_size) - player->x;
+	vectY_end = (sprite->y + sprite_size) - player->y;
+	playertospriteangle  = atan2(vectY, vectX);//atan
 	playertospriteangle_end  = atan2(vectY_end, vectX_end);
-	playerangle = normalizeAngle(player->rotationangle);
+	playerangle = normalizeAngle(player->rotationAngle);
 	spriteangle = playerangle - playertospriteangle;
 	spriteangle_end = playerangle - playertospriteangle_end;
 			
@@ -33,7 +33,7 @@ int	ft_spritevisible(t_sprite *sprite, float sprite_size)
 	spriteangle = fabs(spriteangle);
 	spriteangle_end = fabs(spriteangle_end);
 	float wallspriteangle = fabs(spriteangle_end - spriteangle);
-	float fovSprite = FOV / 2 + wallspriteangle;
+	float fovSprite = FOV_ANGLE / 2 + wallspriteangle;
 	if(spriteangle < fovSprite)
 		return (1);
 	else

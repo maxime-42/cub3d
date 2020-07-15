@@ -2,6 +2,7 @@
 # define _STRUCT_H
 # define SIZE_PATH 64
 
+
 typedef struct		s_ray
 {
 	float			xintercept;
@@ -16,12 +17,12 @@ typedef struct		s_ray
 	float			horzWallHitY;
 	float			horzWallHitX;
 	float			rayAngle;
-	int				foundVertWallHit;
-	int				foundHorzWallHit;
-	int				isRayFacingDown;
-	int				isRayFacingUp;
-	int				isRayFacingRight;
-	int				isRayFacingLeft;
+	int			foundVertWallHit;
+	int			foundHorzWallHit;
+	int			isRayFacingDown;
+	int			isRayFacingUp;
+	int			isRayFacingRight;
+	int			isRayFacingLeft;
 	float			distance;
 }					t_ray;
 
@@ -64,23 +65,6 @@ typedef struct		s_texture
 	int			width;
 }					t_texture;
 
-typedef struct		s_sprite
-{
-	float		diry;
-	float		dirx;
-	float		plany;
-	float		planx;
-  	int		*data;
-	void		*ptr;
-	int		size_l;
-	float		distance;
-	float		buffer[NUM_RAYS];
-	float		angle;
-	int		width;
-	int		bpp;
-	int		endian;
-	int		height;
-}			t_sprite;
 
 typedef struct s_wall
 {
@@ -109,5 +93,6 @@ typedef struct		s_bmp_file
 	unsigned int	TotalColors;
 	unsigned int	ImportantColors;
 }				   t_bmp_file;
+
 
 #endif

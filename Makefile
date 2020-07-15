@@ -34,8 +34,10 @@ SRC	=	./src/main.c\
 		./src/cast_All_Rays/rayVertical.c\
 		./src/render_3d/main.c\
 		./src/render_3d/texture.c\
-		./src/sprite/sprite.c\
 		./src/screenshot/bmp_exporter.c\
+		./src/sprite/init.c\
+		./src/sprite/spriteVisible.c\
+		./src/sprite/sprite.c\
 
 
 OBJ = $(SRC:.c=.o)

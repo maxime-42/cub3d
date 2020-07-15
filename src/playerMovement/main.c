@@ -1,6 +1,5 @@
 #include "cub3d.h"
 
-
 static int	player_Orientation_Angle(float angle)
 {
 	angle = normalizeAngle(angle);
@@ -11,25 +10,25 @@ static int	player_Orientation_Angle(float angle)
 	return (0);
 }
 
-void	calculs_dir_and_plan_for_sprites(t_sprite *sprite, t_player *player)
-{
-	float	dirAngle;
-	float	olddirx;
-	float	oldplanx;
+/* void	calculs_dir_and_plan_for_sprites(t_sprite *sprite, t_player *player) */
+/* { */
+/* 	float	dirangle; */
+/* 	float	olddirx; */
+/* 	float	oldplanx; */
 
-	olddirx = param->dirx;
-	oldplanx = param->planx;
-	dirAngle = player.turnDirection * player->rotationSpeed;
-	sprite->dirX = sprite->dirX * cos(dirAngle) - sprite->dirY * sin(dirAngle);
-	sprite->dirY = olddirx * sin(dirAngle) + sprite->dirY * cos(dirAngle);
-	sprite->planX = sprite->planX * cos(dirAngle) - sprite->planY * sin(dirAngle);
-	sprite->planY = oldplanx * sin(dirAngle) + sprite->planY * cos(dirAngle);
-	/* if (ft_iswall(newPlayerY, newPlayerX) == 0) */
-	/* { */
-	/* 	player->x = newplayerX; */
-	/* 	player->y = newplayerY; */
-	/* } */
-}
+/* 	olddirx = sprite->dirx; */
+/* 	oldplanx = sprite->planx; */
+/* 	dirangle = player.turndirection * player->rotationspeed; */
+/* 	sprite->dirx = sprite->dirx * cos(dirangle) - sprite->diry * sin(dirangle); */
+/* 	sprite->diry = olddirx * sin(dirangle) + sprite->diry * cos(dirangle); */
+/* 	sprite->planx = sprite->planx * cos(dirangle) - sprite->plany * sin(dirangle); */
+/* 	sprite->plany = oldplanx * sin(dirangle) + sprite->plany * cos(dirangle); */
+/* 	/\* if (ft_iswall(newPlayerY, newPlayerX) == 0) *\/ */
+/* 	/\* { *\/ */
+/* 	/\* 	player->x = newplayerX; *\/ */
+/* 	/\* 	player->y = newplayerY; *\/ */
+/* 	/\* } *\/ */
+/* } */
 
 void		playerMovement(t_player *player)
 {
@@ -58,7 +57,7 @@ void		playerMovement(t_player *player)
 			newPlayerY = player->y - sin(angle_angle) * -moveStep;
 		}
 	}
-	calculs_dir_and_plan_for_sprites(sprite, player);
+	/* calculs_dir_and_plan_for_sprites(sprite, player); */
 	if (!hasWallAt(newPlayerY, newPlayerX))
 	{
 		player->y = newPlayerY;

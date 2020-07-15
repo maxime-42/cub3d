@@ -1,6 +1,6 @@
 #ifndef RAYCASTING_H
 # define RAYCASTING_H
-#include "struct.h"
+#include "cub3d.h"
 
 int				keyPressed(int keyCode);
 int				get_file_descriptor(t_info *info, char *name_file);
@@ -23,4 +23,5 @@ void				playerPosition(t_player *player);
 float				normalizeAngle(float angle);
 void				bmp_exporter(char *fileName);
 void				miniMap(t_player *player, char **map);
+
 #endif

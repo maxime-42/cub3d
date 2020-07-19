@@ -11,7 +11,7 @@ static	void	utilis(int *ly, int *lx, int j)
 		x = -1;
 		while (++x < TILE_SIZE * MINIMAP_SCALE_FACTOR)
 		{
-			g_image_data[*ly * WINDOW_WIDTH + *lx] = 0xFFFFFF;
+			g_image_data[*ly * g_window_width + *lx] = 0xFFFFFF;
 			*lx += 1;
 		}
 		*ly += 1;
@@ -53,7 +53,7 @@ static void	playerRect(int corX, int corY, int width, int height, int color)
 	{
 		while (j < width)
 		{
-			g_image_data[(i + corY - width/2) * WINDOW_WIDTH + (j + corX - height/2)] = color;
+			g_image_data[(i + corY - width/2) * g_window_width + (j + corX - height/2)] = color;
 			j++;
 		}
 		j = 0;
@@ -74,7 +74,7 @@ static void	orientation_line(int corY, int corX, float distance, int color, floa
 	y = 0;
 	while (i < distance)
 	{
-		g_image_data[(corY + y) * WINDOW_WIDTH + (corX + x)]= color;
+		g_image_data[(corY + y) * g_window_width + (corX + x)]= color;
 		x = cos(angle) * longeur;
 		y = sin(angle) * longeur;
 		longeur++;
@@ -85,7 +85,7 @@ static void	orientation_line(int corY, int corX, float distance, int color, floa
 void		miniMap(t_player *player, char **map)
 {
 	drawMap(map);
-	playerRect(player->x * MINIMAP_SCALE_FACTOR, player->y * MINIMAP_SCALE_FACTOR, player->radius, player->radius,  0x0078FF);
-	orientation_line(player->y * MINIMAP_SCALE_FACTOR, player->x *MINIMAP_SCALE_FACTOR,
-	15, 0xff0000, player->rotationAngle);
+	playerRect(player->x * MINIMAP_SCALE_FACTOR, player->y * MINIMAP_SCALE_FACTOR, player->radius, player->radius, 0x0078FF);
+	orientation_line(player->y * MINIMAP_SCALE_FACTOR, player->x * MINIMAP_SCALE_FACTOR,
+	10, 0xff0000, player->rotationAngle);
 }

@@ -95,4 +95,25 @@ typedef struct		s_bmp_file
 }				   t_bmp_file;
 
 
+ typedef struct		s_sprite
+{
+	float		diry;
+	float		dirx;
+	float		plany;
+	float		planx;
+  	int		*data;
+	void		*ptr;
+	int		size_l;
+	char		*path;
+	float		distance;
+	/* float		buffer[(float)NUM_RAYS]; */
+	float		angle;
+	int		width;
+	int		bpp;
+	int		endian;
+	int		height;
+	float		x;
+	float		y;
+}			t_sprite;
+
 #endif

@@ -21,7 +21,7 @@ void		drawCeiling(t_wall *wall, int columnId)
 	top = 0;
 	while (top < wall->wallTop)
 	{
-		g_image_data[(top * WINDOW_WIDTH) + columnId] = 0xA9C7FC;
+		g_image_data[(top * g_window_width) + columnId] = 0xA9C7FC;
 		top++;
 	}
 }
@@ -31,10 +31,10 @@ void		drawFloor(t_wall *wall, int columnId)
 {
 	int		bottom;
 
-	bottom = wall->wallBottom;
-	while (bottom < WINDOW_HEIGHT)
+	bottom = (int)wall->wallBottom;
+	while (bottom < g_window_height)
 	{
-		g_image_data[(bottom * WINDOW_WIDTH) + columnId] = 0xFEFEFE;
+		g_image_data[(bottom * g_window_width) + columnId] = 0xFEFEFE;
 		bottom++;
 	}
 }
@@ -49,17 +49,17 @@ void		draw_Wall(t_ray *ray, t_wall *wall, int columnId)
 
 	index = choice_of_texture(ray);
 	if (ray->wasHitVertical == 1)
-		textureOffsetX = (int)(ray->wallHitY * g_texture[index].width / TILE_SIZE) % g_texture[index].width;
+		textureOffsetX = (int)(ray->wallHitY * g_texture[index].width / g_tile_size) % g_texture[index].width;
 	else
-		textureOffsetX = (int)(ray->wallHitX * g_texture[index].width / TILE_SIZE) % g_texture[index].width;
+		textureOffsetX = (int)(ray->wallHitX * g_texture[index].width / g_tile_size) % g_texture[index].width;
 	drawCeiling(wall, columnId);
 	while (wall->wallTop < wall->wallBottom)
 	{
-		distanceFromTop = wall->wallTop + (wall->wallStripHeight / 2) - (WINDOW_HEIGHT / 2);
+		distanceFromTop = wall->wallTop + (wall->wallStripHeight / 2) - (g_window_height / 2);
 		textureOffsetY = distanceFromTop * ((float)g_texture[index].height / wall->wallStripHeight);
 		textureColor = g_texture[index].wallTexture[(g_texture[index].width * textureOffsetY) + textureOffsetX];
 		/* if (textureColor != 0x000000) */
-		g_image_data[(wall->wallTop * WINDOW_WIDTH) + columnId] = textureColor;
+		g_image_data[(wall->wallTop * g_window_width) + columnId] = textureColor;
 		wall->wallTop++;
 	}
 	drawFloor(wall, columnId);
@@ -73,6 +73,11 @@ void		getTexture(t_texture texture[NUM_TEXTURE])
 	int		i;
 
 	i = -1;
+	if (!g_mlx_ptr)
+	{
+		printf("la mlx vaut null dans get_texture\n");
+		exit(freeAll(ERROR));
+	}
 	while (++i < NUM_TEXTURE)
 	{
 		texture[i].texture_ptr = mlx_xpm_file_to_image(g_mlx_ptr,

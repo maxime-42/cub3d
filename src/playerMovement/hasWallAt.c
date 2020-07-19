@@ -19,7 +19,7 @@ int			hasWallAt(float y, float x)
 	int		mapGridIndexX;
 	int		mapGridIndexY;
 
-	if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT)
+	if (x < 0 || x > g_window_width || y < 0 || y > g_window_height)
 	{
 		return (1);
 	}

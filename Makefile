@@ -11,6 +11,7 @@ CFLAGS= -I$(INC) -O3 -I../minilibx-linux
 NAME= cub3d
 
 SRC	=	./src/main.c\
+		./src/init_mlx_and_window.c\
 		./src/free_all.c\
 		./src/parsing/main.c\
 		./src/parsing/get_screen_size.c\
@@ -25,7 +26,7 @@ SRC	=	./src/main.c\
 		./src/playerMovement/main.c\
 		./src/playerMovement/hasWallAt.c\
 		./src/playerMovement/eventKeyboard.c\
-		./src/playerMovement/playerPosition.c\
+		./src/playerMovement/init_player.c\
 		./src/cast_All_Rays/main.c\
 		./src/cast_All_Rays/draw_Ray.c\
 		./src/cast_All_Rays/rayHorizontal.c\
@@ -35,9 +36,10 @@ SRC	=	./src/main.c\
 		./src/render_3d/main.c\
 		./src/render_3d/texture.c\
 		./src/screenshot/bmp_exporter.c\
-		./src/sprite/init.c\
-		./src/sprite/spriteVisible.c\
-		./src/sprite/sprite.c\
+
+		# ./src/sprite/init.c\
+		# ./src/sprite/spriteVisible.c\
+		# ./src/sprite/sprite.c\
 
 
 OBJ = $(SRC:.c=.o)

@@ -15,16 +15,16 @@ static void		create_header(t_bmp_file *infoBmpFile)
 {
 	infoBmpFile->byteType[0] = 0x42;
 	infoBmpFile->byteType[1] = 0x4D;
-	infoBmpFile->byteSize = (WINDOW_WIDTH * WINDOW_HEIGHT * 4) + 54;
+	infoBmpFile->byteSize = (g_window_width * g_window_height * 4) + 54;
 	infoBmpFile->byteReserved = 0x00000000;
 	infoBmpFile->byteOffset = 0x36;
 	infoBmpFile->HeaderSize = 40;
-	infoBmpFile->ImageWidth = WINDOW_WIDTH;
-	infoBmpFile->ImageHeight = -WINDOW_HEIGHT;
+	infoBmpFile->ImageWidth = g_window_width;
+	infoBmpFile->ImageHeight = -g_window_height;
 	infoBmpFile->ColorPlanes = 1;
 	infoBmpFile->BitsPerPixel = 32;
 	infoBmpFile->compression = 0;
-	infoBmpFile->ImageSize = (WINDOW_WIDTH * WINDOW_HEIGHT * 4);
+	infoBmpFile->ImageSize = (g_window_width * g_window_height * 4);
 	infoBmpFile->bitsXPelsPerMeter = 2835;
 	infoBmpFile->bitsXPelsPerMeter = 2835;
 	infoBmpFile->TotalColors = 0;

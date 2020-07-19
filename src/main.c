@@ -2,39 +2,28 @@
 
 char	*filename = 0;
 
-void		initPlayer(t_player *player)
+static	void	createImage(void *mlx_ptr, void *img_ptr, void *image_data)
 {
-	player->x = WINDOW_WIDTH / 2;
-	player->y = WINDOW_HEIGHT / 2;
-	player->radius = 5;
-	player->turnDirection = 0;
-	player->walkDirection = 0;
-	playerPosition(player);
-	player->moveSpeed = 5;
-	player->rotationSpeed = 5 * (M_PI / 180);
-}
+	int			bpp;
+	int			size_line;
+	int			endian;
 
-static	void	createImage(void)
-{
-	int	bpp;
-	int	size_line;
-	int	endian;
-
-	g_img_ptr = 0;
+	img_ptr = 0;
 	endian = 0;
-	if (!(g_img_ptr = mlx_new_image(g_mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT)))
+	if (!(img_ptr = mlx_new_image(mlx_ptr, g_window_width, g_window_height)))
 	{
 		ft_putstr_fd("Error\nfaile to get image pointer", STDOUT);
 		freeAll(ERROR);
 	}
-	g_image_data = (int *)mlx_get_data_addr(g_img_ptr, &bpp, &size_line, &endian);
-	if (!g_image_data)
+	image_data = (int *)mlx_get_data_addr(img_ptr, &bpp, &size_line, &endian);
+	if (!image_data)
 	{
 		ft_putstr_fd("Error\nfaile to get image data", STDOUT);
 		freeAll(ERROR);
 		exit(ERROR);
 	}
-	g_info->size_line = size_line;
+	g_img_ptr = img_ptr;
+	g_image_data = image_data;
 }
 
 static int	gameLoop(t_info *info)
@@ -46,7 +35,7 @@ static int	gameLoop(t_info *info)
 	/* mlx_get_screen_size(g_mlx_ptr, &x, &y); */
 	/* printf("x = %d\n", x); */
 	/* printf("y = %d\n", y); */
-	createImage();
+	createImage(g_mlx_ptr, g_img_ptr, g_image_data);
 	playerMovement(&g_player);
 	cast_All_Rays(&g_player, &ray);
 	miniMap(&g_player, g_info->map);
@@ -60,42 +49,34 @@ static int	gameLoop(t_info *info)
 		freeAll(SUCCESS);
 	}
 	else
+	{
 		mlx_put_image_to_window(g_mlx_ptr, g_win_mlx, g_img_ptr, 0, 0);
+		mlx_destroy_image (g_mlx_ptr, g_img_ptr);
+	}
 	///mlx_destroy_image(g_mlx_ptr, g_img_ptr);
 	g_img_ptr = 0;
 	(void)info;
 	return (0);
 }
 
-static void		init_mlx()
+static void		init_global_variable()
 {
-	g_mlx_ptr = 0;
-	if (!(g_mlx_ptr = mlx_init()))
-	{
-		ft_putstr_fd("Error\nfaile init mlx\n", STDOUT);
-		exit(freeAll(ERROR));
-	}
+	g_wall_strip_width = 1;
+	g_tile_size = 32;
+	g_map_num_rows = g_info->height;
+	g_map_num_cols =  (int)ft_strlen(g_info->begin->content);
+	g_window_width = (g_map_num_cols * g_tile_size);
+	g_window_height = (g_map_num_rows * g_tile_size);
+	g_num_rays = (g_window_width / g_wall_strip_width);
+	g_fov_angle = (60 * (M_PI / 180));
 }
 
-
-static void		createWindow(void)
-{
-	g_win_mlx = 0;
-	if (!filename)
-	{
-		if (!(g_win_mlx = mlx_new_window(g_mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "3D")))
-		{
-			ft_putstr_fd("Error\nfaile open window\n", STDOUT);
-			exit(freeAll(ERROR));
-		}
-	}
-}
-
-int			main(int ac, char **av)
+int				main(int ac, char **av)
 {
 	t_info		info;
-	int		keyCode;
-
+	int			keyCode;
+	g_mlx_ptr = 0;
+	g_win_mlx = 0;
 	info.map = 0;
 	g_texture[0].texture_ptr = 0;
 	g_sprite.ptr = 0;
@@ -111,12 +92,15 @@ int			main(int ac, char **av)
 		return (ERROR);
 	if (parsing_map(&info) == ERROR)
 		return (ERROR);
-	init_mlx();
+	init_global_variable();
+	init_mlx_and_window(g_mlx_ptr, g_win_mlx, filename);
+	/* return (freeAll(SUCCESS)); */
 	getTexture(g_texture);
-	createWindow();
 	g_map = (char **)info.map;
-	initPlayer(&g_player);
-	init_sprite(&g_sprite, g_map, g_player.rotationAngle);	
+	init_player(&g_player);
+	/* printf("window_width %d\n", g_window_width); */
+	/* printf("WINDOW_WIDTH = %d\n", WINDOW_WIDTH); */
+	/* init_sprite(&g_sprite, g_map, g_player.rotationAngle);*/
 	if (!filename)
 	{
 		mlx_hook(g_win_mlx, 2, (1L << 0), &keyPressed, &keyCode);
@@ -126,5 +110,5 @@ int			main(int ac, char **av)
 	}
 	else
 		gameLoop(g_info);
-	freeAll(SUCCESS);
+	return (freeAll(SUCCESS));
 }

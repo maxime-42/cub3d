@@ -4,7 +4,7 @@ static void	next_Horz_Intercept(t_ray *ray, float nextHorzTouchY, float nextHorz
 {
 	float	tmp;
 
-	while (nextHorzTouchX >= 0 && nextHorzTouchX <= WINDOW_WIDTH &&	nextHorzTouchY >= 0 && nextHorzTouchY <= WINDOW_HEIGHT)
+	while (nextHorzTouchX >= 0 && nextHorzTouchX <= g_window_width &&	nextHorzTouchY >= 0 && nextHorzTouchY <= g_window_height)
 	{
 		tmp = 0;
 		if (ray->isRayFacingUp)
@@ -27,18 +27,18 @@ void		rayHorizontal(t_ray *ray, t_player *player)
 	float	nextHorzTouchX;
 
 	// Find the y-coordinate of the closest horizontal grid intersenction
-	ray->yintercept = floor(player->y / TILE_SIZE) * TILE_SIZE;
+	ray->yintercept = floor(player->y / g_tile_size) * g_tile_size;
 	if (ray->isRayFacingDown)
-		ray->yintercept += TILE_SIZE;
+		ray->yintercept += g_tile_size;
 	// Find the x-coordinate of the closest horizontal grid intersection
 	ray->xintercept = player->x + ((ray->yintercept - player->y) / tan(ray->rayAngle));
 
 	// Calculate the increment xstep and ystep
-	ray->ystep = TILE_SIZE;
+	ray->ystep = g_tile_size;
 	if (ray->isRayFacingUp)
 		ray->ystep *= -1;
 
-	ray->xstep = TILE_SIZE / tan(ray->rayAngle);
+	ray->xstep = g_tile_size / tan(ray->rayAngle);
 	if (ray->isRayFacingLeft && ray->xstep > 0)
 		ray->xstep *= -1;
 	if (ray->isRayFacingRight && ray->xstep < 0)

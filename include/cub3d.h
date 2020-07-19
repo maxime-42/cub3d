@@ -8,51 +8,23 @@
 #include "../minilibx-linux/mlx_int.h"
 #include "struct.h"
 #include "raycasting.h"
+#include "global.h"
 
-
+/* # define WALL_STRIP_WIDTH 1 */
+# define MAP_NUM_ROWS g_info->height
+# define MAP_NUM_COLS (const int)ft_strlen(g_info->begin->content)
 # define WINDOW_WIDTH (MAP_NUM_COLS * TILE_SIZE)
 # define WINDOW_HEIGHT (MAP_NUM_ROWS * TILE_SIZE)
-# define MAP_NUM_ROWS g_info->height
-# define MAP_NUM_COLS (const)(int)ft_strlen(g_info->begin->content)
 # define TILE_SIZE 32
-# define FOV_ANGLE (60 * (M_PI / 180))
-# define WALL_STRIP_WIDTH 1
 # define NUM_RAYS (WINDOW_WIDTH / WALL_STRIP_WIDTH)
-# define NUM_TEXTURE 4
-////////*variable globals////////////////////////////////////////////////////////////////////////////////
-t_info				*g_info;
-t_texture			g_texture[NUM_TEXTURE];
-t_player			g_player;
-void				*g_mlx_ptr;
-void				*g_img_ptr;
-void				*g_win_mlx;
-int				*g_image_data;
-int				g_screen_width;//largeur de la fenetre
-int				g_screen_height;//hauteur de la fenetre
-char				**g_map;
-t_ray				g_ray;
+# define FOV_ANGLE (60 * (M_PI / 180))
+/*___________________________________________________________________________*/
 
- typedef struct		s_sprite
-{
-	float		diry;
-	float		dirx;
-	float		plany;
-	float		planx;
-  	int		*data;
-	void		*ptr;
-	int		size_l;
-	char		*path;
-	float		distance;
-	float		buffer[(float)NUM_RAYS];
-	float		angle;
-	int		width;
-	int		bpp;
-	int		endian;
-	int		height;
-	float		x;
-	float		y;
-}			t_sprite;
-t_sprite			g_sprite;
+# define NUM_TEXTURE 4
+
+
+
+
 
 # define SUCCESS 0
 # define ERROR -1
@@ -69,23 +41,19 @@ t_sprite			g_sprite;
 # define TRANSLATION_LEFT 97
 # define QUIT 65307
 
-# define STDOUT 1
-# define WALL '1'
-
-
-
-
-# define MAX_VALUE 2147483647
-# define MINIMAP_SCALE_FACTOR 0.2
-
-
-
-# define IS_SPRITE 2
-
 # define ANGLE_DOWN 0.5 * M_PI
 # define ANGLE_EAST 0
 # define ANGLE_WEST M_PI
 # define ANGLE_UP 1.5 * M_PI
+
+# define STDOUT 1
+
+# define WALL '1'
+# define EMPTY_SPACE '0'
+# define MAX_VALUE 2147483647
+# define MINIMAP_SCALE_FACTOR 0.3
+# define IS_SPRITE 2
+
 
 //////////////////////parsig/////////////////////////////////////////////////////////////////////////////
 

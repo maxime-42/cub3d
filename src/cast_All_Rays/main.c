@@ -54,7 +54,6 @@ static void		the_Smallest_Of_The_Distances(t_ray *ray, t_player *player)
 	if (ray->foundHorzWallHit == 1)
 		horzHitDistance = distanceBetweenPoints(player->x, player->y,
 								ray->horzWallHitX, ray->horzWallHitY);
-
 	else
 		horzHitDistance = MAX_VALUE;
 
@@ -86,7 +85,7 @@ void			cast_All_Rays(t_player *player, t_ray *ray)
 
 	columnId = 0;
 	ray->rayAngle = g_player.rotationAngle - (FOV_ANGLE / 2);
-	while (columnId < NUM_RAYS)
+	while (columnId < g_num_rays)
 	{
 		ray->rayAngle = normalizeAngle(ray->rayAngle);
 		init_Struct_Ray(ray);
@@ -96,7 +95,7 @@ void			cast_All_Rays(t_player *player, t_ray *ray)
 		the_Smallest_Of_The_Distances(ray, player);
 		/* drawline(player->y * MINIMAP_SCALE_FACTOR, player->x * MINIMAP_SCALE_FACTOR, ray->distance * MINIMAP_SCALE_FACTOR, 0xff0000, ray->rayAngle); */
 		render3d_projection(ray, columnId);
-		ray->rayAngle += (FOV_ANGLE / NUM_RAYS);
+		ray->rayAngle += (FOV_ANGLE / g_num_rays);
 		columnId++;
 	}
 	(void)player;

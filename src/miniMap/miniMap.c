@@ -6,16 +6,16 @@ static	void	utilis(int *ly, int *lx, int j)
 	int	x;
 
 	y = -1;
-	while (++y < TILE_SIZE * MINIMAP_SCALE_FACTOR)
+	while (++y < g_tile_size * MINIMAP_SCALE_FACTOR)
 	{
 		x = -1;
-		while (++x < TILE_SIZE * MINIMAP_SCALE_FACTOR)
+		while (++x < g_tile_size * MINIMAP_SCALE_FACTOR)
 		{
 			g_image_data[*ly * g_window_width + *lx] = 0xFFFFFF;
 			*lx += 1;
 		}
 		*ly += 1;
-		*lx = j * TILE_SIZE * MINIMAP_SCALE_FACTOR;
+		*lx = j * g_tile_size * MINIMAP_SCALE_FACTOR;
 	}
 }
 
@@ -27,15 +27,15 @@ static	void	drawMap(char **map)
 	int		ly;
 
 	y = -1;
-	while (++y < MAP_NUM_ROWS)
+	while (++y < g_map_num_rows)
 	{
 		x= -1;
-		while (++x < MAP_NUM_COLS)
+		while (++x < g_map_num_cols)
 		{
 			if (map[y][x] == '0' || ft_strchr("NSEW", map[y][x]))
 			{
-				lx = x * TILE_SIZE * MINIMAP_SCALE_FACTOR;
-				ly = y * TILE_SIZE * MINIMAP_SCALE_FACTOR;
+				lx = x * g_tile_size * MINIMAP_SCALE_FACTOR;
+				ly = y * g_tile_size * MINIMAP_SCALE_FACTOR;
 				utilis(&ly, &lx, x);
 			}
 		}

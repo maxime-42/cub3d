@@ -23,7 +23,7 @@ SRC	=	./src/main.c\
 		./src/parsing/get_fd.c\
 		./src/parsing/put_map_in_array.c\
 		./src/miniMap/miniMap.c\
-		./src/playerMovement/main.c\
+		./src/playerMovement/playerMovement.c\
 		./src/playerMovement/hasWallAt.c\
 		./src/playerMovement/eventKeyboard.c\
 		./src/playerMovement/init_player.c\

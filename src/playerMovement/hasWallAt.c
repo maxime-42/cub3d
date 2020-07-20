@@ -9,8 +9,8 @@
 /* 	{ */
 /* 		return (1); */
 /* 	} */
-/* 	mapGridIndexX = floor(x / TILE_SIZE); */
-/* 	mapGridIndexY = floor(y / TILE_SIZE); */
+/* 	mapGridIndexX = floor(x / g_tile_size); */
+/* 	mapGridIndexY = floor(y / g_tile_size); */
 /* 	return (g_map[mapGridIndexY][mapGridIndexX] != '0'); */
 /* } */
 
@@ -23,8 +23,8 @@ int			hasWallAt(float y, float x)
 	{
 		return (1);
 	}
-	mapGridIndexX = floor(x / TILE_SIZE);
-	mapGridIndexY = floor(y / TILE_SIZE);
+	mapGridIndexX = floor(x / g_tile_size);
+	mapGridIndexY = floor(y / g_tile_size);
 	if (ft_strchr("NSEW", g_map[mapGridIndexY][mapGridIndexX]))
 		return (0);
 	return (g_map[mapGridIndexY][mapGridIndexX] != '0');

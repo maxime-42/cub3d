@@ -1,59 +1,63 @@
 #include "cub3d.h"
 
-int			hasWallAt(float y, float x)
+static int	player_Orientation_Angle(float angle)
 {
-	int		mapGridIndexX;
-	int		mapGridIndexY;
-
-	if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT)
-	{
+	angle = normalizeAngle(angle);
+	if ((angle > M_PI * 0.25) && (angle < 0.75 * M_PI))
 		return (1);
-	}
-	mapGridIndexX = floor(x / TILE_SIZE);
-	mapGridIndexY = floor(y / TILE_SIZE);
-	return (g_map[mapGridIndexY][mapGridIndexX] != '0');
-}
-
-int				keyPressed(int keyCode)
-{
-    if (keyCode == UP_ARROW)
-		g_player.walkDirection = +1;
-	else if (keyCode == DOWN_ARROW)
-        g_player.walkDirection = -1;
-	else if (keyCode == RIGHT_ARROW)
-        g_player.turnDirection = +1;
-	else if (keyCode == LEFT_ARROW)
-		g_player.turnDirection = -1;
-	else if (keyCode == QUIT)
-		exit(freeAll(SUCCESS));
+	else if ((angle > M_PI * 1.25) && (angle < 1.75 * M_PI))
+		return (1);
 	return (0);
 }
 
-int				keyRelease(int keyCode)
-{
-    if (keyCode == UP_ARROW)
-        g_player.walkDirection = 0;
-	else if (keyCode == DOWN_ARROW)
-		g_player.walkDirection = 0;
-	else if (keyCode == RIGHT_ARROW)
-		g_player.turnDirection = 0;
-	else if (keyCode == LEFT_ARROW)
-		g_player.turnDirection = 0;
-	return (0);
-}
+/* void	calculs_dir_and_plan_for_sprites(t_sprite *sprite, t_player *player) */
+/* { */
+/* 	float	dirangle; */
+/* 	float	olddirx; */
+/* 	float	oldplanx; */
+
+/* 	olddirx = sprite->dirx; */
+/* 	oldplanx = sprite->planx; */
+/* 	dirangle = player.turndirection * player->rotationspeed; */
+/* 	sprite->dirx = sprite->dirx * cos(dirangle) - sprite->diry * sin(dirangle); */
+/* 	sprite->diry = olddirx * sin(dirangle) + sprite->diry * cos(dirangle); */
+/* 	sprite->planx = sprite->planx * cos(dirangle) - sprite->plany * sin(dirangle); */
+/* 	sprite->plany = oldplanx * sin(dirangle) + sprite->plany * cos(dirangle); */
+/* 	/\* if (ft_iswall(newPlayerY, newPlayerX) == 0) *\/ */
+/* 	/\* { *\/ */
+/* 	/\* 	player->x = newplayerX; *\/ */
+/* 	/\* 	player->y = newplayerY; *\/ */
+/* 	/\* } *\/ */
+/* } */
 
 void		playerMovement(t_player *player)
 {
 	float	moveStep;
 	float	newPlayerX;
 	float	newPlayerY;
+	int		PlayerOrientation;
+	float	angle_angle;
 
-	newPlayerY = 0;
-	newPlayerX = 0;
+	PlayerOrientation = player_Orientation_Angle(player->rotationAngle);
 	player->rotationAngle += player->turnDirection * player->rotationSpeed;
 	moveStep = player->walkDirection * player->moveSpeed;
 	newPlayerX = player->x + cos(player->rotationAngle) * moveStep;
 	newPlayerY = player->y + sin(player->rotationAngle) * moveStep;
+	if (player->translation == -1 || player->translation == 1)
+	{
+		angle_angle = (M_PI * 0.5) - player->rotationAngle;
+		if (PlayerOrientation == 1)
+		{
+			newPlayerX = player->x - cos(angle_angle) * moveStep;
+			newPlayerY = player->y + sin(angle_angle) * moveStep;
+		}
+		else if (PlayerOrientation == 0)
+		{
+			newPlayerX = player->x + cos(angle_angle) * -moveStep;
+			newPlayerY = player->y - sin(angle_angle) * -moveStep;
+		}
+	}
+	/* calculs_dir_and_plan_for_sprites(sprite, player); */
 	if (!hasWallAt(newPlayerY, newPlayerX))
 	{
 		player->y = newPlayerY;

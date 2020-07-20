@@ -75,8 +75,7 @@ int				main(int ac, char **av)
 {
 	t_info		info;
 	int			keyCode;
-	g_mlx_ptr = 0;
-	g_win_mlx = 0;
+
 	info.map = 0;
 	g_texture[0].texture_ptr = 0;
 	g_sprite.ptr = 0;

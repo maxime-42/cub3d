@@ -61,6 +61,7 @@ static int	gameLoop(t_info *info)
 
 static void		init_global_variable()
 {
+	g_texture[0].texture_ptr = 0;
 	g_wall_strip_width = 1;
 	g_tile_size = 32;
 	g_map_num_rows = g_info->height;
@@ -71,13 +72,34 @@ static void		init_global_variable()
 	g_fov_angle = (60 * (M_PI / 180));
 }
 
+void		load_ptr_textures_in_array(t_texture texture[NUM_TEXTURE])
+{
+	int		bpp;
+	int		size_line;
+	int		endian;
+	int		i;
+
+	i = -1;
+	while (++i < NUM_TEXTURE)
+	{
+		texture[i].texture_ptr = mlx_xpm_file_to_image(g_mlx_ptr,
+		texture[i].path, &texture[i].width, &texture[i].height);
+		texture[i].wallTexture = (int *)mlx_get_data_addr(
+		texture[i].texture_ptr, &bpp, &size_line, &endian);
+		if (!texture[i].texture_ptr)
+		{
+			ft_putstr_fd("Error\nFailer texture ptr\n", STDOUT);
+			exit (freeAll(ERROR));
+		}
+	}
+}
+
 int				main(int ac, char **av)
 {
 	t_info		info;
 	int			keyCode;
 
 	info.map = 0;
-	g_texture[0].texture_ptr = 0;
 	g_sprite.ptr = 0;
 	g_info = &info;
 	if (ac == 3)
@@ -94,12 +116,10 @@ int				main(int ac, char **av)
 	init_global_variable();
 	init_mlx_and_window(g_mlx_ptr, g_win_mlx, filename);
 	/* return (freeAll(SUCCESS)); */
-	getTexture(g_texture);
+	load_ptr_textures_in_array(g_texture);
 	g_map = (char **)info.map;
 	init_player(&g_player);
-	/* printf("window_width %d\n", g_window_width); */
-	/* printf("WINDOW_WIDTH = %d\n", WINDOW_WIDTH); */
-	/* init_sprite(&g_sprite, g_map, g_player.rotationAngle);*/
+	init_sprite(&g_sprite, g_map, g_player.rotationAngle);
 	if (!filename)
 	{
 		mlx_hook(g_win_mlx, 2, (1L << 0), &keyPressed, &keyCode);

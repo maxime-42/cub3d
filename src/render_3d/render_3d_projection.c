@@ -14,9 +14,9 @@ static int	choice_of_texture(t_ray *ray)
 	return (0);
 }
 
-void		drawCeiling(t_wall *wall, int columnId)
+static void	draw_Ceiling(t_wall *wall, int columnId)
 {
-	int		top;
+	int	top;
 
 	top = 0;
 	while (top < wall->wallTop)
@@ -27,9 +27,9 @@ void		drawCeiling(t_wall *wall, int columnId)
 }
 
 
-void		drawFloor(t_wall *wall, int columnId)
+void		draw_Floor(t_wall *wall, int columnId)
 {
-	int		bottom;
+	int	bottom;
 
 	bottom = (int)wall->wallBottom;
 	while (bottom < g_window_height)
@@ -39,20 +39,20 @@ void		drawFloor(t_wall *wall, int columnId)
 	}
 }
 
-void		draw_Wall(t_ray *ray, t_wall *wall, int columnId)
+static void		draw_Wall(t_ray *ray, t_wall *wall, int columnId)
 {
-	int		textureOffsetX;
-	int		textureOffsetY;
-	int		textureColor;
-	int		distanceFromTop;
-	int		index;
+	int	textureOffsetX;
+	int	textureOffsetY;
+	int	textureColor;
+	int	distanceFromTop;
+	int	index;
 
 	index = choice_of_texture(ray);
 	if (ray->wasHitVertical == 1)
 		textureOffsetX = (int)(ray->wallHitY * g_texture[index].width / g_tile_size) % g_texture[index].width;
 	else
 		textureOffsetX = (int)(ray->wallHitX * g_texture[index].width / g_tile_size) % g_texture[index].width;
-	drawCeiling(wall, columnId);
+	/* drawCeiling(wall, columnId); */
 	while (wall->wallTop < wall->wallBottom)
 	{
 		distanceFromTop = wall->wallTop + (wall->wallStripHeight / 2) - (g_window_height / 2);
@@ -62,32 +62,24 @@ void		draw_Wall(t_ray *ray, t_wall *wall, int columnId)
 		g_image_data[(wall->wallTop * g_window_width) + columnId] = textureColor;
 		wall->wallTop++;
 	}
-	drawFloor(wall, columnId);
+	/* drawFloor(wall, columnId); */
 }
 
-void		getTexture(t_texture texture[NUM_TEXTURE])
-{
-	int		bpp;
-	int		size_line;
-	int		endian;
-	int		i;
 
-	i = -1;
-	if (!g_mlx_ptr)
-	{
-		printf("la mlx vaut null dans get_texture\n");
-		exit(freeAll(ERROR));
-	}
-	while (++i < NUM_TEXTURE)
-	{
-		texture[i].texture_ptr = mlx_xpm_file_to_image(g_mlx_ptr,
-		texture[i].path, &texture[i].width, &texture[i].height);
-		texture[i].wallTexture = (int *)mlx_get_data_addr(
-		texture[i].texture_ptr, &bpp, &size_line, &endian);
-		if (!texture[i].texture_ptr)
-		{
-			ft_putstr_fd("Error\nFailer texture ptr\n", STDOUT);
-			exit (freeAll(ERROR));
-		}
-	}
+void		render3d_projection(t_ray *ray, int columnId)
+{
+	t_wall	wall;
+
+	wall.correctWallDistance = ray->distance * cos(ray->rayAngle - g_player.rotationAngle);
+	wall.distanceProjectionPlane = (g_window_width / 2) / tan(g_fov_angle / 2);
+	wall.wallStripHeight = (g_tile_size / wall.correctWallDistance) * wall.distanceProjectionPlane;
+	wall.wallTop = (g_window_height / 2) - (wall.wallStripHeight / 2);
+	if (wall.wallTop < 0)
+		wall.wallTop = 0;
+	wall.wallBottom = (g_window_height / 2) + (wall.wallStripHeight / 2);
+	if (wall.wallBottom > g_window_height)
+		wall.wallBottom = g_window_height;
+	draw_Ceiling(&wall, columnId);
+	draw_Wall(ray, &wall, columnId);
+	draw_Floor(&wall, columnId);
 }

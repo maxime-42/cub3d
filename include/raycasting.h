@@ -18,7 +18,6 @@ void				rayHorizontal(t_ray *ray, t_player *player);
 void				rayVertical(t_ray *ray, t_player *player);
 void				render3d_projection(t_ray *ray, int columnId);
 void				put_sprite(t_ray *ray, int top, int wallStripHeight, int wallBottom, int columnId);
-void				draw_Wall(t_ray *ray, t_wall *wall, int columnId);
 void				playerPosition(t_player *player);
 float				normalizeAngle(float angle);
 void				bmp_exporter(char *fileName);

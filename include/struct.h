@@ -104,9 +104,8 @@ typedef struct		s_bmp_file
   	int		*data;
 	void		*ptr;
 	int		size_l;
-	char		*path;
 	float		distance;
-	/* float		buffer[(float)NUM_RAYS]; */
+	/* float	buffer[(float)NUM_RAYS]; */
 	float		angle;
 	int		width;
 	int		bpp;
@@ -114,6 +113,15 @@ typedef struct		s_bmp_file
 	int		height;
 	float		x;
 	float		y;
+	char		*path;
+	int		nb_sprite;
+	float		*buffer;
+	float		*bottom;
+	int		spritescreenx;
+	int		drawstarty;
+	int		drawendy;
+	int		drawstartx;
+  int		drawendx;
 }			t_sprite;
 
 #endif

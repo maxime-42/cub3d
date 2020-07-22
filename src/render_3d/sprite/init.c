@@ -6,7 +6,7 @@ static void	load_ptr_and_data_sprite(t_sprite *sprite)
 	int	size_line;
 	int	endian;
 
-sprite->ptr = mlx_xpm_file_to_image(g_mlx_ptr, sprite->path, &sprite->width, &sprite->height);
+	sprite->ptr = mlx_xpm_file_to_image(g_mlx_ptr, sprite->path, &sprite->width, &sprite->height);
 	if (!sprite->ptr)
 	{
 		ft_putstr_fd("Error\nFailer get ptr sprite\n", STDOUT);
@@ -38,7 +38,9 @@ static void	position_sprite(t_sprite *sprite, char **map)
 {
 	int	i;
 	int	j;
+	int	id;
 
+	id = 0;
 	i = -1;
 	while (map[++i])
 	{
@@ -47,8 +49,9 @@ static void	position_sprite(t_sprite *sprite, char **map)
 		{
 			if (map[i][j] == '2')
 			{
-				sprite->x = j * g_tile_size + g_tile_size / 2;
-				sprite->y = i * g_tile_size + g_tile_size / 2;
+				sprite->x[id] = j * g_tile_size + g_tile_size / 2;
+				sprite->y[id] = i * g_tile_size + g_tile_size / 2;
+				sprite->distance[id] = 0;
 			}
 			j++;
 		}
@@ -89,6 +92,8 @@ static void	init_vecteur(t_sprite *sprite, float rotationangle)
 
 void		init_sprite(t_sprite *sprite, char **map, float rotationangle)
 {
+	sprite->nb_sprite = count_sprite(map);
+	ft_mallocsprite(sprite);
 	put_to_zero(sprite);
 	load_ptr_and_data_sprite(sprite);
 	position_sprite(sprite, map);

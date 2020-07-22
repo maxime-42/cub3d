@@ -1,5 +1,45 @@
 #include "cub3d.h"
 
+float	ft_calculangle(t_sprite *sprite, t_player *player, float x, float y)
+{
+	float	vectx;
+	float	vecty;
+	float	playertospriteangle;
+	float	spriteangle;
+	float	playerangle;
+
+	vectx = x - player->x;
+	vecty = y - player->y;
+	playertospriteangle = atan2(vecty, vectx);
+	playerangle = ft_normalizeangle(player->rotationangle);
+	spriteangle = playerangle - playertospriteangle;
+	if (spriteangle < -3.14159)
+		spriteangle += 2.0 * 3.14159;
+	if (spriteangle > 3.14159)
+		spriteangle -= 2.0 * 3.14159;
+	spriteangle = fabs(spriteangle);
+	return (spriteangle);
+}
+
+int		ft_spritevisible(t_sprite *sprite, int id, float sprite_size)
+{
+	float	spriteangle;
+	float	spriteangle_end;
+	float	wallspriteangle;
+	float	fovsprite;
+
+	spriteangle = fabs(ft_calculangle(sprite, sprite->sprite.x[id],
+		sprite->y[id]));
+	spriteangle_end = fabs(ft_calculangle(sprite, (sprite->x[id]
+		+ sprite_size), (sprite->y[id] + sprite_size)));
+	wallspriteangle = fabs(spriteangle_end - spriteangle);
+	fovsprite = g_fov_angle / 2 + wallspriteangle;
+	if (spriteangle < fovsprite)
+		return (1);
+	else
+		return (0);
+}
+
 float	ft_gettransformy(t_sprite *sprite_size, int id, float sprite_size)
 {
 	float	spritex;
@@ -14,7 +54,7 @@ float	ft_gettransformy(t_sprite *sprite_size, int id, float sprite_size)
 		- sprite->dirx * sprite->plany);
 	transformx = invdet * (sprite->diry * spritex
 		- sprite->dirx * spritey);
-	transformy = invdet * (-param->player.plany * spritex
+	transformy = invdet * (-sprite->plany * spritex
 		+ sprite.planx * spritey);
 	sprite->spritescreenx = (int)((sprite->win_width / 2) *
 		(1 + -transformx / transformy));

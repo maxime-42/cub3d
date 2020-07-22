@@ -23,4 +23,6 @@ float				normalizeAngle(float angle);
 void				bmp_exporter(char *fileName);
 void				miniMap(t_player *player, char **map);
 void				init_mlx_and_window(void *mlx_ptr, void *win_mlx, char *filename);
+int				count_sprite(char **map);
+void				ft_mallocsprite(t_sprite *sprite);
 #endif

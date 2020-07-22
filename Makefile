@@ -36,6 +36,7 @@ SRC	=	./src/main.c\
 		./src/render_3d/render_3d_projection.c\
 		./src/screenshot/bmp_exporter.c\
 		./src/render_3d/sprite/init.c\
+		./src/render_3d/sprite/init_utile.c\
 
 		# ./src/sprite/init.c\
 		# ./src/sprite/spriteVisible.c\

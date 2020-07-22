@@ -1,65 +1,65 @@
 #include "cub3d.h"
 
-float	ft_calculangle(t_sprite *sprite, t_player *player, float x, float y)
-{
-	float	vectx;
-	float	vecty;
-	float	playertospriteangle;
-	float	spriteangle;
-	float	playerangle;
+/* float	ft_calculangle(t_sprite *sprite, t_player *player, float x, float y) */
+/* { */
+/* 	float	vectx; */
+/* 	float	vecty; */
+/* 	float	playertospriteangle; */
+/* 	float	spriteangle; */
+/* 	float	playerangle; */
 
-	vectx = x - player->x;
-	vecty = y - player->y;
-	playertospriteangle = atan2(vecty, vectx);
-	playerangle = ft_normalizeangle(player->rotationangle);
-	spriteangle = playerangle - playertospriteangle;
-	if (spriteangle < -3.14159)
-		spriteangle += 2.0 * 3.14159;
-	if (spriteangle > 3.14159)
-		spriteangle -= 2.0 * 3.14159;
-	spriteangle = fabs(spriteangle);
-	return (spriteangle);
-}
+/* 	vectx = x - player->x; */
+/* 	vecty = y - player->y; */
+/* 	playertospriteangle = atan2(vecty, vectx); */
+/* 	playerangle = ft_normalizeangle(player->rotationangle); */
+/* 	spriteangle = playerangle - playertospriteangle; */
+/* 	if (spriteangle < -3.14159) */
+/* 		spriteangle += 2.0 * 3.14159; */
+/* 	if (spriteangle > 3.14159) */
+/* 		spriteangle -= 2.0 * 3.14159; */
+/* 	spriteangle = fabs(spriteangle); */
+/* 	return (spriteangle); */
+/* } */
 
-int		ft_spritevisible(t_sprite *sprite, int id, float sprite_size)
-{
-	float	spriteangle;
-	float	spriteangle_end;
-	float	wallspriteangle;
-	float	fovsprite;
+/* int		ft_spritevisible(t_sprite *sprite, int id, float sprite_size) */
+/* { */
+/* 	float	spriteangle; */
+/* 	float	spriteangle_end; */
+/* 	float	wallspriteangle; */
+/* 	float	fovsprite; */
 
-	spriteangle = fabs(ft_calculangle(sprite, sprite->sprite.x[id],
-		sprite->y[id]));
-	spriteangle_end = fabs(ft_calculangle(sprite, (sprite->x[id]
-		+ sprite_size), (sprite->y[id] + sprite_size)));
-	wallspriteangle = fabs(spriteangle_end - spriteangle);
-	fovsprite = g_fov_angle / 2 + wallspriteangle;
-	if (spriteangle < fovsprite)
-		return (1);
-	else
-		return (0);
-}
+/* 	spriteangle = fabs(ft_calculangle(sprite, sprite->sprite.x[id], */
+/* 		sprite->y[id])); */
+/* 	spriteangle_end = fabs(ft_calculangle(sprite, (sprite->x[id] */
+/* 		+ sprite_size), (sprite->y[id] + sprite_size))); */
+/* 	wallspriteangle = fabs(spriteangle_end - spriteangle); */
+/* 	fovsprite = g_fov_angle / 2 + wallspriteangle; */
+/* 	if (spriteangle < fovsprite) */
+/* 		return (1); */
+/* 	else */
+/* 		return (0); */
+/* } */
 
-float	ft_gettransformy(t_sprite *sprite_size, int id, float sprite_size)
-{
-	float	spritex;
-	float	spritey;
-	float	invdet;
-	float	transformx;
-	float	transformy;
+/* float	ft_gettransformy(t_sprite *sprite_size, int id, float sprite_size) */
+/* { */
+/* 	float	spritex; */
+/* 	float	spritey; */
+/* 	float	invdet; */
+/* 	float	transformx; */
+/* 	float	transformy; */
 
-	spritex = sprite->x[id] - player->x;
-	spritey = sprite->y[id] - player->y;
-	invdet = 1.0 / (sprite->planx * sprite->diry
-		- sprite->dirx * sprite->plany);
-	transformx = invdet * (sprite->diry * spritex
-		- sprite->dirx * spritey);
-	transformy = invdet * (-sprite->plany * spritex
-		+ sprite.planx * spritey);
-	sprite->spritescreenx = (int)((sprite->win_width / 2) *
-		(1 + -transformx / transformy));
-	return (transformy);
-}
+/* 	spritex = sprite->x[id] - player->x; */
+/* 	spritey = sprite->y[id] - player->y; */
+/* 	invdet = 1.0 / (sprite->planx * sprite->diry */
+/* 		- sprite->dirx * sprite->plany); */
+/* 	transformx = invdet * (sprite->diry * spritex */
+/* 		- sprite->dirx * spritey); */
+/* 	transformy = invdet * (-sprite->plany * spritex */
+/* 		+ sprite.planx * spritey); */
+/* 	sprite->spritescreenx = (int)((sprite->win_width / 2) * */
+/* 		(1 + -transformx / transformy)); */
+/* 	return (transformy); */
+/* } */
 
 void	ft_switch(t_sprite *sprite, int i, int j)
 {
@@ -109,14 +109,14 @@ void	ft_spritedistance(t_param *param)
 	}
 }
 
-void	ft_zero(t_sprite *sprite)
-{
-	sprite->drawstartx = 0;
-	sprite->drawendx = 0;
-	sprite->drawstarty = 0;
-	sprite->drawendy = 0;
-	sprite->spritescreenx = 0;
-}
+/* void	ft_zero(t_sprite *sprite) */
+/* { */
+/* 	sprite->drawstartx = 0; */
+/* 	sprite->drawendx = 0; */
+/* 	sprite->drawstarty = 0; */
+/* 	sprite->drawendy = 0; */
+/* 	sprite->spritescreenx = 0; */
+/* } */
 
 void	ft_putsprite(t_sprite *sprite)
 {
@@ -128,18 +128,18 @@ void	ft_putsprite(t_sprite *sprite)
 	id = 0;
 	ft_spritedistance(sprite);
 	ft_sortsprite(sprite);
-	while (id < sprite->sprite.nb_sprite)
-	{
-		distanceprojection = (g_window_width / 2) / tan(g_fov_angle / 2);
-		sprite_size = (sprite->tile_s * 0.5 /
-			sprite->sprite.distance[id]) * distanceprojection;
-		ft_zero(sprite);
-		if (ft_spritevisible(sprite, id, sprite_size) == 1)
-		{
-			transformy = ft_gettransformy(sprite, id, sprite_size);
-			ft_getstart(sprite, sprite_size);
-			ft_drawsprite(sprite, transformy, sprite_size);
-		}
-		id++;
-	}
+	/* while (id < sprite->sprite.nb_sprite) */
+	/* { */
+	/* 	distanceprojection = (g_window_width / 2) / tan(g_fov_angle / 2); */
+	/* 	sprite_size = (sprite->tile_s * 0.5 / */
+	/* 		sprite->sprite.distance[id]) * distanceprojection; */
+	/* 	ft_zero(sprite); */
+	/* 	if (ft_spritevisible(sprite, id, sprite_size) == 1) */
+	/* 	{ */
+	/* 		transformy = ft_gettransformy(sprite, id, sprite_size); */
+	/* 		ft_getstart(sprite, sprite_size); */
+	/* 		ft_drawsprite(sprite, transformy, sprite_size); */
+	/* 	} */
+	/* 	id++; */
+	/* } */
 }

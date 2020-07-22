@@ -18,8 +18,6 @@ static void	load_ptr_and_data_sprite(t_sprite *sprite)
 		ft_putstr_fd("Error\nFailer get image sprite\n", STDOUT);
 		exit(freeAll(ERROR));
 	}
-	printf("ptr sprite success\n");
-	printf("sprite->path : %s\n", sprite->path);
 }
 
 static	void	put_to_zero(t_sprite *sprite)
@@ -93,6 +91,7 @@ static void	init_vecteur(t_sprite *sprite, float rotationangle)
 void		init_sprite(t_sprite *sprite, char **map, float rotationangle)
 {
 	sprite->nb_sprite = count_sprite(map);
+	printf("sprite->nb_sprite = %d\n", sprite->nb_sprite);
 	ft_mallocsprite(sprite);
 	put_to_zero(sprite);
 	load_ptr_and_data_sprite(sprite);

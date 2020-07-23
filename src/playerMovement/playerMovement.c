@@ -10,25 +10,20 @@ static int	player_Orientation_Angle(float angle)
 	return (0);
 }
 
-/* void	calculs_dir_and_plan_for_sprites(t_sprite *sprite, t_player *player) */
-/* { */
-/* 	float	dirangle; */
-/* 	float	olddirx; */
-/* 	float	oldplanx; */
+void		ft_updatevect(t_player *player, t_sprite *sprite)
+{
+	float	olddirx;
+	float	oldplanx;
+	float	vectangle;
 
-/* 	olddirx = sprite->dirx; */
-/* 	oldplanx = sprite->planx; */
-/* 	dirangle = player.turndirection * player->rotationspeed; */
-/* 	sprite->dirx = sprite->dirx * cos(dirangle) - sprite->diry * sin(dirangle); */
-/* 	sprite->diry = olddirx * sin(dirangle) + sprite->diry * cos(dirangle); */
-/* 	sprite->planx = sprite->planx * cos(dirangle) - sprite->plany * sin(dirangle); */
-/* 	sprite->plany = oldplanx * sin(dirangle) + sprite->plany * cos(dirangle); */
-/* 	/\* if (ft_iswall(newPlayerY, newPlayerX) == 0) *\/ */
-/* 	/\* { *\/ */
-/* 	/\* 	player->x = newplayerX; *\/ */
-/* 	/\* 	player->y = newplayerY; *\/ */
-/* 	/\* } *\/ */
-/* } */
+	olddirx = sprite->dirx;
+	oldplanx = sprite->planx;
+	vectangle = player->turnDirection * player->rotationSpeed;
+	sprite->dirx = sprite->dirx * cos(vectangle) - sprite->diry * sin(vectangle);
+	sprite->diry = olddirx * sin(vectangle) + sprite->diry * cos(vectangle);
+	sprite->planx = sprite->planx * cos(vectangle) - sprite->plany * sin(vectangle);
+	sprite->plany = oldplanx * sin(vectangle) + sprite->plany * cos(vectangle);
+}
 
 void		playerMovement(t_player *player)
 {
@@ -57,7 +52,7 @@ void		playerMovement(t_player *player)
 			newPlayerY = player->y - sin(angle_angle) * -moveStep;
 		}
 	}
-	/* calculs_dir_and_plan_for_sprites(sprite, player); */
+	ft_updatevect(player, &g_sprite);
 	if (!hasWallAt(newPlayerY, newPlayerX))
 	{
 		player->y = newPlayerY;

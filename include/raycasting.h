@@ -25,4 +25,6 @@ void				miniMap(t_player *player, char **map);
 void				init_mlx_and_window(void *mlx_ptr, void *win_mlx, char *filename);
 int				count_sprite(char **map);
 void				ft_mallocsprite(t_sprite *sprite);
+void				ft_putsprite(t_sprite *sprite, t_player *player);
+void	ft_putsprite(t_sprite *sprite, t_player *player);
 #endif

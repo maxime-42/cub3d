@@ -47,4 +47,5 @@ int				spritevisible(t_sprite *sprite, t_player *player, float sprite_size);
 void			putsprite(t_sprite *sprite);
 
 void		init_sprite(t_sprite *sprite, char **map, float rotationangle);
+
 #endif

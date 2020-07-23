@@ -37,8 +37,11 @@ static int	gameLoop(t_info *info)
 	/* printf("y = %d\n", y); */
 	createImage(g_mlx_ptr, g_img_ptr, g_image_data);
 	playerMovement(&g_player);
+
+	ft_putsprite(&g_sprite, &g_player);
 	cast_All_Rays(&g_player, &ray);
 	miniMap(&g_player, g_info->map);
+	ft_putsprite(&g_sprite, &g_player);
 	/* drawMap(g_info->map); */
 	/* drawPlayer(&g_player); */
 	/* cast_All_Rays(&g_player, &g_ray); */
@@ -97,11 +100,13 @@ void		load_ptr_textures_in_array(t_texture texture[NUM_TEXTURE])
 int				main(int ac, char **av)
 {
 	t_info		info;
-	int			keyCode;
+	int		keyCode;
 
 	info.map = 0;
 	g_sprite.ptr = 0;
 	g_info = &info;
+	keyCode = 0;
+	g_texture[0].texture_ptr = 0;
 	if (ac == 3)
 		filename = "myscreenShoot";
 	else if (ac != 2)

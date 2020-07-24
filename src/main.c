@@ -64,6 +64,7 @@ static int	gameLoop(t_info *info)
 
 static void		init_global_variable()
 {
+  	g_map = (char **)g_info->map;
 	g_texture[0].texture_ptr = 0;
 	g_wall_strip_width = 1;
 	g_tile_size = 32;
@@ -120,11 +121,10 @@ int				main(int ac, char **av)
 		return (ERROR);
 	init_global_variable();
 	init_mlx_and_window(g_mlx_ptr, g_win_mlx, filename);
+	init_player(&g_player);
 	/* return (freeAll(SUCCESS)); */
 	load_ptr_textures_in_array(g_texture);
-	g_map = (char **)info.map;
-	init_player(&g_player);
-	init_sprite(&g_sprite, g_map, g_player.rotationAngle);
+	init_sprite(&g_sprite, g_map, g_player.position);
 	if (!filename)
 	{
 		mlx_hook(g_win_mlx, 2, (1L << 0), &keyPressed, &keyCode);

@@ -41,11 +41,10 @@ void				freeContentNode(void *line);
 /* int					free_texture(t_texture texture[NUM_TEXTURE]); */
 int				checkTexture(int fd, t_texture texture[NUM_TEXTURE]);
 void				getTexture(t_texture texture[NUM_TEXTURE]);
-int					get_path_sprite(int fd, t_sprite *sprite);
 
-int				spritevisible(t_sprite *sprite, t_player *player, float sprite_size);
-void			putsprite(t_sprite *sprite);
 
-void		init_sprite(t_sprite *sprite, char **map, float rotationangle);
+/* int				spritevisible(t_sprite *sprite, t_player *player, float sprite_size); */
+/* void			putsprite(t_sprite *sprite); */
+
 
 #endif

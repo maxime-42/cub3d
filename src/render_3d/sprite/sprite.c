@@ -13,6 +13,7 @@ void	ft_puttexture(t_sprite *sprite, int x, int y, float sprite_size)
 	color = sprite->data[(textureoffsety * sprite->width) + textureoffsetx];
 	/* if (color == 0xFFFFFF) */
 	/* 	color = 0xFFFF00; */
+	/* printf("hellow\n"); */
 	g_image_data[y * g_window_width + x] = color;
 }
 
@@ -24,6 +25,8 @@ void	ft_drawsprite(t_sprite *sprite, float transformy, float sprite_size)
 	x = sprite->drawstartx;
 	/* printf("drawstartx = %d\n", sprite->drawstartx); */
 	/* printf("sprite->drawendx = %d\n", sprite->drawendx); */
+	printf("sprite->drawstarty = %d\n", sprite->drawstarty);
+	printf("sprite->drawendy = %d\n", sprite->drawendy);
 	while (x < sprite->drawendx)
 	{
 		if (transformy > 0 && x > 0 && x < g_window_width /* && transformy < sprite->buffer[x] */)
@@ -44,8 +47,7 @@ void	ft_getstart(t_sprite *sprite, float sprite_size, float transformy)
 	int		spriteheight;
 	int		spritewidth;
 
-	/* spritewidth = sprite_size; */
-	spritewidth =  abs((g_window_height / transformy));
+	spritewidth = sprite_size;
 	sprite->drawstartx = (-spritewidth / 2) + sprite->spritescreenx;
 	if (sprite->drawstartx < 0)
 		sprite->drawstartx = 0;

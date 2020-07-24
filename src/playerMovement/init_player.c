@@ -22,31 +22,17 @@ static void		coordinate_player(t_player *player)
 	}
 }
 
-/* static void		player_position(t_player *player) */
-/* { */
-/* 	coordinate_player(player); */
-/* 	if (player->position == 'N') */
-/* 		player->rotationAngle = (M_PI / 2) * 3; */
-/* 	else if (player->position == 'W') */
-/* 		player->rotationAngle = (M_PI / 2) * 2; */
-/* 	else if (player->position == 'E') */
-/* 		player->rotationAngle = (M_PI / 2) * 4; */
-/* 	else if (player->position == 'S') */
-/* 		player->rotationAngle = (M_PI / 2); */
-/* } */
-
-
 static void		player_position(t_player *player)
 {
 	coordinate_player(player);
 	if (player->position == 'N')
-	  player->rotationAngle = ANGLE_UP;
+		player->rotationAngle = ANGLE_UP;
 	else if (player->position == 'W')
-	  player->rotationAngle = ANGLE_WEST;
+		player->rotationAngle = ANGLE_WEST;
 	else if (player->position == 'E')
-	  player->rotationAngle = ANGLE_EAST;
+		player->rotationAngle = ANGLE_EAST;
 	else if (player->position == 'S')
-	  player->rotationAngle = ANGLE_DOWN;
+		player->rotationAngle = ANGLE_DOWN;
 }
 
 void			init_player(t_player *player)

@@ -56,51 +56,50 @@ static void	position_sprite(t_sprite *sprite, char **map)
 	}
 }
 
-static void	init_vecteur(t_sprite *sprite, float rotationangle)
+static void	init_vecteur(t_sprite *sprite, char player_position)
 {
-  //printf("rotationangle = %f\n", rotationangle);
-		/* printf("rotationangle = %f\n", rotationangle); */
-		/* printf("ANGLE_UP = %f\n", (float)ANGLE_UP); */
-  
-	/* if (rotationangle == ANGLE_EAST) */
-	/* { */
-	/* 	sprite->dirx = 1; */
-	/* 	sprite->diry = 0; */
-	/* 	sprite->planx = 0; */
-	/* 	sprite->plany = -0.6; */
-	/* } */
-	/* else if (rotationangle == ANGLE_DOWN) */
-	/* { */
-	/* 	sprite->dirx = 0; */
-	/* 	sprite->diry = 1; */
-	/* 	sprite->planx = 0.6; */
-	/* 	sprite->plany = 0; */
-	/* } */
-	/* else if (rotationangle == ANGLE_WEST) */
-	/* { */
-	/* 	sprite->dirx = -1; */
-	/* 	sprite->diry = 0; */
-	/* 	sprite->planx = 0; */
-	/* 	sprite->plany = 0.6; */
-	/* } */
-  	printf("rotationangle = %f\n", rotationangle);
-	printf("ANGLE_UP = %f\n", ANGLE_UP);
-
-	if (rotationangle ==  1.5 * M_PI)
+  //printf("player_position = %f\n", player_position);
+	//printf("ANGLE_UP = %f\n", ANGLE_UP);
+	if (player_position == 'E')
 	{
-		printf("hellow\n");
+  		printf("ANGLE_EAST\n");
+		sprite->dirx = 1;
+		sprite->diry = 0;
+		sprite->planx = 0;
+		sprite->plany = -0.6;
+	}
+	else if (player_position == 'S')
+	{
+		printf("ANGLE_DOWN\n");
+		sprite->dirx = 0;
+		sprite->diry = 1;
+		sprite->planx = 0.6;
+		sprite->plany = 0;
+	}
+	else if (player_position == 'W')
+	{
+		printf("ANGLE_WEST\n");
+		sprite->dirx = -1;
+		sprite->diry = 0;
+		sprite->planx = 0;
+		sprite->plany = 0.6;
+	}
+	else if (player_position ==  'N')
+	{
+  		printf("ANGLE_UP\n");
 		sprite->dirx = 0;
 		sprite->diry = -1;
 		sprite->planx = -0.6;
 		sprite->plany = 0;
 	}
-	/* else */
-	/* { */
-	/* } */
+	else
+	{
+		printf("angle null part\n");
+	}
 
 }
 
- void		init_sprite(t_sprite *sprite, char **map, float rotationangle)
+ void		init_sprite(t_sprite *sprite, char **map, char player_position)
 {
 
 	sprite->nb_sprite = count_sprite(map);
@@ -108,7 +107,7 @@ static void	init_vecteur(t_sprite *sprite, float rotationangle)
 	put_to_zero(sprite);
 	load_ptr_and_data_sprite(sprite);
 	position_sprite(sprite, map);
-	init_vecteur(sprite, rotationangle);
+	init_vecteur(sprite, player_position);
 	/* printf("sprite->planx = %f\n", sprite->planx); */
 	/* printf("sprite->diry = %f\n", sprite->diry); */
 	/* printf("sprite->dirx = %f\n", sprite->dirx); */

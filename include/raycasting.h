@@ -26,5 +26,7 @@ void				init_mlx_and_window(void *mlx_ptr, void *win_mlx, char *filename);
 int				count_sprite(char **map);
 void				ft_mallocsprite(t_sprite *sprite);
 void				ft_putsprite(t_sprite *sprite, t_player *player);
-void	ft_putsprite(t_sprite *sprite, t_player *player);
+void				ft_putsprite(t_sprite *sprite, t_player *player);
+void				init_sprite(t_sprite *sprite, char **map, char player_position);
+int				get_path_sprite(int fd, t_sprite *sprite);
 #endif

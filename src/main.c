@@ -4,9 +4,9 @@ char	*filename = 0;
 
 static	void	createImage(void *mlx_ptr, void *img_ptr, void *image_data)
 {
-	int			bpp;
-	int			size_line;
-	int			endian;
+	int	bpp;
+	int	size_line;
+	int	endian;
 
 	img_ptr = 0;
 	endian = 0;
@@ -26,7 +26,7 @@ static	void	createImage(void *mlx_ptr, void *img_ptr, void *image_data)
 	g_image_data = image_data;
 }
 
-static int	gameLoop(t_info *info)
+static int	game_loop(t_info *info)
 {
 	t_ray	ray;
 	/* int	x; */
@@ -42,10 +42,6 @@ static int	gameLoop(t_info *info)
 	cast_All_Rays(&g_player, &ray);
 	miniMap(&g_player, g_info->map);
 	ft_putsprite(&g_sprite, &g_player);
-	/* drawMap(g_info->map); */
-	/* drawPlayer(&g_player); */
-	/* cast_All_Rays(&g_player, &g_ray); */
-	/* mlx_clear_window(g_mlx_ptr, g_win_mlx); */
 	if (filename)
 	{
 		bmp_exporter(filename);
@@ -56,32 +52,34 @@ static int	gameLoop(t_info *info)
 		mlx_put_image_to_window(g_mlx_ptr, g_win_mlx, g_img_ptr, 0, 0);
 		mlx_destroy_image (g_mlx_ptr, g_img_ptr);
 	}
-	///mlx_destroy_image(g_mlx_ptr, g_img_ptr);
 	g_img_ptr = 0;
 	(void)info;
 	return (0);
 }
 
-static void		init_global_variable()
+static void	init_global_variable()
 {
-  	g_map = (char **)g_info->map;
-	g_texture[0].texture_ptr = 0;
-	g_wall_strip_width = 1;
-	g_tile_size = 32;
+  
+  	g_map = (char **)g_info->map;  
 	g_map_num_rows = g_info->height;
 	g_map_num_cols =  (int)ft_strlen(g_info->begin->content);
-	g_window_width = (g_map_num_cols * g_tile_size);
-	g_window_height = (g_map_num_rows * g_tile_size);
+	g_texture[0].texture_ptr = 0;
+	g_wall_strip_width = 1;
+	g_window_width = g_screen_width;
+	g_window_height = g_screen_height;
+	g_tile_size = g_window_width / g_map_num_cols;
+	/* g_window_width = (g_map_num_cols * g_tile_size); */
+	/* g_window_height = (g_map_num_rows * g_tile_size); */
 	g_num_rays = (g_window_width / g_wall_strip_width);
 	g_fov_angle = (60 * (M_PI / 180));
 }
 
 void		load_ptr_textures_in_array(t_texture texture[NUM_TEXTURE])
 {
-	int		bpp;
-	int		size_line;
-	int		endian;
-	int		i;
+	int	bpp;
+	int	size_line;
+	int	endian;
+	int	i;
 
 	i = -1;
 	while (++i < NUM_TEXTURE)
@@ -98,21 +96,35 @@ void		load_ptr_textures_in_array(t_texture texture[NUM_TEXTURE])
 	}
 }
 
-int				main(int ac, char **av)
+static void	event(char *filename, t_info *info)
 {
-	t_info		info;
-	int		keyCode;
+	int	keyCode;
+
+	keyCode = 0;
+	if (!filename)
+	{
+		mlx_hook(g_win_mlx, 2, (1L << 0), &keyPressed, &keyCode);
+		mlx_hook(g_win_mlx, 3, (1L << 1), &keyRelease, &keyCode);
+		mlx_loop_hook(g_mlx_ptr, &game_loop, &info);
+		mlx_loop(g_mlx_ptr);
+	}
+	else
+		game_loop(info);
+}
+
+int		main(int ac, char **av)
+{
+	t_info	info;
 
 	info.map = 0;
 	g_sprite.ptr = 0;
 	g_info = &info;
-	keyCode = 0;
 	g_texture[0].texture_ptr = 0;
 	if (ac == 3)
 		filename = "myscreenShoot";
 	else if (ac != 2)
 	{
-		ft_putstr_fd("Error\nError\nnumber argument\n", STDOUT);
+		ft_putstr_fd("Error\nnumber argument\n", STDOUT);
 		return (ERROR);
 	}
 	if (get_file_descriptor(&info, av[1]) == ERROR)
@@ -122,17 +134,8 @@ int				main(int ac, char **av)
 	init_global_variable();
 	init_mlx_and_window(g_mlx_ptr, g_win_mlx, filename);
 	init_player(&g_player);
-	/* return (freeAll(SUCCESS)); */
 	load_ptr_textures_in_array(g_texture);
 	init_sprite(&g_sprite, g_map, g_player.position);
-	if (!filename)
-	{
-		mlx_hook(g_win_mlx, 2, (1L << 0), &keyPressed, &keyCode);
-		mlx_hook(g_win_mlx, 3, (1L << 1), &keyRelease, &keyCode);
-		mlx_loop_hook(g_mlx_ptr, &gameLoop, &info);
-		mlx_loop(g_mlx_ptr);
-	}
-	else
-		gameLoop(g_info);
+	event(filename, &info);
 	return (freeAll(SUCCESS));
 }

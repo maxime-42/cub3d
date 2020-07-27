@@ -4,7 +4,7 @@ static void	next_Horz_Intercept(t_ray *ray, float nextHorzTouchY, float nextHorz
 {
 	float	tmp;
 
-	while (nextHorzTouchX >= 0 && nextHorzTouchX <= g_window_width &&	nextHorzTouchY >= 0 && nextHorzTouchY <= g_window_height)
+	while (nextHorzTouchX >= 0 && nextHorzTouchX <= (g_map_num_cols * g_tile_size ) && nextHorzTouchY >= 0 && nextHorzTouchY <= (g_map_num_rows * g_tile_size))
 	{
 		tmp = 0;
 		if (ray->isRayFacingUp)

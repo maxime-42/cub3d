@@ -2,25 +2,23 @@
 
 static void	ft_puttexture(t_sprite *sprite, int x, int y, float sprite_size)
 {
-	int		textureoffsetx;
-	int		distancefromtop;
-	int		textureoffsety;
-	int		color;
+	int	textureoffsetx;
+	int	distancefromtop;
+	int	textureoffsety;
+	int	color;
 
 	textureoffsetx = (int)(256 * (x - (-sprite_size / 2 + sprite->spritescreenx)) * sprite->width / sprite_size) / 256;
 	distancefromtop = (y) * 256 - g_window_height * 128 + sprite_size * 128;
 	textureoffsety = ((distancefromtop * sprite->height) / sprite_size) / 256;
 	color = sprite->data[(textureoffsety * sprite->width) + textureoffsetx];
-	if (color == 0xFFFFFF)
-		color = 0xFFFF00;
-	/* printf("hellow\n"); */
-	g_image_data[y * g_window_width + x] = color;
+	/* if (color != 0x000000) */
+	  	g_image_data[y * g_window_width + x] = color;
 }
 
 static void	ft_drawsprite(t_sprite *sprite, float transformy, float sprite_size)
 {
-	int		y;
-	int		x;
+	int	y;
+	int	x;
 
 	x = sprite->drawstartx;
 	while (x < sprite->drawendx)
@@ -40,8 +38,8 @@ static void	ft_drawsprite(t_sprite *sprite, float transformy, float sprite_size)
 
 static void	ft_getstart(t_sprite *sprite, float sprite_size, float transformy)
 {
-	int		spriteheight;
-	int		spritewidth;
+	int	spriteheight;
+	int	spritewidth;
 
 	spritewidth = sprite_size;
 	sprite->drawstartx = (-spritewidth / 2) + sprite->spritescreenx;
@@ -140,8 +138,8 @@ static void	ft_switch(t_sprite *sprite, int i, int j)
 
 static void	ft_sortsprite(t_sprite *sprite)
 {
-	int		j;
-	int		i;
+	int	j;
+	int	i;
 
 	i = -1;
 	while (i++ < sprite->nb_sprite)
@@ -158,7 +156,7 @@ static void	ft_sortsprite(t_sprite *sprite)
 
 static void	ft_spritedistance(t_sprite *sprite, t_player *player)
 {
-	int id;
+	int	id;
 
 	id = 0;
 	while (id < sprite->nb_sprite)
@@ -177,7 +175,7 @@ static void	ft_zero(t_sprite *sprite)
 	sprite->spritescreenx = 0;
 }
 
-void	ft_putsprite(t_sprite *sprite, t_player *player)
+void		ft_putsprite(t_sprite *sprite, t_player *player)
 {
 	float	distanceprojection;
 	float	sprite_size;

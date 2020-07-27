@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void	ft_puttexture(t_sprite *sprite, int x, int y, float sprite_size)
+static void	ft_puttexture(t_sprite *sprite, int x, int y, float sprite_size)
 {
 	int		textureoffsetx;
 	int		distancefromtop;
@@ -11,25 +11,21 @@ void	ft_puttexture(t_sprite *sprite, int x, int y, float sprite_size)
 	distancefromtop = (y) * 256 - g_window_height * 128 + sprite_size * 128;
 	textureoffsety = ((distancefromtop * sprite->height) / sprite_size) / 256;
 	color = sprite->data[(textureoffsety * sprite->width) + textureoffsetx];
-	/* if (color == 0xFFFFFF) */
-	/* 	color = 0xFFFF00; */
+	if (color == 0xFFFFFF)
+		color = 0xFFFF00;
 	/* printf("hellow\n"); */
 	g_image_data[y * g_window_width + x] = color;
 }
 
-void	ft_drawsprite(t_sprite *sprite, float transformy, float sprite_size)
+static void	ft_drawsprite(t_sprite *sprite, float transformy, float sprite_size)
 {
 	int		y;
 	int		x;
 
 	x = sprite->drawstartx;
-	/* printf("drawstartx = %d\n", sprite->drawstartx); */
-	/* printf("sprite->drawendx = %d\n", sprite->drawendx); */
-	printf("sprite->drawstarty = %d\n", sprite->drawstarty);
-	printf("sprite->drawendy = %d\n", sprite->drawendy);
 	while (x < sprite->drawendx)
 	{
-		if (transformy > 0 && x > 0 && x < g_window_width /* && transformy < sprite->buffer[x] */)
+		if (transformy > 0 && x > 0 && x < g_window_width && transformy < sprite->buffer[x])
 		{
 			y = sprite->drawstarty;
 			while (y < sprite->drawendy)
@@ -42,7 +38,7 @@ void	ft_drawsprite(t_sprite *sprite, float transformy, float sprite_size)
 	}
 }
 
-void	ft_getstart(t_sprite *sprite, float sprite_size, float transformy)
+static void	ft_getstart(t_sprite *sprite, float sprite_size, float transformy)
 {
 	int		spriteheight;
 	int		spritewidth;
@@ -56,18 +52,19 @@ void	ft_getstart(t_sprite *sprite, float sprite_size, float transformy)
 	/* printf("sprite->drawendx = %d\n", sprite->drawendx); */
 	if (sprite->drawendx >= g_window_width)
 		sprite->drawendx = g_window_width - 1;
-	/* spriteheight = sprite_size; */
-	spriteheight  = (g_window_height / transformy);
-	sprite->drawstarty = -spriteheight / 2 + g_window_height / 2;
+	spriteheight = sprite_size;
+	/* spriteheight  = (g_window_height / transformy); */
+	sprite->drawstarty = (-spriteheight / 2) + (g_window_height / 2);
 	if (sprite->drawstarty < 0)
 		sprite->drawstarty = 0;
 	sprite->drawendy = spriteheight / 2 + g_window_height / 2;
 	if (sprite->drawendy >= g_window_height)
 		sprite->drawendy = g_window_height - 1;
 	(void)sprite_size;
+	(void)transformy;
 }
 
-float	ft_calculangle(t_player *player, float x, float y)
+static float	ft_calculangle(t_player *player, float x, float y)
 {
 	float	vectx;
 	float	vecty;
@@ -88,7 +85,7 @@ float	ft_calculangle(t_player *player, float x, float y)
 	return (spriteangle);
 }
 
-int		ft_spritevisible(t_sprite *sprite, t_player *player, int id, float sprite_size)
+static int		ft_spritevisible(t_sprite *sprite, t_player *player, int id, float sprite_size)
 {
 	float	spriteangle;
 	float	spriteangle_end;
@@ -107,7 +104,7 @@ int		ft_spritevisible(t_sprite *sprite, t_player *player, int id, float sprite_s
 		return (0);
 }
 
-float	ft_gettransformy(t_sprite *sprite, t_player *player, int id)
+static float	ft_gettransformy(t_sprite *sprite, t_player *player, int id)
 {
 	float	spritex;
 	float	spritey;
@@ -118,17 +115,13 @@ float	ft_gettransformy(t_sprite *sprite, t_player *player, int id)
 	spritex = sprite->x[id] - player->x;
 	spritey = sprite->y[id] - player->y;
 	invdet = 1.0 / (sprite->planx * sprite->diry - sprite->dirx * sprite->plany);
-	/* printf("sprite->planx = %f\n", sprite->planx); */
-	/* printf("sprite->diry = %f\n", sprite->diry); */
-	/* printf("sprite->dirx = %f\n", sprite->dirx); */
-	/* printf("sprite->plany = %f\n", sprite->plany); */
 	transformx = invdet * (sprite->diry * spritex - sprite->dirx * spritey);
 	transformy = invdet * (-sprite->plany * spritex + sprite->planx * spritey);
 	sprite->spritescreenx = (int)((g_window_width / 2) * (1 + -transformx / transformy));
 	return (transformy);
 }
 
-void	ft_switch(t_sprite *sprite, int i, int j)
+static void	ft_switch(t_sprite *sprite, int i, int j)
 {
 	float	temp_dist;
 	float	temp_y;
@@ -145,7 +138,7 @@ void	ft_switch(t_sprite *sprite, int i, int j)
 	sprite->y[i] = temp_y;
 }
 
-void	ft_sortsprite(t_sprite *sprite)
+static void	ft_sortsprite(t_sprite *sprite)
 {
 	int		j;
 	int		i;
@@ -163,7 +156,7 @@ void	ft_sortsprite(t_sprite *sprite)
 	}
 }
 
-void	ft_spritedistance(t_sprite *sprite, t_player *player)
+static void	ft_spritedistance(t_sprite *sprite, t_player *player)
 {
 	int id;
 
@@ -175,7 +168,7 @@ void	ft_spritedistance(t_sprite *sprite, t_player *player)
 	}
 }
 
-void	ft_zero(t_sprite *sprite)
+static void	ft_zero(t_sprite *sprite)
 {
 	sprite->drawstartx = 0;
 	sprite->drawendx = 0;
@@ -207,8 +200,4 @@ void	ft_putsprite(t_sprite *sprite, t_player *player)
 		}
 		id++;
 	}
-	(void)distanceprojection;
-	(void)sprite_size;
-	(void)id;
-	(void)transformy;
 }

@@ -32,7 +32,7 @@ static	void	put_to_zero(t_sprite *sprite)
 	sprite->height = 0;
 }
 
-static void	position_sprite(t_sprite *sprite, char **map)
+static void	init_position_sprite(t_sprite *sprite, char **map)
 {
 	int	i;
 	int	j;
@@ -50,6 +50,7 @@ static void	position_sprite(t_sprite *sprite, char **map)
 				sprite->x[id] = j * g_tile_size + g_tile_size / 2;
 				sprite->y[id] = i * g_tile_size + g_tile_size / 2;
 				sprite->distance[id] = 0;
+				id++;
 			}
 			j++;
 		}
@@ -58,8 +59,6 @@ static void	position_sprite(t_sprite *sprite, char **map)
 
 static void	init_vecteur(t_sprite *sprite, char player_position)
 {
-  //printf("player_position = %f\n", player_position);
-	//printf("ANGLE_UP = %f\n", ANGLE_UP);
 	if (player_position == 'E')
 	{
   		printf("ANGLE_EAST\n");
@@ -106,7 +105,7 @@ static void	init_vecteur(t_sprite *sprite, char player_position)
 	ft_mallocsprite(sprite);
 	put_to_zero(sprite);
 	load_ptr_and_data_sprite(sprite);
-	position_sprite(sprite, map);
+	init_position_sprite(sprite, map);
 	init_vecteur(sprite, player_position);
 	/* printf("sprite->planx = %f\n", sprite->planx); */
 	/* printf("sprite->diry = %f\n", sprite->diry); */

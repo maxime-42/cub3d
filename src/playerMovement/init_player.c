@@ -2,8 +2,8 @@
 
 static void		coordinate_player(t_player *player)
 {
-	int			x;
-	int			y;
+	int		x;
+	int		y;
 
 	y = -1;
 	while (g_map[++y])

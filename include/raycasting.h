@@ -29,4 +29,5 @@ void				ft_putsprite(t_sprite *sprite, t_player *player);
 void				ft_putsprite(t_sprite *sprite, t_player *player);
 void				init_sprite(t_sprite *sprite, char **map, char player_position);
 int				get_path_sprite(int fd, t_sprite *sprite);
+/* void				render3d_projection(t_ray *ray, t_sprite *sprite, int columnId); */
 #endif

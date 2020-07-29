@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int			keyPressed(int keyCode)
+int	keyPressed(int keyCode)
 {
 	if (keyCode == UP_ARROW)
 		g_player.walkDirection = +1;
@@ -25,7 +25,7 @@ int			keyPressed(int keyCode)
 	return (0);
 }
 
-int			keyRelease(int keyCode)
+int	keyRelease(int keyCode)
 {
     if (keyCode == UP_ARROW)
 		g_player.walkDirection = 0;
@@ -41,4 +41,22 @@ int			keyRelease(int keyCode)
 		g_player.walkDirection = 0;
 	}
 	return (0);
+}
+
+int	close_window(int keycode)
+{
+	exit(freeAll(SUCCESS));
+	(void)keycode;
+}
+
+void	handling_event(t_info *info)
+{
+	int	keyCode;
+
+	keyCode = 0;
+	mlx_hook(g_win_mlx, 17, 1L << 17, &close_window, &keyCode);
+	mlx_hook(g_win_mlx, 2, (1L << 0), &keyPressed, &keyCode);
+	mlx_hook(g_win_mlx, 3, (1L << 1), &keyRelease, &keyCode);
+	mlx_loop_hook(g_mlx_ptr, &game_loop, &info);
+	mlx_loop(g_mlx_ptr);
 }

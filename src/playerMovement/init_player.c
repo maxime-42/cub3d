@@ -14,8 +14,8 @@ static void		coordinate_player(t_player *player)
 			if (g_map[y][x] == 'N' || g_map[y][x] == 'S' ||
 			g_map[y][x] == 'W' || g_map[y][x] == 'E')
 			{
-				player->x = g_tile_size * x;
-				player->y = g_tile_size * y;
+				player->x = g_tile_size * x + g_tile_size / 2;
+				player->y = g_tile_size * y + g_tile_size / 2;
 				player->position = g_map[y][x];
 			}
 		}
@@ -42,5 +42,5 @@ void			init_player(t_player *player)
 	player->walkDirection = 0;
 	player_position(player);
 	player->moveSpeed = 2;
-	player->rotationSpeed = 1 * (M_PI / 180);
+	player->rotationSpeed = 3 * (M_PI / 180);
 }

@@ -99,9 +99,4 @@ static void	init_vecteur(t_sprite *sprite, char player_position)
 	load_ptr_and_data_sprite(sprite);
 	init_position_sprite(sprite, map);
 	init_vecteur(sprite, player_position);
-	/* printf("sprite->planx = %f\n", sprite->planx); */
-	/* printf("sprite->diry = %f\n", sprite->diry); */
-	/* printf("sprite->dirx = %f\n", sprite->dirx); */
-	/* printf("sprite->plany = %f\n", sprite->plany); */
-
 }

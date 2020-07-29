@@ -12,7 +12,7 @@ static	void	*init_mlx(void *mlx_ptr)
 	return (mlx_ptr);
 }
 
-	void	createWindow(void *mlx_ptr, void *win_mlx, char *filename)
+static	void	createWindow(void *mlx_ptr, void *win_mlx, char *filename)
 {
 	g_win_mlx = 0;
 	if (!filename)

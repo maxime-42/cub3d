@@ -27,7 +27,7 @@ static void	draw_Ceiling(t_wall *wall, int columnId)
 }
 
 
-void		draw_Floor(t_wall *wall, int columnId)
+static void	draw_Floor(t_wall *wall, int columnId)
 {
 	int	bottom;
 
@@ -52,17 +52,14 @@ static void	draw_Wall(t_ray *ray, t_wall *wall, int columnId)
 		textureOffsetX = (int)(ray->wallHitY * g_texture[index].width / g_tile_size) % g_texture[index].width;
 	else
 		textureOffsetX = (int)(ray->wallHitX * g_texture[index].width / g_tile_size) % g_texture[index].width;
-	/* drawCeiling(wall, columnId); */
 	while (wall->wallTop < wall->wallBottom)
 	{
 		distanceFromTop = wall->wallTop + (wall->wallStripHeight / 2) - (g_window_height / 2);
 		textureOffsetY = distanceFromTop * ((float)g_texture[index].height / wall->wallStripHeight);
 		textureColor = g_texture[index].wallTexture[(g_texture[index].width * textureOffsetY) + textureOffsetX];
-		/* if (textureColor != 0x000000) */
 		g_image_data[(wall->wallTop * g_window_width) + columnId] = textureColor;
 		wall->wallTop++;
 	}
-	/* drawFloor(wall, columnId); */
 }
 
 

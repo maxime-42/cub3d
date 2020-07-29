@@ -26,12 +26,11 @@ static	void	createImage(void *mlx_ptr, void *img_ptr, void *image_data)
 	g_image_data = image_data;
 }
 
-static int	game_loop(t_info *info)
+int	game_loop(t_info *info)
 {
 	t_ray	ray;
 	/* int	x; */
 	/* int	y; */
-
 	/* mlx_get_screen_size(g_mlx_ptr, &x, &y); */
 	/* printf("x = %d\n", x); */
 	/* printf("y = %d\n", y); */
@@ -96,22 +95,6 @@ static void	load_ptr_textures_in_array(t_texture texture[NUM_TEXTURE])
 	}
 }
 
-static void	event(char *filename, t_info *info)
-{
-	int	keyCode;
-
-	keyCode = 0;
-	if (!filename)
-	{
-		mlx_hook(g_win_mlx, 2, (1L << 0), &keyPressed, &keyCode);
-		mlx_hook(g_win_mlx, 3, (1L << 1), &keyRelease, &keyCode);
-		mlx_loop_hook(g_mlx_ptr, &game_loop, &info);
-		mlx_loop(g_mlx_ptr);
-	}
-	else
-		game_loop(info);
-}
-
 int		main(int ac, char **av)
 {
 	t_info	info;
@@ -136,6 +119,9 @@ int		main(int ac, char **av)
 	init_player(&g_player);
 	load_ptr_textures_in_array(g_texture);
 	init_sprite(&g_sprite, g_map, g_player.position);
-	event(filename, &info);
+	if (!filename)
+		handling_event(&info);
+	else
+		game_loop(&info);
 	return (freeAll(SUCCESS));
 }

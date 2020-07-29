@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int		count_sprite(char **map)
+int	count_sprite(char **map)
 {
 	int	i;
 	int	j;

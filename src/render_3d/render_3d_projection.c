@@ -21,7 +21,7 @@ static void	draw_Ceiling(t_wall *wall, int columnId)
 	top = 0;
 	while (top < wall->wallTop)
 	{
-		g_image_data[(top * g_window_width) + columnId] = 0xA9C7FC;
+		g_image_data[top * g_window_width + columnId] = 0xC3BDBD;
 		top++;
 	}
 }
@@ -39,7 +39,7 @@ void		draw_Floor(t_wall *wall, int columnId)
 	}
 }
 
-static void		draw_Wall(t_ray *ray, t_wall *wall, int columnId)
+static void	draw_Wall(t_ray *ray, t_wall *wall, int columnId)
 {
 	int	textureOffsetX;
 	int	textureOffsetY;

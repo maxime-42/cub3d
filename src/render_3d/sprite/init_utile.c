@@ -46,4 +46,5 @@ void	ft_mallocsprite(t_sprite *sprite)
 		ft_putstr_fd("Error\nFailer malloc\n", STDOUT);
 		freeAll(ERROR);	  
 	}
+	ft_bzero(sprite->buffer, sizeof(float) * g_window_width);
 }

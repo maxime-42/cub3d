@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-static	void	utilis(int *ly, int *lx, int j)
+static	void	draw_map_utile(int *ly, int *lx, int j, int color)
 {
 	int	y;
 	int	x;
@@ -11,7 +11,7 @@ static	void	utilis(int *ly, int *lx, int j)
 		x = -1;
 		while (++x < g_tile_size * MINIMAP_SCALE_FACTOR)
 		{
-			g_image_data[*ly * g_window_width + *lx] = 0xFFFFFF;
+			g_image_data[*ly * g_window_width + *lx] = color;
 			*lx += 1;
 		}
 		*ly += 1;
@@ -32,11 +32,14 @@ static	void	drawMap(char **map)
 		x= -1;
 		while (++x < g_map_num_cols)
 		{
-			if (map[y][x] == '0' || ft_strchr("NSEW", map[y][x]))
+			if (map[y][x] == '2' || map[y][x] == '0' || ft_strchr("NSEW", map[y][x]))
 			{
 				lx = x * g_tile_size * MINIMAP_SCALE_FACTOR;
 				ly = y * g_tile_size * MINIMAP_SCALE_FACTOR;
-				utilis(&ly, &lx, x);
+				if (map[y][x] == '2')
+					draw_map_utile(&ly, &lx, x, 0xFF0000);
+				else
+					draw_map_utile(&ly, &lx, x, 0xFFFFFF);  
 			}
 		}
 	}

@@ -115,12 +115,11 @@ typedef struct		s_bmp_file
 	char		*path;
 	int		nb_sprite;
 	float		*buffer;
-	float		*bottom;
 	int		spritescreenx;
 	int		drawstarty;
 	int		drawendy;
 	int		drawstartx;
-  int		drawendx;
+	int		drawendx;
 }			t_sprite;
 
 #endif

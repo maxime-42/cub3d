@@ -11,7 +11,7 @@ static void	ft_puttexture(t_sprite *sprite, int x, int y, float sprite_size)
 	distancefromtop = (y) * 256 - g_window_height * 128 + sprite_size * 128;
 	textureoffsety = ((distancefromtop * sprite->height) / sprite_size) / 256;
 	color = sprite->data[(textureoffsety * sprite->width) + textureoffsetx];
-	/* if (color != 0x000000) */
+	if (color != 0x000000)
 	  	g_image_data[y * g_window_width + x] = color;
 }
 
@@ -23,6 +23,7 @@ static void	ft_drawsprite(t_sprite *sprite, float transformy, float sprite_size)
 	x = sprite->drawstartx;
 	while (x < sprite->drawendx)
 	{
+	  /* printf("sprite->buffer[x] = %f\n", sprite->buffer[x]); */
 		if (transformy > 0 && x > 0 && x < g_window_width && transformy < sprite->buffer[x])
 		{
 			y = sprite->drawstarty;
@@ -42,17 +43,18 @@ static void	ft_getstart(t_sprite *sprite, float sprite_size, float transformy)
 	int	spritewidth;
 
 	spritewidth = sprite_size;
-	sprite->drawstartx = (-spritewidth / 2) + sprite->spritescreenx;
+	sprite->drawstartx = -spritewidth / 2 + sprite->spritescreenx;
+	//printf("sprite->spritescreenx = %d\n", sprite->spritescreenx);
 	if (sprite->drawstartx < 0)
 		sprite->drawstartx = 0;
 	/* printf("spritewidth = %d\n", spritewidth); */
-	sprite->drawendx = (spritewidth / 2) + sprite->spritescreenx;
+	sprite->drawendx = spritewidth / 2 + sprite->spritescreenx;
 	/* printf("sprite->drawendx = %d\n", sprite->drawendx); */
 	if (sprite->drawendx >= g_window_width)
 		sprite->drawendx = g_window_width - 1;
 	spriteheight = sprite_size;
-	/* spriteheight  = (g_window_height / transformy); */
-	sprite->drawstarty = (-spriteheight / 2) + (g_window_height / 2);
+	/* spriteheight = (g_window_height / transformy); */
+	sprite->drawstarty = -spriteheight / 2 + g_window_height / 2;
 	if (sprite->drawstarty < 0)
 		sprite->drawstarty = 0;
 	sprite->drawendy = spriteheight / 2 + g_window_height / 2;
@@ -83,7 +85,7 @@ static float	ft_calculangle(t_player *player, float x, float y)
 	return (spriteangle);
 }
 
-static int		ft_spritevisible(t_sprite *sprite, t_player *player, int id, float sprite_size)
+static int	ft_spritevisible(t_sprite *sprite, t_player *player, int id, float sprite_size)
 {
 	float	spriteangle;
 	float	spriteangle_end;
@@ -116,6 +118,7 @@ static float	ft_gettransformy(t_sprite *sprite, t_player *player, int id)
 	transformx = invdet * (sprite->diry * spritex - sprite->dirx * spritey);
 	transformy = invdet * (-sprite->plany * spritex + sprite->planx * spritey);
 	sprite->spritescreenx = (int)((g_window_width / 2) * (1 + -transformx / transformy));
+	/* printf("sprite->spritescreenx = %d\n", sprite->spritescreenx); */
 	return (transformy);
 }
 

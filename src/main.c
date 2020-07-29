@@ -67,14 +67,14 @@ static void	init_global_variable()
 	g_wall_strip_width = 1;
 	g_window_width = g_screen_width;
 	g_window_height = g_screen_height;
-	g_tile_size = g_window_width / g_map_num_cols;
+	g_tile_size = (g_window_width / g_map_num_cols);
 	/* g_window_width = (g_map_num_cols * g_tile_size); */
 	/* g_window_height = (g_map_num_rows * g_tile_size); */
 	g_num_rays = (g_window_width / g_wall_strip_width);
 	g_fov_angle = (60 * (M_PI / 180));
 }
 
-void		load_ptr_textures_in_array(t_texture texture[NUM_TEXTURE])
+static void	load_ptr_textures_in_array(t_texture texture[NUM_TEXTURE])
 {
 	int	bpp;
 	int	size_line;

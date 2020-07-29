@@ -61,7 +61,6 @@ static void	init_vecteur(t_sprite *sprite, char player_position)
 {
 	if (player_position == 'E')
 	{
-  		printf("ANGLE_EAST\n");
 		sprite->dirx = 1;
 		sprite->diry = 0;
 		sprite->planx = 0;
@@ -69,7 +68,6 @@ static void	init_vecteur(t_sprite *sprite, char player_position)
 	}
 	else if (player_position == 'S')
 	{
-		printf("ANGLE_DOWN\n");
 		sprite->dirx = 0;
 		sprite->diry = 1;
 		sprite->planx = 0.6;
@@ -77,7 +75,6 @@ static void	init_vecteur(t_sprite *sprite, char player_position)
 	}
 	else if (player_position == 'W')
 	{
-		printf("ANGLE_WEST\n");
 		sprite->dirx = -1;
 		sprite->diry = 0;
 		sprite->planx = 0;
@@ -85,15 +82,10 @@ static void	init_vecteur(t_sprite *sprite, char player_position)
 	}
 	else if (player_position ==  'N')
 	{
-  		printf("ANGLE_UP\n");
 		sprite->dirx = 0;
 		sprite->diry = -1;
 		sprite->planx = -0.6;
 		sprite->plany = 0;
-	}
-	else
-	{
-		printf("angle null part\n");
 	}
 
 }

@@ -1,5 +1,6 @@
 #include "cub3d.h"
 
+
 void	print_list(t_list *tmp)
 {
 	while (tmp)
@@ -18,7 +19,6 @@ int	skip_space(char *str)
 		i++;
 	return (i);
 }
-
 
 int	skip_number(char *str)
 {
@@ -39,6 +39,21 @@ int my_compare(char *s1, char *s2, size_t nbr_char)
 		return (SUCCESS);
 	}
 	return (ERROR);
+}
+t_list	*get_node( t_list **begin, char *search)
+{
+	t_list	*node;
+
+	node = ft_list_find(*begin, search, 1, &my_compare);
+	if (!node)
+		return (0);
+	if (node == ft_lstlast(*begin))
+	{
+		ft_putstr_fd("Error\n nothing else must be at\
+		the end except the map\n", STDOUT);
+		return (0);
+	}
+	return (node);
 }
 
 static		int	put_files_in_list(t_list **begin, int fd)
@@ -79,7 +94,7 @@ int	parsing(t_info *info)
 	get_window_size(&info->begin);
 	print_list(info->begin);
 	/* printf("\ng_screen_height = %d\n", g_screen_height); */
-
+	get_color(&info->begin, &info->color_ceiling);
 	return(freeAll(ERROR));
 	/* if (checkTexture(info->fd, g_texture) == ERROR) */
 	/* 	return (free_struct(info, ERROR)); */

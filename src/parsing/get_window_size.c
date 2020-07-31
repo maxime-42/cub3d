@@ -53,25 +53,22 @@ char	*get_height(char *line)
 	return (line);
 }
 
-int			get_window_size(t_list **begin)
+
+int	get_window_size(t_list **begin)
 {
 	char	*line;
 	t_list	*node;
 
-	node = ft_list_find(*begin, "R", 1, &my_compare);
-	line = node->content;
-	if (!node)
+	if (!(node = get_node(begin, "R")))
 	{
-		ft_putstr_fd("Error\nnot find resolution\n", STDOUT);
+		ft_putstr_fd("not find resolution\n", STDOUT);	  
 		return (ERROR);
 	}
+	line = node->content;
 	if (!(line = get_width(line)))
 		return (ERROR);
 	if (!(line = get_height(line)))
 		return (ERROR);
-	/* printf("\ng_screen_widht = %d\n", g_screen_width); */
-	/* printf("\ng_screen_height = %d\n", g_screen_height); */
-
-	ft_list_remove_if(begin, "R 1000 1000", &ft_strcmp, &freeContentNode);
+	ft_list_remove_one_if(begin, node->content, &ft_strcmp, &freeContentNode);
 	return (SUCCESS);
 }

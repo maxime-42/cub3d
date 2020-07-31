@@ -25,9 +25,9 @@
 
 //////////////////////parsig/////////////////////////////////////////////////////////////////////////////
 
-int					get_Screen_Size(t_info *info);
-int					get_sprint(t_info *info);
-int					get_color(t_info *ctrl);
+int				get_Screen_Size(t_info *info);
+int				get_sprint(t_info *info);
+
 int					put_map_in_list(t_list **begin, int fd);
 void				print_list(t_list *begin);
 int					put_map_in_tab_char(void *ptr, t_list *begin);
@@ -48,6 +48,8 @@ int my_compare(char *s1, char *s2, size_t nbr_char);
 int	skip_number(char *str);
 int	skip_space(char *str);
 int			get_window_size(t_list **begine);
-void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *));
+
 void	print_list(t_list *tmp);
+t_list	*get_node( t_list **begin, char *search);
+int		get_color(t_list **begin, int *color_ceiling);
 #endif

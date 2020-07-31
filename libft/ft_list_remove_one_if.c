@@ -1,4 +1,5 @@
-#include "cub3d.h"
+#include "libft.h"
+#include <stdlib.h>
 
 void	remove_front(t_list **begin_list, void (*free_fct)(void *))
 {
@@ -12,7 +13,7 @@ void	remove_front(t_list **begin_list, void (*free_fct)(void *))
 	prev = 0;
 }
 
-void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *))
+void	ft_list_remove_one_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *))
 {
 	t_list	*prev;
 	t_list	*next;
@@ -20,7 +21,10 @@ void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (
 	if (!begin_list || !*begin_list)
 		return ;
 	if (!(*cmp)((*begin_list)->content, data_ref))
+	{
 		remove_front(begin_list, free_fct);
+		return ;
+	}
 	prev = *begin_list;
 	next = (*begin_list)->next;
 	while (prev)
@@ -31,14 +35,9 @@ void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (
 			(*free_fct)(next->content);
 			free(next);
 			next = prev->next;
+			return ;
 		}
 		prev = prev->next;
-		if (next)
-		{
-			/* printf("next->content : %s\n", (char *)next->content); */
-			next = next->next;
-		}
+		next = (next) ? next->next : next;
 	}
-	(void)prev;
-	(void)next;
 }

@@ -40,7 +40,7 @@ SRC	=	./src/main.c\
 		./src/sprite/init_sprite_utile.c\
 		./src/sprite/sprite_utile.c\
 		./src/sprite/sprite.c\
-		./src/utile/ft_list_remove_if.c\
+
 
 OBJ = $(SRC:.c=.o)
 

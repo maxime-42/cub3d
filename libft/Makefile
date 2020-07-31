@@ -54,6 +54,9 @@ BONUS	=	./ft_lstnew_bonus.c\
 			./ft_lstiter_bonus.c\
 			./ft_lstmap_bonus.c\
 			./ft_list_find_bonus.c\
+			./ft_list_remove_if.c\
+			./ft_list_remove_one_if.c\
+
 
 MANDATORY_SRCS	=	${MANDATORY}
 

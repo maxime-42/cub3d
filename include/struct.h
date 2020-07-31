@@ -49,8 +49,8 @@ typedef struct		s_info
 	char			*sprint;
 	void			*map;
 	t_list			*begin;
-	int				color_c[3];
-	int				color_f[3];
+	int			color_ceiling;
+  int				color_floor;
 	int				fd;
 	int			size_line;  
 	char			orientation;

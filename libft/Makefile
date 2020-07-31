@@ -4,7 +4,7 @@ RM	= rm -f
 
 NAME	= libft.a
 
-MANDATORY =			./ft_memset.c\
+MANDATORY =		./ft_memset.c\
 				./ft_bzero.c\
 				./ft_memcpy.c\
 				./ft_memccpy.c\
@@ -42,8 +42,9 @@ MANDATORY =			./ft_memset.c\
 				./get_next_line_utils.c\
 				./ft_lenght_nbr.c\
 				./ft_isspace.c\
+				./ft_strcmp.c\
 
-BONUS	=		./ft_lstnew_bonus.c\
+BONUS	=	./ft_lstnew_bonus.c\
 			./ft_lstadd_front_bonus.c\
 			./ft_lstsize_bonus.c\
 			./ft_lstlast_bonus.c\
@@ -52,6 +53,7 @@ BONUS	=		./ft_lstnew_bonus.c\
 			./ft_lstclear_bonus.c\
 			./ft_lstiter_bonus.c\
 			./ft_lstmap_bonus.c\
+			./ft_list_find_bonus.c\
 
 MANDATORY_SRCS	=	${MANDATORY}
 

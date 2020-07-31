@@ -6,7 +6,7 @@
 /*   By: mkayumba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 17:03:04 by mkayumba          #+#    #+#             */
-/*   Updated: 2019/11/06 15:20:40 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/07/30 19:51:50 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,8 @@ void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 					void (*del)(void *));
+t_list				*ft_list_find(t_list *begin_list, void *data_ref, size_t n, int (*cmp)());
+
+
+int	ft_strcmp(char *s1, char *s2);
 #endif

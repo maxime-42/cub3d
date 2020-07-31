@@ -112,7 +112,7 @@ int		main(int ac, char **av)
 	}
 	if (get_file_descriptor(&info, av[1]) == ERROR)
 		return (ERROR);
-	if (parsing_map(&info) == ERROR)
+	if (parsing(&info) == ERROR)
 		return (ERROR);
 	init_global_variable();
 	init_mlx_and_window(g_mlx_ptr, g_win_mlx, filename);

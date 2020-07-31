@@ -2,7 +2,6 @@
 
 int		free_struct(t_info *info, int code_return)
 {
-	close(info->fd);
 	if (info->map)
 	{
 		free(info->map);
@@ -16,6 +15,7 @@ void		freeContentNode(void *line)
 	if ((char *)line)
 	{
 		free((char *)line);
+		/* ft_bzero(line, ft_strlen(line)); */
 		line = 0;
 	}
 }
@@ -55,7 +55,6 @@ static	void	free_texture()
 
 int		freeAll(int codeReturn)
 {
-	close(g_info->fd);
 	ft_lstclear(&g_info->begin, &freeContentNode);
 	free_struct(g_info, codeReturn);
 	if (g_win_mlx)

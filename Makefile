@@ -1,3 +1,4 @@
+
 INC=%%%%
 
 RM	= rm -f
@@ -15,7 +16,7 @@ SRC	=	./src/main.c\
 		./src/utile/event.c\
 		./src/utile/free_all.c\
 		./src/parsing/main.c\
-		./src/parsing/get_screen_size.c\
+		./src/parsing/get_window_size.c\
 		./src/parsing/checkTexture.c\
 		./src/parsing/get_sprint.c\
 		./src/parsing/get_color.c\
@@ -39,7 +40,7 @@ SRC	=	./src/main.c\
 		./src/sprite/init_sprite_utile.c\
 		./src/sprite/sprite_utile.c\
 		./src/sprite/sprite.c\
-
+		./src/utile/ft_list_remove_if.c\
 
 OBJ = $(SRC:.c=.o)
 

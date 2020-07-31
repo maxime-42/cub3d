@@ -36,15 +36,18 @@ void				free_list(void *line);
 int					free_struct(t_info *info, int code_return);
 int					put_map_in_array(t_info *info, t_list *begin);
 int				freeAll(int codeReturn);
-int				parsing_map(t_info *info);
+int				parsing(t_info *info);
 void				freeContentNode(void *line);
 /* int					free_texture(t_texture texture[NUM_TEXTURE]); */
 int				checkTexture(int fd, t_texture texture[NUM_TEXTURE]);
 void				getTexture(t_texture texture[NUM_TEXTURE]);
 
-
+int my_compare(char *s1, char *s2, size_t nbr_char);
 /* int				spritevisible(t_sprite *sprite, t_player *player, float sprite_size); */
 /* void			putsprite(t_sprite *sprite); */
-
-
+int	skip_number(char *str);
+int	skip_space(char *str);
+int			get_window_size(t_list **begine);
+void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *));
+void	print_list(t_list *tmp);
 #endif

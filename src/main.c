@@ -45,6 +45,7 @@ int	game_loop(t_info *info)
 	{
 		bmp_exporter(filename);
 		freeAll(SUCCESS);
+		return (0);
 	}
 	else
 	{

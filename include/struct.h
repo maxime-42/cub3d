@@ -58,8 +58,8 @@ typedef struct		s_info
 
 typedef struct		s_texture
 {
-	char			*path;
-	void			*texture_ptr;
+	char		*path;
+	void		*texture_ptr;
 	int			*wallTexture;
 	int			height;
 	int			width;

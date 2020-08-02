@@ -43,6 +43,8 @@ MANDATORY =		./ft_memset.c\
 				./ft_lenght_nbr.c\
 				./ft_isspace.c\
 				./ft_strcmp.c\
+				./ft_strstr.c\
+				./ft_strcpy.c\
 
 BONUS	=	./ft_lstnew_bonus.c\
 			./ft_lstadd_front_bonus.c\

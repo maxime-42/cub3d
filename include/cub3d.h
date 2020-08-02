@@ -25,10 +25,10 @@
 
 //////////////////////parsig/////////////////////////////////////////////////////////////////////////////
 
-int				get_Screen_Size(t_info *info);
-int				get_sprint(t_info *info);
+/* int				get_Screen_Size(t_info *info); */
+/* int				get_sprint(t_info *info); */
 
-int					put_map_in_list(t_list **begin, int fd);
+/* int					put_map_in_list(t_list **begin, int fd); */
 void				print_list(t_list *begin);
 int					put_map_in_tab_char(void *ptr, t_list *begin);
 int					check_character_map(t_list *begin);
@@ -39,17 +39,20 @@ int				freeAll(int codeReturn);
 int				parsing(t_info *info);
 void				freeContentNode(void *line);
 /* int					free_texture(t_texture texture[NUM_TEXTURE]); */
-int				checkTexture(int fd, t_texture texture[NUM_TEXTURE]);
-void				getTexture(t_texture texture[NUM_TEXTURE]);
+//int				checkTexture(int fd, t_texture texture[NUM_TEXTURE]);
+/* void				getTexture(t_texture texture[NUM_TEXTURE]); */
 
-int my_compare(char *s1, char *s2, size_t nbr_char);
+int		my_compare(char *s1, char *s2, size_t nbr_char);
 /* int				spritevisible(t_sprite *sprite, t_player *player, float sprite_size); */
 /* void			putsprite(t_sprite *sprite); */
-int	skip_number(char *str);
+int		skip_number(char *str);
 int	skip_space(char *str);
 int			get_window_size(t_list **begine);
 
 void	print_list(t_list *tmp);
-t_list	*get_node( t_list **begin, char *search);
-int		get_color(t_list **begin, int *color_ceiling);
+t_list	*get_node( t_list **begin, char *search, int n);
+int			get_color(t_list **begin, char *name, int *num_color);
+int			get_image_path(t_list **begin, char *name, int n, char **dest);
+int			check_header_footer(t_list **begin);
+int			put_the_same_number_of_column(t_list **begin);
 #endif

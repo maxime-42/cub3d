@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-char	*get_width(char *line)
+char	*get_width(char *line, int *screen_width)
 {
 	int	size_width;
 
@@ -9,7 +9,8 @@ char	*get_width(char *line)
 		line++;
 	if (!ft_isspace(*line))
 	{
-		ft_putstr_fd("Error\nwrong format for size window\n", STDOUT);
+		ft_putstr_fd("Error\nwindow size the", STDOUT);
+		ft_putstr_fd("first character must be spaces\n", STDOUT);
 		return (0);
 	}
 	line += skip_space(line);
@@ -20,15 +21,14 @@ char	*get_width(char *line)
 	}
 	else
 	{
-		printf("hellow");
-		ft_putstr_fd("Error\nwrong format for size window\n", STDOUT);
+		ft_putstr_fd("Error\nwindow wrong format for size window\n", STDOUT);
 		return (0);
 	}
-	g_screen_width = size_width;
+	*screen_width = size_width;
 	return (line);
 }
 
-char	*get_height(char *line)
+char	*get_height(char *line, int *screen_height)
 {
 	int	size_height;
 
@@ -49,7 +49,7 @@ char	*get_height(char *line)
 		ft_putstr_fd("Error\nwrong character for size window\n", STDOUT);
 		return (0);
 	}
-	g_screen_height = size_height;
+	*screen_height = size_height;
 	return (line);
 }
 
@@ -59,15 +59,16 @@ int	get_window_size(t_list **begin)
 	char	*line;
 	t_list	*node;
 
-	if (!(node = get_node(begin, "R")))
+	if (!(node = get_node(begin, "R ", 2)))
 	{
-		ft_putstr_fd("not find resolution\n", STDOUT);	  
+		ft_putstr_fd("Error\n", STDOUT);
+		ft_putstr_fd("not find resolution or format is wrong\n", STDOUT);
 		return (ERROR);
 	}
 	line = node->content;
-	if (!(line = get_width(line)))
+	if (!(line = get_width(line, &g_screen_width)))
 		return (ERROR);
-	if (!(line = get_height(line)))
+	if (!(line = get_height(line, &g_screen_height)))
 		return (ERROR);
 	ft_list_remove_one_if(begin, node->content, &ft_strcmp, &freeContentNode);
 	return (SUCCESS);

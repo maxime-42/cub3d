@@ -1,4 +1,4 @@
-#include "../include/cub3d.h"
+#include "cub3d.h"
 
 int		free_struct(t_info *info, int code_return)
 {
@@ -15,17 +15,19 @@ void		freeContentNode(void *line)
 	if ((char *)line)
 	{
 		free((char *)line);
-		/* ft_bzero(line, ft_strlen(line)); */
 		line = 0;
 	}
 }
 
 static	void	free_sprite()
 {
-	if (g_sprite.ptr)
+	if (g_sprite.path)
 	{
 		free(g_sprite.path);
 		g_sprite.path = 0;
+	}
+	if (g_sprite.ptr)
+	{
 		if (g_sprite.ptr)
 		{
 			mlx_destroy_image (g_mlx_ptr, g_sprite.ptr);
@@ -43,12 +45,20 @@ static	void	free_texture()
 	int	i;
 
 	i = -1;
+	if (g_texture[0].path)
+		free(g_texture[0].path);
+	if (g_texture[1].path)
+		free(g_texture[1].path);
+	if (g_texture[2].path)
+		free(g_texture[2].path);
+	if (g_texture[3].path)
+		free(g_texture[3].path);
 	if (g_texture[0].texture_ptr)
 	{
 		while (++i < NUM_TEXTURE)
 		{
-			free(g_texture[i].path);
-			mlx_destroy_image (g_mlx_ptr, g_texture[i].texture_ptr);
+			if (g_texture[i].texture_ptr)
+				mlx_destroy_image (g_mlx_ptr, g_texture[i].texture_ptr);
 		}
 	}
 }
@@ -57,14 +67,14 @@ int		freeAll(int codeReturn)
 {
 	ft_lstclear(&g_info->begin, &freeContentNode);
 	free_struct(g_info, codeReturn);
+	free_texture();
+	free_sprite();
 	if (g_win_mlx)
 	{
 		mlx_clear_window(g_mlx_ptr, g_win_mlx);
 		mlx_destroy_window(g_mlx_ptr, g_win_mlx);
 		if (g_img_ptr)
 			mlx_destroy_image (g_mlx_ptr, g_img_ptr);
-		free_texture();
-		free_sprite();
 	}
 	g_mlx_ptr = 0;
 	g_win_mlx = 0;

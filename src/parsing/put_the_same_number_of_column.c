@@ -1,60 +1,66 @@
 #include "cub3d.h"
 
-static int			get_the_largest_column(t_list *begin)
-{
-	t_list			*tmp;
-	int				largest_column;
-	int				nb_column;
 
-	largest_column = 0;
-	tmp = begin;
-	while (tmp)
+int			nb_cloumn(t_list *node)
+{
+	int		size;
+	int		new_size;
+
+	size = 0;
+	while (node)
 	{
-		nb_column = (int)ft_strlen(tmp->content);
-		if (nb_column > largest_column)
-			largest_column = nb_column;
-		tmp = tmp->next;
+		new_size = (int)ft_strlen(node->content);
+		if (new_size > size)
+			size = new_size;
+		node = node->next;
 	}
-	return (largest_column);
+	return (size);
 }
 
-static	void		fill_str(char *str, int nb_char)
+void		cpy_without_space(char *dest, char *src, int size)
 {
-	int				n;
+	int		index_dest;
+	int		r;
 
-	n = -1;
-	while (++n < nb_char)
+	index_dest = 0;
+	while (*src)
 	{
-		str[n] = '1';
+		src += skip_space(src);
+		if (*src)
+			dest[index_dest++] = *src;
+		src++;
 	}
-	str[n] = '\0';
+	r = size - index_dest;
+	/* printf("r = %d\n", r ); */
+	while (r > 0)
+	{
+		/* printf("hellow"); */
+		dest[index_dest++] = '1';
+		r--;
+	}
 }
 
-int					put_the_same_number_of_column(t_list *begin)
+int			put_the_same_number_of_column(t_list **begin)
 {
-	t_list			*tmp;
-	int				nb_char;
-	char			*str;
-	int				largest_column;
+	char	*line;
+	int		size;
+	t_list	*node;
 
-	tmp = begin;
-	largest_column = get_the_largest_column(begin);
-	while (tmp)
+	node = *begin;
+	size = nb_cloumn(node);
+	printf("size = %d\n", size);
+	while (node)
 	{
-		if (largest_column != (int)ft_strlen(tmp->content))
+		if (!(line = malloc(sizeof(char) * (size + 1))))
 		{
-			if (!(str = malloc(sizeof(char) * (largest_column + 1))))
-			{
-				ft_putstr_fd("Error\nmalloc failed\n", STDOUT);
-				return (ERROR);
-			}
-			nb_char = ft_strlen(tmp->content);
-			str = (char *)ft_memmove(str, tmp->content, (size_t)nb_char);
-			fill_str(str + nb_char, largest_column - nb_char);
-			free((char*)tmp->content);
-			tmp->content = str;
+			ft_putstr_fd("Error\nmalloc failure\n", STDOUT);
+			return (ERROR);
 		}
-		tmp = tmp->next;
+		ft_bzero(line, size + 1);
+		cpy_without_space(line, node->content, size);
+		free((char *)node->content);
+		node->content = line;
+		node = node->next;
 	}
 	return (SUCCESS);
 }

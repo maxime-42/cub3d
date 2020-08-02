@@ -12,7 +12,7 @@ void	playerMovement(t_player *player);
 void	init_player(t_player *player);;
 void	drawline(int corY, int corX, float distance, int color, float angle);
 void	drawRect(int corX, int corY, int width, int height, int color);
-int	put_the_same_number_of_column(t_list *begin);
+/* int	put_the_same_number_of_column(t_list *begin); */
 void	cast_All_Rays(t_player *player, t_ray *ray);
 void	rayHorizontal(t_ray *ray, t_player *player);
 void	rayVertical(t_ray *ray, t_player *player);

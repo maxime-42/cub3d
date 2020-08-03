@@ -63,12 +63,12 @@ static void	draw_Wall(t_ray *ray, t_wall *wall, int columnId)
 }
 
 
-void		render3d_projection(t_ray *ray, int columnId)
+void		render3d_projection(t_ray *ray, int columnId, t_sprite *sprite)
 {
 	t_wall	wall;
 
 	wall.correctWallDistance = ray->distance * cos(ray->rayAngle - g_player.rotationAngle);
-	g_sprite.buffer[columnId] = wall.correctWallDistance;//test;
+	sprite->buffer[columnId] = wall.correctWallDistance;//test;
 	wall.distanceProjectionPlane = (g_window_width / 2) / tan(g_fov_angle / 2);
 	wall.wallStripHeight = (g_tile_size / wall.correctWallDistance) * wall.distanceProjectionPlane;
 	wall.wallTop = (g_window_height / 2) - (wall.wallStripHeight / 2);

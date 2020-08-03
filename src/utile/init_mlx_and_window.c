@@ -14,10 +14,19 @@ static	void	*init_mlx(void *mlx_ptr)
 
 static	void	createWindow(void *mlx_ptr, void *win_mlx, char *filename)
 {
+  	int	width;
+	int	height;
+
+	mlx_get_screen_size(g_mlx_ptr, &width, &height);
+	if (g_screen_width > width || g_screen_height > height)
+	{
+		g_screen_height = height;
+		g_screen_width = width;
+	}
 	g_win_mlx = 0;
 	if (!filename)
 	{
-		if (!(win_mlx = mlx_new_window(mlx_ptr, g_window_width, g_window_height, "3D")))
+		if (!(win_mlx = mlx_new_window(mlx_ptr, g_screen_width, g_screen_height, "3D")))
 		{
 			ft_putstr_fd("Error\nfaile open window\n", STDOUT);
 			exit(freeAll(ERROR));

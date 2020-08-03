@@ -35,7 +35,7 @@ static void		write_header(int fd, t_bmp_file infoBmpFile)
 {
 	 int	r;  
 
-	 r = 0;
+	r = 0;
 	r = write(fd, &infoBmpFile.byteType, 2);
 	r = write(fd, &infoBmpFile.byteSize, 4);
 	r = write(fd, &infoBmpFile.byteReserved, 4);
@@ -83,6 +83,7 @@ void			bmp_exporter(char *fileName)
 	t_bmp_file	infoBmpFile;
 	int			fd;
 
+	ft_bzero(&infoBmpFile, sizeof(t_bmp_file));
 	fd = create_file(fileName);
 	create_header(&infoBmpFile);
 	write_header(fd, infoBmpFile);

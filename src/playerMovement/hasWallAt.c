@@ -25,7 +25,7 @@ int			hasWallAt(float y, float x)
 	}
 	mapGridIndexX = floor(x / g_tile_size);
 	mapGridIndexY = floor(y / g_tile_size);
-	if (ft_strchr("NSEW", g_map[mapGridIndexY][mapGridIndexX]))
-		return (0);
+	/* if (ft_strchr("NSEW", g_map[mapGridIndexY][mapGridIndexX])) */
+	/* 	return (0); */
 	return (g_map[mapGridIndexY][mapGridIndexX] == '1');
 }

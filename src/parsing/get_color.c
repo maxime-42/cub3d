@@ -70,7 +70,7 @@ int			get_color(t_list **begin, char *name, int *num_color)
 		return (ERROR);
 	*num_color = 0;
 	*num_color = (((array_color[0]) << 16) + ((array_color[1]) << 8) + (array_color[2]));
-	printf("%d | %d | %d |\n", array_color[0], array_color[1], array_color[2]);
+	/* printf("%d | %d | %d |\n", array_color[0], array_color[1], array_color[2]); */
 	ft_list_remove_one_if(begin, node->content, &ft_strcmp, &freeContentNode);
 	return (SUCCESS);
 }

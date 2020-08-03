@@ -79,9 +79,9 @@ static void		the_Smallest_Of_The_Distances(t_ray *ray, t_player *player)
 		ray->wasHitVertical = 1;
 }
 
-void			cast_All_Rays(t_player *player, t_ray *ray)
+void			cast_All_Rays(t_player *player, t_ray *ray, t_sprite *sprite)
 {
-	int			columnId;
+	int		columnId;
 
 	columnId = 0;
 	ray->rayAngle = g_player.rotationAngle - (g_fov_angle / 2);
@@ -94,7 +94,7 @@ void			cast_All_Rays(t_player *player, t_ray *ray)
 		rayVertical(ray, player);
 		the_Smallest_Of_The_Distances(ray, player);
 		/* drawline(player->y * MINIMAP_SCALE_FACTOR, player->x * MINIMAP_SCALE_FACTOR, ray->distance * MINIMAP_SCALE_FACTOR, 0xff0000, ray->rayAngle); */
-		render3d_projection(ray, columnId);
+		render3d_projection(ray, columnId, sprite);
 		ray->rayAngle += (g_fov_angle / g_num_rays);
 		columnId++;
 	}

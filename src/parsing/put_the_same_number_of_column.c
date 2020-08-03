@@ -48,7 +48,6 @@ int			put_the_same_number_of_column(t_list **begin)
 
 	node = *begin;
 	size = nb_cloumn(node);
-	printf("size = %d\n", size);
 	while (node)
 	{
 		if (!(line = malloc(sizeof(char) * (size + 1))))

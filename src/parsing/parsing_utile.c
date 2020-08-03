@@ -4,7 +4,7 @@ void	print_list(t_list *tmp)
 {
 	while (tmp)
 	{
-		printf("%s\n", (char *)tmp->content);
+		/* printf("%s\n", (char *)tmp->content); */
 		/* printf("strlen = %d\n", (int)ft_strlen((char *)tmp->content)); */
 		tmp = tmp->next;
 	}

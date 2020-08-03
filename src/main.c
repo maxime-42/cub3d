@@ -29,32 +29,23 @@ static	void	createImage(void *mlx_ptr, void *img_ptr, void *image_data)
 int	game_loop(t_info *info)
 {
 	t_ray	ray;
-	/* int	x; */
-	/* int	y; */
-	/* mlx_get_screen_size(g_mlx_ptr, &x, &y); */
-	/* printf("x = %d\n", x); */
-	/* printf("y = %d\n", y); */
+
 	createImage(g_mlx_ptr, g_img_ptr, g_image_data);
 	playerMovement(&g_player);
-
 	ft_putsprite(&g_sprite, &g_player);
-	cast_All_Rays(&g_player, &ray);
+	cast_All_Rays(&g_player, &ray, &g_sprite);
 	miniMap(&g_player, g_info->map);
 	ft_putsprite(&g_sprite, &g_player);
 	if (filename)
-	{
 		bmp_exporter(filename);
-		freeAll(SUCCESS);
-		return (0);
-	}
 	else
 	{
 		mlx_put_image_to_window(g_mlx_ptr, g_win_mlx, g_img_ptr, 0, 0);
 		mlx_destroy_image (g_mlx_ptr, g_img_ptr);
+		g_img_ptr = 0;
 	}
-	g_img_ptr = 0;
 	(void)info;
-	return (0);
+	return (SUCCESS);	
 }
 
 static void	init_global_variable()
@@ -105,24 +96,35 @@ int		main(int ac, char **av)
 	g_info = &info;
 	g_texture[0].texture_ptr = 0;
 	if (ac == 3)
-		filename = "myscreenShoot";
+	{
+		if (!ft_strcmp("--save", av[2]))
+			filename = "myscreenShoot";
+		else
+		{
+			ft_putstr_fd("Error\nwrong argument\n", STDOUT);
+			return (ERROR);
+		}
+	}
 	else if (ac != 2)
 	{
-		ft_putstr_fd("Error\nnumber argument\n", STDOUT);
+		ft_putstr_fd("Error\nwrong argument\n", STDOUT);
 		return (ERROR);
 	}
 	if (get_file_descriptor(&info, av[1]) == ERROR)
 		return (ERROR);
 	if (parsing(&info) == ERROR)
 		return (ERROR);
-	init_global_variable();
+
 	init_mlx_and_window(g_mlx_ptr, g_win_mlx, filename);
+	init_global_variable();		
 	init_player(&g_player);
 	load_ptr_textures_in_array(g_texture);
 	init_sprite(&g_sprite, g_map, g_player.position);
 	if (!filename)
 		handling_event(&info);
 	else
+	{
 		game_loop(&info);
+	}
 	return (freeAll(SUCCESS));
 }

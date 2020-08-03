@@ -1,13 +1,13 @@
-R   1000 1000
+R   100 100  
 NO		./image_texture/test.xpm
 SO ./image_texture/test1.xpm
 WE ./image_texture/test2.xpm
 EA ./image_texture/test3.xpm
 S ./image_sprite/test0.xpm
 
-F 255 , 250 ,44
+F 238 , 238 ,238
 
-C 225,30,0
+C 194, 70, 70
 
 111111111111111111111111111111111
 111111100000000111000001000000011

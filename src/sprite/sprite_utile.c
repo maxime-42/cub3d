@@ -6,10 +6,14 @@ void	ft_puttexture(t_sprite *sprite, int x, int y, float sprite_size)
 	int	distancefromtop;
 	int	textureoffsety;
 	int	color;
+	/* int	a; */
 
+	/* a = sizeof(sprite->data); */
 	textureoffsetx = (int)(256 * (x - (-sprite_size / 2 + sprite->spritescreenx)) * sprite->width / sprite_size) / 256;
 	distancefromtop = (y) * 256 - g_window_height * 128 + sprite_size * 128;
 	textureoffsety = ((distancefromtop * sprite->height) / sprite_size) / 256;
+	/* if ((textureoffsety * sprite->width) + textureoffsetx) < a) */
+	/* 	return ; */
 	color = sprite->data[(textureoffsety * sprite->width) + textureoffsetx];
 	if (color != 0x000000)
 	  	g_image_data[y * g_window_width + x] = color;

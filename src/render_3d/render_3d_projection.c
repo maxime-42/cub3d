@@ -17,11 +17,13 @@ static int	choice_of_texture(t_ray *ray)
 static void	draw_Ceiling(t_wall *wall, int columnId)
 {
 	int	top;
+	int	color;
 
 	top = 0;
+	color = g_info->color_ceiling;	
 	while (top < wall->wallTop)
 	{
-		g_image_data[top * g_window_width + columnId] = 0xC3BDBD;
+		g_image_data[top * g_window_width + columnId] = color;
 		top++;
 	}
 }
@@ -30,11 +32,13 @@ static void	draw_Ceiling(t_wall *wall, int columnId)
 static void	draw_Floor(t_wall *wall, int columnId)
 {
 	int	bottom;
+	int	color;
 
+	color = g_info->color_floor;
 	bottom = (int)wall->wallBottom;
 	while (bottom < g_window_height)
 	{
-		g_image_data[(bottom * g_window_width) + columnId] = 0xFEFEFE;
+	  g_image_data[(bottom * g_window_width) + columnId] = color;
 		bottom++;
 	}
 }

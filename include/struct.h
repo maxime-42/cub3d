@@ -17,12 +17,12 @@ typedef struct		s_ray
 	float			horzWallHitY;
 	float			horzWallHitX;
 	float			rayAngle;
-	int			foundVertWallHit;
-	int			foundHorzWallHit;
-	int			isRayFacingDown;
-	int			isRayFacingUp;
-	int			isRayFacingRight;
-	int			isRayFacingLeft;
+	int				foundVertWallHit;
+	int				foundHorzWallHit;
+	int				isRayFacingDown;
+	int				isRayFacingUp;
+	int				isRayFacingRight;
+	int				isRayFacingLeft;
 	float			distance;
 }					t_ray;
 
@@ -49,30 +49,31 @@ typedef struct		s_info
 	char			*sprint;
 	void			*map;
 	t_list			*begin;
-	int			color_ceiling;
-  int				color_floor;
+	int				color_ceiling;
+	int				color_floor;
 	int				fd;
-	int			size_line;  
+	unsigned int	screenshoot : 1;
+	int				size_line;
 	char			orientation;
 }					t_info;
 
 typedef struct		s_texture
 {
-	char		*path;
-	void		*texture_ptr;
-	int			*wallTexture;
-	int			height;
-	int			width;
+	char			*path;
+	void			*texture_ptr;
+	int				*wallTexture;
+	int				height;
+	int				width;
 }					t_texture;
 
 
 typedef struct s_wall
 {
-	float	correctWallDistance;
-	float	distanceProjectionPlane;
-	int		wallStripHeight;
-	int		wallTop;
-	int		wallBottom;
+	float			correctWallDistance;
+	float			distanceProjectionPlane;
+	int				wallStripHeight;
+	int				wallTop;
+	int				wallBottom;
 }				t_wall;
 
 typedef struct		s_bmp_file
@@ -97,29 +98,29 @@ typedef struct		s_bmp_file
 
  typedef struct		s_sprite
 {
-	float		diry;
-	float		dirx;
-	float		plany;
-	float		planx;
-  	int		*data;
-	void		*ptr;
-	int		size_l;
-	float		*distance;
-	float		angle;
-	int		width;
-	int		bpp;
-	int		endian;
-	int		height;
-	float		*x;
-	float		*y;
-	char		*path;
-	int		nb_sprite;
-	float		*buffer;
-	int		spritescreenx;
-	int		drawstarty;
-	int		drawendy;
-	int		drawstartx;
-	int		drawendx;
-}			t_sprite;
+	float			diry;
+	float			dirx;
+	float			plany;
+	float			planx;
+  	int				*data;
+	void			*ptr;
+	int				size_l;
+	float			*distance;
+	float			angle;
+	int				width;
+	int				bpp;
+	int				endian;
+	int				height;
+	float			*x;
+	float			*y;
+	char			*path;
+	int				nb_sprite;
+	float			*buffer;
+	int				spritescreenx;
+	int				drawstarty;
+	int				drawendy;
+	int				drawstartx;
+	int				drawendx;
+}					t_sprite;
 
 #endif

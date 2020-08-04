@@ -68,8 +68,15 @@ int	get_window_size(t_list **begin)
 	line = node->content;
 	if (!(line = get_width(line, &g_screen_width)))
 		return (ERROR);
+
 	if (!(line = get_height(line, &g_screen_height)))
 		return (ERROR);
+	if (g_screen_width < 100 || g_screen_height < 100)
+	{
+		ft_putstr_fd("Error\n", STDOUT);
+		ft_putstr_fd("window size not correct\n", STDOUT);
+		return (ERROR);
+	}
 	ft_list_remove_one_if(begin, node->content, &ft_strcmp, &freeContentNode);
 	return (SUCCESS);
 }

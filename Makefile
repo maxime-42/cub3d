@@ -20,11 +20,9 @@ SRC	=	./src/main.c\
 		./src/parsing/get_window_size.c\
 		./src/parsing/get_image_path.c\
 		./src/parsing/get_color.c\
-		./src/parsing/put_map_in_list.c\
 		./src/parsing/check_character_map.c\
 		./src/parsing/get_fd.c\
 		./src/parsing/check_header_footer_map.c\
-		./src/parsing/put_map_in_array.c\
 		./src/miniMap/miniMap.c\
 		./src/playerMovement/playerMovement.c\
 		./src/playerMovement/hasWallAt.c\

@@ -1,16 +1,18 @@
 #include "cub3d.h"
 
-static int	check_xpm_extension(char *line)
+int	check_file_extension(char *line, char *extension_name)
 {
 	int		end;
 
-	end = ft_strlen(line) - 1;
+	end = (int)ft_strlen(line) - 1;
 	while (end && ft_isspace(line[end]))
 			line[end--] = '\0';
+	/* printf("end == %d | %c\n", end, extension_name[end]); */
 	end -= 3;
-	if (end > 4)
+	/* printf("end == %d | %c\n", end, extension_name[end]); */
+	if (end >= 4)//avant c'etait 4
 	{
-		if (ft_strcmp(line + end, ".xpm"))
+		if (ft_strcmp(line + end, extension_name))
 		{
 			ft_putstr_fd("Error\nit is not xpm extension\n", STDOUT);
 			return (ERROR);
@@ -18,6 +20,7 @@ static int	check_xpm_extension(char *line)
 	}
 	else
 	{
+		printf("extension_name = %s\n", extension_name );
 		ft_putstr_fd("Error\nthe are trouble with name file\n", STDOUT);
 		return (ERROR);
 	}
@@ -37,7 +40,7 @@ int			get_image_path(t_list **begin, char *name, int n, char **dest)
 	line = (char *)node->content;
 	line += 2;
 	line += skip_space(line);
-	if (check_xpm_extension(line) == ERROR)
+	if (check_file_extension(line, ".xpm") == ERROR)
 		return (ERROR);
 	dest[0] = ft_strdup(line);
 	ft_list_remove_one_if(begin, node->content, &ft_strcmp, &freeContentNode);

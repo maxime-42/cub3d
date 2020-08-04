@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int	count_sprite(char **map)
+int		count_sprite(char **map)
 {
 	int	i;
 	int	j;
@@ -39,12 +39,12 @@ void	ft_mallocsprite(t_sprite *sprite)
 	if (!(sprite->distance = (float *)malloc(sizeof(float) * sprite->nb_sprite)))
 	{
 		ft_putstr_fd("Error\nFailer malloc\n", STDOUT);
-		freeAll(ERROR);	  
+		freeAll(ERROR);
 	}
 	if (!(sprite->buffer = malloc(sizeof(float) * g_window_width)))
 	{
 		ft_putstr_fd("Error\nFailer malloc\n", STDOUT);
-		freeAll(ERROR);	  
+		freeAll(ERROR);
 	}
 	ft_bzero(sprite->buffer, sizeof(float) * g_window_width);
 }

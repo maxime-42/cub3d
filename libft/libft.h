@@ -6,7 +6,7 @@
 /*   By: mkayumba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 17:03:04 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/08/01 15:28:19 by lenox            ###   ########.fr       */
+/*   Updated: 2020/08/04 17:05:41 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int				ft_isspace (int c);
 int				ft_strcmp(char *s1, char *s2);
 char			*ft_strstr(char *str, char *to_find);
 char			*ft_strcpy(char *dest, char *src);
-
+char			**array_char(int line, int column);
 typedef struct		s_list
 {
 	void		*content;

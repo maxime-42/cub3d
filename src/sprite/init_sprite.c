@@ -87,7 +87,6 @@ static void	init_vecteur(t_sprite *sprite, char player_position)
 		sprite->planx = -0.6;
 		sprite->plany = 0;
 	}
-
 }
 
  void		init_sprite(t_sprite *sprite, char **map, char player_position)

@@ -1,6 +1,9 @@
 #include "cub3d.h"
 
-char	*filename = 0;
+/* char	*filename = 0; */
+//unsigned g_screenshoot = 0;
+
+
 
 static	void	createImage(void *mlx_ptr, void *img_ptr, void *image_data)
 {
@@ -36,8 +39,8 @@ int	game_loop(t_info *info)
 	cast_All_Rays(&g_player, &ray, &g_sprite);
 	miniMap(&g_player, g_info->map);
 	ft_putsprite(&g_sprite, &g_player);
-	if (filename)
-		bmp_exporter(filename);
+	if (g_info->screenshoot)
+		bmp_exporter("my_screenshoot");
 	else
 	{
 		mlx_put_image_to_window(g_mlx_ptr, g_win_mlx, g_img_ptr, 0, 0);
@@ -45,15 +48,16 @@ int	game_loop(t_info *info)
 		g_img_ptr = 0;
 	}
 	(void)info;
-	return (SUCCESS);	
+	return (SUCCESS);
 }
 
 static void	init_global_variable()
 {
-  
-  	g_map = (char **)g_info->map;  
-	g_map_num_rows = g_info->height;
-	g_map_num_cols =  (int)ft_strlen(g_info->begin->content);
+  	g_map = (char **)g_info->map;
+	/* g_map_num_rows = g_info->height; */
+	/* g_map_num_cols =  (int)ft_strlen(g_info->begin->content); */
+	/* g_map_num_cols =  (int)ft_strlen(g_info->begin->content); */
+	g_map_num_cols =  g_info->column;
 	g_texture[0].texture_ptr = 0;
 	g_wall_strip_width = 1;
 	g_window_width = g_screen_width;
@@ -86,7 +90,73 @@ static void	load_ptr_textures_in_array(t_texture texture[NUM_TEXTURE])
 		{
 			ft_putstr_fd("Error\nFailer texture ptr\n", STDOUT);
 			exit (freeAll(ERROR));
-		}		  
+		}
+	}
+}
+
+void			*init_mlx(void)
+{
+	void		*mlx_ptr;
+
+	g_mlx_ptr = 0;
+	if (!(mlx_ptr = mlx_init()))
+	{
+		ft_putstr_fd("Error\nfaile init mlx\n", STDOUT);
+		exit(freeAll(ERROR));
+	}
+	return (mlx_ptr);
+}
+
+void	*createWindow(void *mlx_ptr)
+{
+  	int			width;
+	int			height;
+	void		*win_mlx;
+
+	mlx_get_screen_size(mlx_ptr, &width, &height);
+	if (g_screen_width > width)
+		g_screen_width = width;
+	if (g_screen_height > height)
+		g_screen_height = height;
+	win_mlx = 0;
+	if (!g_info->screenshoot)
+	{
+		if (!(win_mlx = mlx_new_window(mlx_ptr, g_screen_width, g_screen_height, "3D")))
+		{
+			ft_putstr_fd("Error\nfaile open window\n", STDOUT);
+			exit(freeAll(ERROR));
+		}
+	}
+	return (win_mlx);
+}
+
+void	check_argument(t_info *info, int nb_arg, char **arg_array)
+{
+	info->screenshoot = 0;
+	if (nb_arg == 3)
+	{
+		if (!ft_strcmp("--save", arg_array[2]))
+		{
+			info->screenshoot = 1;
+			if (check_file_extension(arg_array[1], ".cub") == ERROR)
+				exit(ERROR);
+		}
+		else
+		{
+			ft_putstr_fd("Error\nwrong argument\n", STDOUT);
+			exit(ERROR);
+		}
+	}
+	else if (nb_arg != 2)
+	{
+		ft_putstr_fd("Error\nwrong argument\n", STDOUT);
+		exit(ERROR);
+	}
+	if (nb_arg == 2)
+	{
+					/* printf("arg_array[1] %s\n", arg_array[1]); */
+		if (check_file_extension(arg_array[1], ".cub") == ERROR)
+			exit(ERROR);
 	}
 }
 
@@ -98,36 +168,44 @@ int		main(int ac, char **av)
 	g_sprite.ptr = 0;
 	g_info = &info;
 	g_texture[0].texture_ptr = 0;
-	if (ac == 3)
-	{
-		if (!ft_strcmp("--save", av[2]))
-			filename = "myscreenShoot";
-		else
-		{
-			ft_putstr_fd("Error\nwrong argument\n", STDOUT);
-			return (ERROR);
-		}
-	}
-	else if (ac != 2)
-	{
-		ft_putstr_fd("Error\nwrong argument\n", STDOUT);
-		return (ERROR);
-	}
+	/* if (ac == 3) */
+	/* { */
+	/* 	if (!ft_strcmp("--save", av[2])) */
+	/* 		filename = "myscreenShoot"; */
+	/* 	else */
+	/* 	{ */
+	/* 		ft_putstr_fd("Error\nwrong argument\n", STDOUT); */
+	/* 		return (ERROR); */
+	/* 	} */
+	/* } */
+	/* else if (ac != 2) */
+	/* { */
+	/* 	ft_putstr_fd("Error\nwrong argument\n", STDOUT); */
+	/* 	return (ERROR); */
+	/* } */
+	/* g_info->screenshoot = 0; */
+	check_argument(&info, ac, av);
 	if (get_file_descriptor(&info, av[1]) == ERROR)
 		return (ERROR);
 	if (parsing(&info) == ERROR)
 		return (ERROR);
-
-	init_mlx_and_window(g_mlx_ptr, g_win_mlx, filename);
-	init_global_variable();		
-	init_player(&g_player);
+	g_mlx_ptr = init_mlx();
 	load_ptr_textures_in_array(g_texture);
+	init_global_variable();
+	init_player(&g_player);
 	init_sprite(&g_sprite, g_map, g_player.position);
-	if (!filename)
+	g_win_mlx = createWindow(g_mlx_ptr);
+	if (!info.screenshoot)
 		handling_event(&info);
 	else
 	{
 		game_loop(&info);
 	}
+	/* if (!filename) */
+	/* 	handling_event(&info); */
+	/* else */
+	/* { */
+	/* 	game_loop(&info); */
+	/* } */
 	return (freeAll(SUCCESS));
 }

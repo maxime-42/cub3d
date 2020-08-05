@@ -61,5 +61,7 @@ int	isvalideCharacter(char *orientation, char character);
 int	check_around_character(char **map, int y, int j);
 /* int					check_character_map(t_list *begin); */
 int					check_character_map(int nb_line, char *orientation);
-int	isValideCharacter(char *orientation, char character);
+void	print_tab();
+void	delete_space_in_map(int column);
+int		is_wall(char *line);
 #endif

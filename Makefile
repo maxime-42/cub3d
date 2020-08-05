@@ -9,17 +9,18 @@ CC = gcc -g -Wall -Wextra -Werror -I./include/
 
 CFLAGS= -I$(INC) -O3 -I../minilibx-linux
 
-NAME= cub3d
+NAME= cub3D
 
 SRC	=	./src/main.c\
 		./src/utile/init_mlx_and_window.c\
 		./src/utile/event.c\
 		./src/utile/free_all.c\
-		./src/parsing/main.c\
-		./src/parsing/parsing_utile.c\
+		./src/parsing/parsing.c\
+		./src/parsing/utile.c\
 		./src/parsing/get_window_size.c\
 		./src/parsing/get_image_path.c\
 		./src/parsing/get_color.c\
+		./src/parsing/check_character_map_utile.c\
 		./src/parsing/check_character_map.c\
 		./src/parsing/get_fd.c\
 		./src/parsing/check_header_footer_map.c\
@@ -31,7 +32,6 @@ SRC	=	./src/main.c\
 		./src/cast_All_Rays/draw_Ray.c\
 		./src/cast_All_Rays/rayHorizontal.c\
 		./src/cast_All_Rays/distanceBetweenPoints.c\
-		./src/parsing/put_the_same_number_of_column.c\
 		./src/cast_All_Rays/rayVertical.c\
 		./src/render_3d/render_3d_projection.c\
 		./src/screenshot/bmp_exporter.c\

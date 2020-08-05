@@ -1,16 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_image_path.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <mkayumba@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/05 17:12:43 by user42            #+#    #+#             */
+/*   Updated: 2020/08/05 17:13:22 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-int	check_file_extension(char *line, char *extension_name)
+int			check_file_extension(char *line, char *extension_name)
 {
 	int		end;
 
 	end = (int)ft_strlen(line) - 1;
 	while (end && ft_isspace(line[end]))
-			line[end--] = '\0';
-	/* printf("end == %d | %c\n", end, extension_name[end]); */
+		line[end--] = '\0';
 	end -= 3;
-	/* printf("end == %d | %c\n", end, extension_name[end]); */
-	if (end >= 4)//avant c'etait 4
+	if (end >= 4)
 	{
 		if (ft_strcmp(line + end, extension_name))
 		{
@@ -20,7 +30,6 @@ int	check_file_extension(char *line, char *extension_name)
 	}
 	else
 	{
-		printf("extension_name = %s\n", extension_name );
 		ft_putstr_fd("Error\nthe are trouble with name file\n", STDOUT);
 		return (ERROR);
 	}
@@ -34,8 +43,8 @@ int			get_image_path(t_list **begin, char *name, int n, char **dest)
 
 	if (!(node = get_node(begin, name, n)))
 	{
-			ft_putstr_fd("Error\nit is not possible to load image\n", STDOUT);
-			return (ERROR);
+		ft_putstr_fd("Error\nit is not possible to load image\n", STDOUT);
+		return (ERROR);
 	}
 	line = (char *)node->content;
 	line += 2;

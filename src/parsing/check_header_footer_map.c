@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_header_footer_map.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <mkayumba@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/05 17:17:47 by user42            #+#    #+#             */
+/*   Updated: 2020/08/05 17:21:15 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 static int	check_header_map(t_list **begin, t_list *node)
@@ -6,13 +18,14 @@ static int	check_header_map(t_list **begin, t_list *node)
 	t_list	*next;
 
 	if (!node)
-		return(ERROR);
+		return (ERROR);
 	line = node->content;
 	line += skip_space(line);
 	if (!*line)
 	{
 		next = node->next;
-		ft_list_remove_one_if(begin, node->content, &ft_strcmp, &freeContentNode);
+		ft_list_remove_one_if(begin, node->content,
+		&ft_strcmp, &freeContentNode);
 		return (check_header_map(begin, next));
 	}
 	else if (*line != '1')
@@ -43,12 +56,14 @@ int			check_header_footer(t_list **begin)
 {
 	if ((check_header_map(begin, *begin)) == ERROR)
 	{
-		ft_putstr_fd("Error\nthere is a problem with the format of the map\n", STDOUT);
+		ft_putstr_fd("Error\nthere is a problem with ", STDOUT);
+		ft_putstr_fd("Error\nthe format of the map\n", STDOUT);
 		return (ERROR);
 	}
 	if (check_footer_map(begin) == ERROR)
 	{
-		ft_putstr_fd("Error\nthere is a problem with the format of the map\n", STDOUT);
+		ft_putstr_fd("Error\nthere is a problem with ", STDOUT);
+		ft_putstr_fd("Error\nthe format of the map\n", STDOUT);
 		return (ERROR);
 	}
 	(void)begin;

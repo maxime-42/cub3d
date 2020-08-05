@@ -1,10 +1,5 @@
 #include "cub3d.h"
 
-/* char	*filename = 0; */
-//unsigned g_screenshoot = 0;
-
-
-
 static	void	createImage(void *mlx_ptr, void *img_ptr, void *image_data)
 {
 	int	bpp;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_window_size.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: user42 <mkayumba@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/05 17:14:55 by user42            #+#    #+#             */
+/*   Updated: 2020/08/05 17:17:24 by user42           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 char	*get_width(char *line, int *screen_width)
@@ -53,8 +65,7 @@ char	*get_height(char *line, int *screen_height)
 	return (line);
 }
 
-
-int	get_window_size(t_list **begin)
+int		get_window_size(t_list **begin)
 {
 	char	*line;
 	t_list	*node;
@@ -68,7 +79,6 @@ int	get_window_size(t_list **begin)
 	line = node->content;
 	if (!(line = get_width(line, &g_screen_width)))
 		return (ERROR);
-
 	if (!(line = get_height(line, &g_screen_height)))
 		return (ERROR);
 	if (g_screen_width < 100 || g_screen_height < 100)

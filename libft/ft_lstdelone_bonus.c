@@ -6,14 +6,14 @@
 /*   By: mkayumba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 18:49:57 by mkayumba          #+#    #+#             */
-/*   Updated: 2020/07/30 18:58:04 by lenox            ###   ########.fr       */
+/*   Updated: 2020/08/06 19:19:54 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdlib.h>
 
-void	ft_lstdelone(t_list *lst,  void (*del)(void *))
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
 	if (lst)
 	{
@@ -22,4 +22,3 @@ void	ft_lstdelone(t_list *lst,  void (*del)(void *))
 		lst = 0;
 	}
 }
-

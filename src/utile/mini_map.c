@@ -6,7 +6,7 @@
 /*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:52:42 by lenox             #+#    #+#             */
-/*   Updated: 2020/08/06 16:05:15 by lenox            ###   ########.fr       */
+/*   Updated: 2020/08/06 18:03:26 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,5 @@ void			mini_map(t_player *player, char **map)
 	MINIMAP_SCALE_FACTOR, player->radius, player->radius);
 	orientation_line(player->y * MINIMAP_SCALE_FACTOR,
 	player->x * MINIMAP_SCALE_FACTOR,
-	10, player->rotationAngle);
+	10, player->rotation_angle);
 }

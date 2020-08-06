@@ -6,7 +6,7 @@
 /*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:34:50 by lenox             #+#    #+#             */
-/*   Updated: 2020/08/06 15:37:30 by lenox            ###   ########.fr       */
+/*   Updated: 2020/08/06 18:05:49 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ float	ft_calculangle(t_player *player, float x, float y)
 	vectx = x - player->x;
 	vecty = y - player->y;
 	playertospriteangle = atan2(vecty, vectx);
-	playerangle = normalize_angle(player->rotationAngle);
+	playerangle = normalize_angle(player->rotation_angle);
 	spriteangle = playerangle - playertospriteangle;
 	if (spriteangle < -3.14159)
 		spriteangle += 2.0 * 3.14159;

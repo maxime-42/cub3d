@@ -6,7 +6,7 @@
 /*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:07:47 by lenox             #+#    #+#             */
-/*   Updated: 2020/08/06 16:56:07 by lenox            ###   ########.fr       */
+/*   Updated: 2020/08/06 19:32:15 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int				game_loop(t_info *info)
 	mini_map(&g_player, g_info->map);
 	ft_putsprite(&g_sprite, &g_player);
 	if (g_info->screenshoot)
-		bmp_exporter("my_screenshoot");
+		bmp_exporter("my_screenshoot.bmp");
 	else
 	{
 		mlx_put_image_to_window(g_mlx_ptr, g_win_mlx, g_img_ptr, 0, 0);

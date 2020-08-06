@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_list_remove_if.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/06 19:06:52 by lenox             #+#    #+#             */
+/*   Updated: 2020/08/06 19:25:52 by lenox            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "libft.h"
 #include <stdlib.h>
 
@@ -13,7 +25,8 @@ void	remove_front(t_list **begin_list, void (*free_fct)(void *))
 	prev = 0;
 }
 
-void	ft_list_remove_if(t_list **begin_list, void *data_ref, int (*cmp)(), void (*free_fct)(void *))
+void	ft_list_remove_if(t_list **begin_list, void *data_ref,
+		int (*cmp)(), void (*free_fct)(void *))
 {
 	t_list	*prev;
 	t_list	*next;

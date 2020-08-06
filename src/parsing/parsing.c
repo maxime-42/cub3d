@@ -6,7 +6,7 @@
 /*   By: user42 <mkayumba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 16:52:27 by user42            #+#    #+#             */
-/*   Updated: 2020/08/06 13:06:43 by lenox            ###   ########.fr       */
+/*   Updated: 2020/08/06 19:34:39 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,17 +87,17 @@ static int	check_map(t_info *info)
 {
 	if ((check_header_footer(&info->begin) == ERROR))
 		return (free_all(ERROR));
-	if ((g_map_num_rows = ft_lstsize(info->begin)) < 3)
+	if ((info->height = ft_lstsize(info->begin)) < 3)
 	{
 		ft_putstr_fd("Error\nthere are not enought number line\n", STDOUT);
 		return (free_all(ERROR));
 	}
 	info->column = nb_cloumn(info->begin);
-	if ((put_map_in_array(info->begin, g_map_num_rows, info->column)) == ERROR)
+	if ((put_map_in_array(info->begin, info->height, info->column)) == ERROR)
 		return (free_all(ERROR));
 	if (g_info->begin)
 		ft_lstclear(&g_info->begin, &free_content_node);
-	if (check_character_map(g_map_num_rows, &info->orientation) == ERROR)
+	if (check_character_map(info->height, &info->orientation) == ERROR)
 		return (free_all(ERROR));
 	if (!info->orientation)
 	{

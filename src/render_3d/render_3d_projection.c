@@ -6,7 +6,7 @@
 /*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 14:58:05 by lenox             #+#    #+#             */
-/*   Updated: 2020/08/06 17:21:01 by lenox            ###   ########.fr       */
+/*   Updated: 2020/08/06 19:00:04 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static int	choice_of_texture(t_ray *ray)
 {
-	if (ray->isRayFacingUp && !ray->wasHitVertical)
+	if (ray->is_ray_facing_up && !ray->was_hit_vertical)
 		return (0);
-	if (ray->isRayFacingDown && !ray->wasHitVertical)
+	if (ray->is_ray_facing_down && !ray->was_hit_vertical)
 		return (1);
-	if (ray->isRayFacingLeft && ray->wasHitVertical)
+	if (ray->is_ray_facing_left && ray->was_hit_vertical)
 		return (2);
-	if (ray->isRayFacingRight && ray->wasHitVertical)
+	if (ray->is_ray_facing_right && ray->was_hit_vertical)
 		return (3);
 	(void)ray;
 	return (0);
@@ -33,7 +33,7 @@ static void	draw_ceiling(t_wall *wall, int column_id)
 
 	top = 0;
 	color = g_info->color_ceiling;
-	while (top < wall->wallTop)
+	while (top < wall->wall_top)
 	{
 		g_image_data[top * g_window_width + column_id] = color;
 		top++;
@@ -46,7 +46,7 @@ static void	draw_floor(t_wall *wall, int column_id)
 	int	color;
 
 	color = g_info->color_floor;
-	bottom = (int)wall->wallBottom;
+	bottom = (int)wall->wall_bottom;
 	while (bottom < g_window_height)
 	{
 		g_image_data[(bottom * g_window_width) + column_id] = color;
@@ -63,23 +63,23 @@ static void	draw_wall(t_ray *ray, t_wall *wall, int column_id)
 	int	index;
 
 	index = choice_of_texture(ray);
-	if (ray->wasHitVertical == 1)
+	if (ray->was_hit_vertical == 1)
 		texture_offset_x = (int)(ray->wall_hit_y * g_texture[index].width /
 		g_tile_size) % g_texture[index].width;
 	else
 		texture_offset_x = (int)(ray->wall_hit_x * g_texture[index].width /
 		g_tile_size) % g_texture[index].width;
-	while (wall->wallTop < wall->wallBottom)
+	while (wall->wall_top < wall->wall_bottom)
 	{
-		distance_from_top = wall->wallTop + (wall->wallStripHeight / 2) -
+		distance_from_top = wall->wall_top + (wall->wall_strip_height / 2) -
 		(g_window_height / 2);
 		texture_offset_y = distance_from_top * ((float)g_texture[index].height /
-		wall->wallStripHeight);
-		texture_color = g_texture[index].wallTexture[(g_texture[index].width *
+		wall->wall_strip_height);
+		texture_color = g_texture[index].wall_texture[(g_texture[index].width *
 		texture_offset_y) + texture_offset_x];
-		g_image_data[(wall->wallTop * g_window_width) +
+		g_image_data[(wall->wall_top * g_window_width) +
 		column_id] = texture_color;
-		wall->wallTop++;
+		wall->wall_top++;
 	}
 }
 
@@ -87,18 +87,19 @@ void		render3d_projection(t_ray *ray, int column_id, t_sprite *sprite)
 {
 	t_wall	wall;
 
-	wall.correctWallDistance = ray->distance * cos(ray->rayAngle -
-	g_player.rotationAngle);
-	sprite->buffer[column_id] = wall.correctWallDistance;
-	wall.distanceProjectionPlane = (g_window_width / 2) / tan(g_fov_angle / 2);
-	wall.wallStripHeight = (g_tile_size / wall.correctWallDistance) *
-	wall.distanceProjectionPlane;
-	wall.wallTop = (g_window_height / 2) - (wall.wallStripHeight / 2);
-	if (wall.wallTop < 0)
-		wall.wallTop = 0;
-	wall.wallBottom = (g_window_height / 2) + (wall.wallStripHeight / 2);
-	if (wall.wallBottom > g_window_height)
-		wall.wallBottom = g_window_height;
+	wall.correct_wall_distance = ray->distance * cos(ray->ray_angle -
+	g_player.rotation_angle);
+	sprite->buffer[column_id] = wall.correct_wall_distance;
+	wall.distance_projection_plane = (g_window_width / 2) /
+	tan(g_fov_angle / 2);
+	wall.wall_strip_height = (g_tile_size / wall.correct_wall_distance) *
+	wall.distance_projection_plane;
+	wall.wall_top = (g_window_height / 2) - (wall.wall_strip_height / 2);
+	if (wall.wall_top < 0)
+		wall.wall_top = 0;
+	wall.wall_bottom = (g_window_height / 2) + (wall.wall_strip_height / 2);
+	if (wall.wall_bottom > g_window_height)
+		wall.wall_bottom = g_window_height;
 	draw_ceiling(&wall, column_id);
 	draw_wall(ray, &wall, column_id);
 	draw_floor(&wall, column_id);

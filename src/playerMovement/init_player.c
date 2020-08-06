@@ -6,7 +6,7 @@
 /*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 10:51:48 by lenox             #+#    #+#             */
-/*   Updated: 2020/08/06 10:52:36 by lenox            ###   ########.fr       */
+/*   Updated: 2020/08/06 18:57:54 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,21 +38,21 @@ static void		player_position(t_player *player)
 {
 	coordinate_player(player);
 	if (player->position == 'N')
-		player->rotationAngle = ANGLE_UP;
+		player->rotation_angle = 1.5 * M_PI;
 	else if (player->position == 'W')
-		player->rotationAngle = ANGLE_WEST;
+		player->rotation_angle = M_PI;
 	else if (player->position == 'E')
-		player->rotationAngle = ANGLE_EAST;
+		player->rotation_angle = 0;
 	else if (player->position == 'S')
-		player->rotationAngle = ANGLE_DOWN;
+		player->rotation_angle = 0.5 * M_PI;
 }
 
 void			init_player(t_player *player)
 {
 	player->radius = 5;
-	player->turnDirection = 0;
-	player->walkDirection = 0;
+	player->turn_direction = 0;
+	player->walk_direction = 0;
 	player_position(player);
-	player->moveSpeed = 1;
-	player->rotationSpeed = 3 * (M_PI / 180);
+	player->move_speed = 1;
+	player->rotation_speed = 3 * (M_PI / 180);
 }

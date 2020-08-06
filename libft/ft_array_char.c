@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_array_char.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/06 19:08:55 by lenox             #+#    #+#             */
+/*   Updated: 2020/08/06 19:09:04 by lenox            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 
-char	**array_char(int line, int column)
+char		**array_char(int line, int column)
 {
 	char	**array;
 	int		i;
@@ -19,7 +31,6 @@ char	**array_char(int line, int column)
 			}
 			return (0);
 		}
-		/* ft_bzero(array[i], column); */
 		array[i][column] = '\0';
 	}
 	array[line] = 0;

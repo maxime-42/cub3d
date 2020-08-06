@@ -6,7 +6,7 @@
 /*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 12:06:33 by lenox             #+#    #+#             */
-/*   Updated: 2020/08/06 13:08:38 by lenox            ###   ########.fr       */
+/*   Updated: 2020/08/06 18:01:36 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,24 @@
 int		key_pressed(int key_code)
 {
 	if (key_code == UP_ARROW)
-		g_player.walkDirection = +1;
+		g_player.walk_direction = +1;
 	else if (key_code == DOWN_ARROW)
-		g_player.walkDirection = -1;
+		g_player.walk_direction = -1;
 	else if (key_code == RIGHT_ARROW)
-		g_player.turnDirection = +1;
+		g_player.turn_direction = +1;
 	else if (key_code == LEFT_ARROW)
-		g_player.turnDirection = -1;
+		g_player.turn_direction = -1;
 	else if (key_code == QUIT)
 		exit(free_all(SUCCESS));
 	else if (key_code == TRANSLATION_RIGHT)
 	{
 		g_player.translation = 1;
-		g_player.walkDirection = +1;
+		g_player.walk_direction = +1;
 	}
 	else if (key_code == TRANSLATION_LEFT)
 	{
 		g_player.translation = -1;
-		g_player.walkDirection = -1;
+		g_player.walk_direction = -1;
 	}
 	return (0);
 }
@@ -40,17 +40,17 @@ int		key_pressed(int key_code)
 int		key_release(int key_code)
 {
 	if (key_code == UP_ARROW)
-		g_player.walkDirection = 0;
+		g_player.walk_direction = 0;
 	else if (key_code == DOWN_ARROW)
-		g_player.walkDirection = 0;
+		g_player.walk_direction = 0;
 	else if (key_code == RIGHT_ARROW)
-		g_player.turnDirection = 0;
+		g_player.turn_direction = 0;
 	else if (key_code == LEFT_ARROW)
-		g_player.turnDirection = 0;
+		g_player.turn_direction = 0;
 	else if (key_code == TRANSLATION_RIGHT || key_code == TRANSLATION_LEFT)
 	{
 		g_player.translation = 0;
-		g_player.walkDirection = 0;
+		g_player.walk_direction = 0;
 	}
 	return (0);
 }

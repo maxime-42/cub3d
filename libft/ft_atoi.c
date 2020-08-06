@@ -6,13 +6,13 @@
 /*   By: mkayumba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 16:34:39 by mkayumba          #+#    #+#             */
-/*   Updated: 2019/11/06 14:51:20 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/08/06 19:26:19 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int			ft_atoi(const char *nptr)
 {
-	long		n;
+	long	n;
 	int		s;
 	int		ovf;
 

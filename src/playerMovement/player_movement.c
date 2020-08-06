@@ -6,7 +6,7 @@
 /*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 10:53:26 by lenox             #+#    #+#             */
-/*   Updated: 2020/08/06 14:26:31 by lenox            ###   ########.fr       */
+/*   Updated: 2020/08/06 18:09:33 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static void		update_position(t_player *player, float y,
 
 	olddirx = sprite->dirx;
 	oldplanx = sprite->planx;
-	vectangle = player->turnDirection * player->rotationSpeed;
+	vectangle = player->turn_direction * player->rotation_speed;
 	sprite->dirx = sprite->dirx * cos(vectangle) - sprite->diry *
 	sin(vectangle);
 	sprite->diry = olddirx * sin(vectangle) + sprite->diry * cos(vectangle);
@@ -52,14 +52,14 @@ void			player_movement(t_player *player)
 	float		new_player_y;
 	int			player_orientation;
 
-	player_orientation = player_orientation_angle(player->rotationAngle);
-	player->rotationAngle += player->turnDirection * player->rotationSpeed;
-	move_step = player->walkDirection * player->moveSpeed;
-	new_player_x = player->x + cos(player->rotationAngle) * move_step;
-	new_player_y = player->y + sin(player->rotationAngle) * move_step;
+	player_orientation = player_orientation_angle(player->rotation_angle);
+	player->rotation_angle += player->turn_direction * player->rotation_speed;
+	move_step = player->walk_direction * player->move_speed;
+	new_player_x = player->x + cos(player->rotation_angle) * move_step;
+	new_player_y = player->y + sin(player->rotation_angle) * move_step;
 	if (player->translation == -1 || player->translation == 1)
 	{
-		player->angle_angle = (M_PI * 0.5) - player->rotationAngle;
+		player->angle_angle = (M_PI * 0.5) - player->rotation_angle;
 		if (player_orientation == 1)
 		{
 			new_player_x = player->x - cos(player->angle_angle) * move_step;

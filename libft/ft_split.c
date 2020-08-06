@@ -6,7 +6,7 @@
 /*   By: mkayumba <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/04 17:38:43 by mkayumba          #+#    #+#             */
-/*   Updated: 2019/11/05 18:41:49 by mkayumba         ###   ########.fr       */
+/*   Updated: 2020/08/06 19:22:19 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ static	int		nb_char(char *s, char c)
 
 char			**ft_split(char *s, char c)
 {
-	int		nb_w;
-	int		i;
-	int		j;
+	int			nb_w;
+	int			i;
+	int			j;
 	char		**tab;
 
 	i = -1;

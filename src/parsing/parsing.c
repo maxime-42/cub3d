@@ -6,7 +6,7 @@
 /*   By: user42 <mkayumba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 16:52:27 by user42            #+#    #+#             */
-/*   Updated: 2020/08/05 18:21:51 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/06 13:06:43 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,40 +65,40 @@ static int	check_and_get_info(t_info *info)
 	info->color_floor = 0;
 	info->color_ceiling = 0;
 	if (get_window_size(&info->begin) == ERROR)
-		return (freeAll(ERROR));
+		return (free_all(ERROR));
 	if (get_color(&info->begin, "C ", &info->color_ceiling) == ERROR)
-		return (freeAll(ERROR));
+		return (free_all(ERROR));
 	if (get_color(&info->begin, "F ", &info->color_floor) == ERROR)
-		return (freeAll(ERROR));
+		return (free_all(ERROR));
 	if (get_image_path(&info->begin, "NO", 2, &g_texture[0].path) == ERROR)
-		return (freeAll(ERROR));
+		return (free_all(ERROR));
 	if (get_image_path(&info->begin, "SO", 2, &g_texture[1].path) == ERROR)
-		return (freeAll(ERROR));
+		return (free_all(ERROR));
 	if (get_image_path(&info->begin, "WE", 2, &g_texture[2].path) == ERROR)
-		return (freeAll(ERROR));
+		return (free_all(ERROR));
 	if (get_image_path(&info->begin, "EA", 2, &g_texture[3].path) == ERROR)
-		return (freeAll(ERROR));
+		return (free_all(ERROR));
 	if (get_image_path(&info->begin, "S", 1, &g_sprite.path) == ERROR)
-		return (freeAll(ERROR));
+		return (free_all(ERROR));
 	return (SUCCESS);
 }
 
 static int	check_map(t_info *info)
 {
 	if ((check_header_footer(&info->begin) == ERROR))
-		return (freeAll(ERROR));
+		return (free_all(ERROR));
 	if ((g_map_num_rows = ft_lstsize(info->begin)) < 3)
 	{
 		ft_putstr_fd("Error\nthere are not enought number line\n", STDOUT);
-		return (freeAll(ERROR));
+		return (free_all(ERROR));
 	}
 	info->column = nb_cloumn(info->begin);
 	if ((put_map_in_array(info->begin, g_map_num_rows, info->column)) == ERROR)
-		return (freeAll(ERROR));
+		return (free_all(ERROR));
 	if (g_info->begin)
-		ft_lstclear(&g_info->begin, &freeContentNode);
+		ft_lstclear(&g_info->begin, &free_content_node);
 	if (check_character_map(g_map_num_rows, &info->orientation) == ERROR)
-		return (freeAll(ERROR));
+		return (free_all(ERROR));
 	if (!info->orientation)
 	{
 		ft_putstr_fd("Error\nthere are probleme ", STDOUT);
@@ -127,7 +127,7 @@ int			parsing(t_info *info)
 	g_texture[3].path = 0;
 	g_sprite.path = 0;
 	if (put_files_in_list(&info->begin, info->fd) == ERROR)
-		return (freeAll(ERROR));
+		return (free_all(ERROR));
 	if (check_and_get_info(info) == ERROR)
 		return (ERROR);
 	if ((check_map(info)) == ERROR)

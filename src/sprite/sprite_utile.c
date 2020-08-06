@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprite_utile.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/06 15:34:50 by lenox             #+#    #+#             */
+/*   Updated: 2020/08/06 15:37:30 by lenox            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
 void	ft_puttexture(t_sprite *sprite, int x, int y, float sprite_size)
@@ -6,17 +18,18 @@ void	ft_puttexture(t_sprite *sprite, int x, int y, float sprite_size)
 	int	distancefromtop;
 	int	textureoffsety;
 	int	color;
-	/* int	a; */
+	int	a;
 
-	/* a = sizeof(sprite->data); */
-	textureoffsetx = (int)(256 * (x - (-sprite_size / 2 + sprite->spritescreenx)) * sprite->width / sprite_size) / 256;
+	a = sizeof(sprite->data);
+	textureoffsetx = (int)(256 * (x - (-sprite_size / 2 +
+	sprite->spritescreenx)) * sprite->width / sprite_size) / 256;
 	distancefromtop = (y) * 256 - g_window_height * 128 + sprite_size * 128;
 	textureoffsety = ((distancefromtop * sprite->height) / sprite_size) / 256;
-	/* if ((textureoffsety * sprite->width) + textureoffsetx) < a) */
-	/* 	return ; */
+	if (((textureoffsety * sprite->width) + textureoffsetx) < a)
+		return ;
 	color = sprite->data[(textureoffsety * sprite->width) + textureoffsetx];
 	if (color != 0x000000)
-	  	g_image_data[y * g_window_width + x] = color;
+		g_image_data[y * g_window_width + x] = color;
 }
 
 void	ft_drawsprite(t_sprite *sprite, float transformy, float sprite_size)
@@ -27,7 +40,8 @@ void	ft_drawsprite(t_sprite *sprite, float transformy, float sprite_size)
 	x = sprite->drawstartx;
 	while (x < sprite->drawendx)
 	{
-		if (transformy > 0 && x > 0 && x < g_window_width && transformy < sprite->buffer[x])
+		if (transformy > 0 && x > 0 && x < g_window_width &&
+		transformy < sprite->buffer[x])
 		{
 			y = sprite->drawstarty;
 			while (y < sprite->drawendy)
@@ -74,7 +88,7 @@ float	ft_calculangle(t_player *player, float x, float y)
 	vectx = x - player->x;
 	vecty = y - player->y;
 	playertospriteangle = atan2(vecty, vectx);
-	playerangle = normalizeAngle(player->rotationAngle);
+	playerangle = normalize_angle(player->rotationAngle);
 	spriteangle = playerangle - playertospriteangle;
 	if (spriteangle < -3.14159)
 		spriteangle += 2.0 * 3.14159;
@@ -84,8 +98,8 @@ float	ft_calculangle(t_player *player, float x, float y)
 	return (spriteangle);
 }
 
-
-int	ft_spritevisible(t_sprite *sprite, t_player *player, int id, float sprite_size)
+int		ft_spritevisible(t_sprite *sprite, t_player *player,
+		int id, float sprite_size)
 {
 	float	spriteangle;
 	float	spriteangle_end;
@@ -100,6 +114,5 @@ int	ft_spritevisible(t_sprite *sprite, t_player *player, int id, float sprite_si
 	fovsprite = g_fov_angle / 2 + wallspriteangle;
 	if (spriteangle < fovsprite)
 		return (1);
-	else
-		return (0);
+	return (0);
 }

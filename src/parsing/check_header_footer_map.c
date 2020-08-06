@@ -6,7 +6,7 @@
 /*   By: user42 <mkayumba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 17:17:47 by user42            #+#    #+#             */
-/*   Updated: 2020/08/05 17:21:15 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/06 12:41:28 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	check_header_map(t_list **begin, t_list *node)
 	{
 		next = node->next;
 		ft_list_remove_one_if(begin, node->content,
-		&ft_strcmp, &freeContentNode);
+		&ft_strcmp, &free_content_node);
 		return (check_header_map(begin, next));
 	}
 	else if (*line != '1')

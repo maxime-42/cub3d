@@ -6,7 +6,7 @@
 /*   By: user42 <mkayumba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 17:02:35 by user42            #+#    #+#             */
-/*   Updated: 2020/08/05 17:09:37 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/06 12:44:23 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ int				get_color(t_list **begin, char *name, int *num_color)
 	if (!(line = get_value_color(&color[2], line, 2)))
 		return (ERROR);
 	*num_color = (((color[0]) << 16) + ((color[1]) << 8) + (color[2]));
-	ft_list_remove_one_if(begin, node->content, &ft_strcmp, &freeContentNode);
+	ft_list_remove_one_if(begin, node->content, &ft_strcmp, &free_content_node);
 	return (SUCCESS);
 }

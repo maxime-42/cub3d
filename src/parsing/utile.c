@@ -6,32 +6,11 @@
 /*   By: user42 <mkayumba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 18:11:49 by user42            #+#    #+#             */
-/*   Updated: 2020/08/05 18:14:40 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/06 17:03:04 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void		print_tab(void)
-{
-	int	i;
-
-	i = 0;
-	while (g_map && g_map[i])
-	{
-		printf("%s\n", g_map[i]);
-		i++;
-	}
-}
-
-void		print_list(t_list *tmp)
-{
-	while (tmp)
-	{
-		printf("%s\n", (char *)tmp->content);
-		tmp = tmp->next;
-	}
-}
 
 void		delete_space_in_map(int column)
 {

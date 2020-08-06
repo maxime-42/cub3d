@@ -6,7 +6,7 @@
 /*   By: user42 <mkayumba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 17:14:55 by user42            #+#    #+#             */
-/*   Updated: 2020/08/05 17:17:24 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/06 12:42:45 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,6 @@ int		get_window_size(t_list **begin)
 		ft_putstr_fd("window size not correct\n", STDOUT);
 		return (ERROR);
 	}
-	ft_list_remove_one_if(begin, node->content, &ft_strcmp, &freeContentNode);
+	ft_list_remove_one_if(begin, node->content, &ft_strcmp, &free_content_node);
 	return (SUCCESS);
 }

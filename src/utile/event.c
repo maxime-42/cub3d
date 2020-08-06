@@ -1,23 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   event.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/06 12:06:33 by lenox             #+#    #+#             */
+/*   Updated: 2020/08/06 13:08:38 by lenox            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-int	keyPressed(int keyCode)
+int		key_pressed(int key_code)
 {
-	if (keyCode == UP_ARROW)
+	if (key_code == UP_ARROW)
 		g_player.walkDirection = +1;
-	else if (keyCode == DOWN_ARROW)
-        g_player.walkDirection = -1;
-	else if (keyCode == RIGHT_ARROW)
-        g_player.turnDirection = +1;
-	else if (keyCode == LEFT_ARROW)
+	else if (key_code == DOWN_ARROW)
+		g_player.walkDirection = -1;
+	else if (key_code == RIGHT_ARROW)
+		g_player.turnDirection = +1;
+	else if (key_code == LEFT_ARROW)
 		g_player.turnDirection = -1;
-	else if (keyCode == QUIT)
-		exit(freeAll(SUCCESS));
-	else if (keyCode == TRANSLATION_RIGHT)
+	else if (key_code == QUIT)
+		exit(free_all(SUCCESS));
+	else if (key_code == TRANSLATION_RIGHT)
 	{
 		g_player.translation = 1;
 		g_player.walkDirection = +1;
 	}
-	else if (keyCode == TRANSLATION_LEFT)
+	else if (key_code == TRANSLATION_LEFT)
 	{
 		g_player.translation = -1;
 		g_player.walkDirection = -1;
@@ -25,17 +37,17 @@ int	keyPressed(int keyCode)
 	return (0);
 }
 
-int	keyRelease(int keyCode)
+int		key_release(int key_code)
 {
-    if (keyCode == UP_ARROW)
+	if (key_code == UP_ARROW)
 		g_player.walkDirection = 0;
-	else if (keyCode == DOWN_ARROW)
+	else if (key_code == DOWN_ARROW)
 		g_player.walkDirection = 0;
-	else if (keyCode == RIGHT_ARROW)
+	else if (key_code == RIGHT_ARROW)
 		g_player.turnDirection = 0;
-	else if (keyCode == LEFT_ARROW)
+	else if (key_code == LEFT_ARROW)
 		g_player.turnDirection = 0;
-	else if (keyCode == TRANSLATION_RIGHT || keyCode == TRANSLATION_LEFT)
+	else if (key_code == TRANSLATION_RIGHT || key_code == TRANSLATION_LEFT)
 	{
 		g_player.translation = 0;
 		g_player.walkDirection = 0;
@@ -43,20 +55,20 @@ int	keyRelease(int keyCode)
 	return (0);
 }
 
-int	close_window(int keycode)
+int		close_window(int keycode)
 {
-	exit(freeAll(SUCCESS));
+	exit(free_all(SUCCESS));
 	(void)keycode;
 }
 
 void	handling_event(t_info *info)
 {
-	int	keyCode;
+	int	key_code;
 
-	keyCode = 0;
-	mlx_hook(g_win_mlx, 17, 1L << 17, &close_window, &keyCode);
-	mlx_hook(g_win_mlx, 2, (1L << 0), &keyPressed, &keyCode);
-	mlx_hook(g_win_mlx, 3, (1L << 1), &keyRelease, &keyCode);
+	key_code = 0;
+	mlx_hook(g_win_mlx, 17, 1L << 17, &close_window, &key_code);
+	mlx_hook(g_win_mlx, 2, (1L << 0), &key_pressed, &key_code);
+	mlx_hook(g_win_mlx, 3, (1L << 1), &key_release, &key_code);
 	mlx_loop_hook(g_mlx_ptr, &game_loop, &info);
 	mlx_loop(g_mlx_ptr);
 }

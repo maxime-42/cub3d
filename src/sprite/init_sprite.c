@@ -1,22 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_sprite.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/06 15:24:17 by lenox             #+#    #+#             */
+/*   Updated: 2020/08/06 15:34:08 by lenox            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-static void	load_ptr_and_data_sprite(t_sprite *sprite)
+static void		load_ptr_and_data_sprite(t_sprite *sprite)
 {
-	int	bpp;
-	int	size_line;
-	int	endian;
+	int			bpp;
+	int			size_line;
+	int			endian;
 
-	sprite->ptr = mlx_xpm_file_to_image(g_mlx_ptr, sprite->path, &sprite->width, &sprite->height);
+	sprite->ptr = mlx_xpm_file_to_image(g_mlx_ptr, sprite->path,
+	&sprite->width, &sprite->height);
 	if (!sprite->ptr)
 	{
 		ft_putstr_fd("Error\nFailer get ptr sprite\n", STDOUT);
-		exit(freeAll(ERROR));
+		exit(free_all(ERROR));
 	}
-	sprite->data = (int *)mlx_get_data_addr(sprite->ptr, &bpp, &size_line, &endian);
+	sprite->data = (int *)mlx_get_data_addr(sprite->ptr,
+	&bpp, &size_line, &endian);
 	if (!sprite->data)
 	{
 		ft_putstr_fd("Error\nFailer get image sprite\n", STDOUT);
-		exit(freeAll(ERROR));
+		exit(free_all(ERROR));
 	}
 }
 
@@ -32,11 +46,11 @@ static	void	put_to_zero(t_sprite *sprite)
 	sprite->height = 0;
 }
 
-static void	init_position_sprite(t_sprite *sprite, char **map)
+static void		init_position_sprite(t_sprite *sprite, char **map)
 {
-	int	i;
-	int	j;
-	int	id;
+	int			i;
+	int			j;
+	int			id;
 
 	id = 0;
 	i = -1;
@@ -57,7 +71,7 @@ static void	init_position_sprite(t_sprite *sprite, char **map)
 	}
 }
 
-static void	init_vecteur(t_sprite *sprite, char player_position)
+static void		init_vecteur(t_sprite *sprite, char player_position)
 {
 	if (player_position == 'E')
 	{
@@ -80,18 +94,12 @@ static void	init_vecteur(t_sprite *sprite, char player_position)
 		sprite->planx = 0;
 		sprite->plany = 0.6;
 	}
-	else if (player_position ==  'N')
-	{
-		sprite->dirx = 0;
-		sprite->diry = -1;
-		sprite->planx = -0.6;
-		sprite->plany = 0;
-	}
+	else if (player_position == 'N')
+		init_vecteur_north(sprite);
 }
 
- void		init_sprite(t_sprite *sprite, char **map, char player_position)
+void			init_sprite(t_sprite *sprite, char **map, char player_position)
 {
-
 	sprite->nb_sprite = count_sprite(map);
 	ft_mallocsprite(sprite);
 	put_to_zero(sprite);

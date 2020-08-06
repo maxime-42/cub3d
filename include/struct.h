@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struct.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/06 17:12:40 by lenox             #+#    #+#             */
+/*   Updated: 2020/08/06 17:19:51 by lenox            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 #ifndef _STRUCT_H
 # define _STRUCT_H
 # define SIZE_PATH 64
@@ -9,8 +20,8 @@ typedef struct		s_ray
 	float			yintercept;
 	float			xstep;
 	float			ystep;
-	float			wallHitX;
-	float			wallHitY;
+	float			wall_hit_x;
+	float			wall_hit_y;
 	float			wasHitVertical;
 	float			vertWallHitX;
 	float			vertWallHitY;
@@ -31,6 +42,7 @@ typedef struct		s_player
 	float			x;
 	float			y;
 	int				radius;
+	float			angle_angle;
 	int				turnDirection;
 	int				walkDirection;
 	float			rotationAngle;
@@ -44,8 +56,8 @@ typedef struct		s_info
 {
 	char			*texture[5];
 	int				nline_map;
-	int				column;// je l'utiliser que durant le parsing
-	int				height;//je l'utiliser que durant   le parsing
+	int				column;
+	int				height;
 	char			*sprint;
 	void			*map;
 	t_list			*begin;
@@ -65,7 +77,6 @@ typedef struct		s_texture
 	int				height;
 	int				width;
 }					t_texture;
-
 
 typedef struct s_wall
 {

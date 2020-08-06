@@ -12,8 +12,12 @@ CFLAGS= -I$(INC) -O3 -I../minilibx-linux
 NAME= cub3D
 
 SRC	=	./src/main.c\
-		./src/utile/init_mlx_and_window.c\
 		./src/utile/event.c\
+		./src/utile/init_global_variable.c\
+		./src/utile/mini_map.c\
+		./src/utile/load_ptr_textures_in_array.c\
+		./src/utile/normalize_angle.c\
+		./src/utile/check_argument.c\
 		./src/utile/free_all.c\
 		./src/parsing/parsing.c\
 		./src/parsing/utile.c\
@@ -24,15 +28,13 @@ SRC	=	./src/main.c\
 		./src/parsing/check_character_map.c\
 		./src/parsing/get_fd.c\
 		./src/parsing/check_header_footer_map.c\
-		./src/miniMap/miniMap.c\
-		./src/playerMovement/playerMovement.c\
-		./src/playerMovement/hasWallAt.c\
+		./src/playerMovement/player_movement.c\
+		./src/playerMovement/has_wall_at.c\
 		./src/playerMovement/init_player.c\
-		./src/cast_All_Rays/cast_All_Rays.c\
-		./src/cast_All_Rays/draw_Ray.c\
-		./src/cast_All_Rays/rayHorizontal.c\
-		./src/cast_All_Rays/distanceBetweenPoints.c\
-		./src/cast_All_Rays/rayVertical.c\
+		./src/cast_All_Rays/cast_all_rays.c\
+		./src/cast_All_Rays/ray_horizontal.c\
+		./src/cast_All_Rays/distance_between_points.c\
+		./src/cast_All_Rays/ray_vertical.c\
 		./src/render_3d/render_3d_projection.c\
 		./src/screenshot/bmp_exporter.c\
 		./src/sprite/init_sprite.c\

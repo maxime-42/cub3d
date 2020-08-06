@@ -1,4 +1,16 @@
-#include "cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sprite.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/06 15:20:01 by lenox             #+#    #+#             */
+/*   Updated: 2020/08/06 15:22:13 by lenox            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+# include "cub3d.h"
 
 static float	ft_gettransformy(t_sprite *sprite, t_player *player, int id)
 {
@@ -13,7 +25,8 @@ static float	ft_gettransformy(t_sprite *sprite, t_player *player, int id)
 	invdet = 1.0 / (sprite->planx * sprite->diry - sprite->dirx * sprite->plany);
 	transformx = invdet * (sprite->diry * spritex - sprite->dirx * spritey);
 	transformy = invdet * (-sprite->plany * spritex + sprite->planx * spritey);
-	sprite->spritescreenx = (int)((g_window_width / 2) * (1 + -transformx / transformy));
+	sprite->spritescreenx = (int)((g_window_width / 2) *
+	(1 + -transformx / transformy));
 	return (transformy);
 }
 
@@ -59,7 +72,8 @@ static void	ft_spritedistance(t_sprite *sprite, t_player *player)
 	id = 0;
 	while (id < sprite->nb_sprite)
 	{
-		sprite->distance[id] = distanceBetweenPoints(player->x, player->y, sprite->x[id], sprite->y[id]);
+		sprite->distance[id] = distance_between_points(player->x,
+		player->y, sprite->x[id], sprite->y[id]);
 		id++;
 	}
 }
@@ -86,7 +100,8 @@ void		ft_putsprite(t_sprite *sprite, t_player *player)
 	while (id < sprite->nb_sprite)
 	{
 		distanceprojection = (g_window_width / 2) / tan(g_fov_angle / 2);
-		sprite_size = (g_tile_size * 0.5 / sprite->distance[id]) * distanceprojection;
+		sprite_size = (g_tile_size * 0.5 / sprite->distance[id]) *
+		distanceprojection;
 		ft_zero(sprite);
 		if (ft_spritevisible(sprite, player, id, sprite_size) == 1)
 		{

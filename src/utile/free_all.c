@@ -1,18 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   free_all.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/08/06 12:24:58 by lenox             #+#    #+#             */
+/*   Updated: 2020/08/06 13:10:23 by lenox            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
 
-int		free_struct(t_info *info, int code_return)
+void			free_map(void)
 {
-	if (info->map)
-	{
-		free(info->map);
-		info->map = 0;
-	}
-	return (code_return);
-}
-
-void	free_map()
-{
-	int	i;
+	int			i;
 
 	i = -1;
 	if (g_map)
@@ -20,14 +22,14 @@ void	free_map()
 		while (g_map[++i])
 		{
 			free(g_map[i]);
-			g_map[i] = 0;;
+			g_map[i] = 0;
 		}
 		free(g_map);
 		g_map = 0;
 	}
 }
 
-void		freeContentNode(void *line)
+void			free_content_node(void *line)
 {
 	if ((char *)line)
 	{
@@ -36,7 +38,7 @@ void		freeContentNode(void *line)
 	}
 }
 
-static	void	free_sprite()
+static	void	free_sprite(void)
 {
 	if (g_sprite.path)
 	{
@@ -47,7 +49,7 @@ static	void	free_sprite()
 	{
 		if (g_sprite.ptr)
 		{
-			mlx_destroy_image (g_mlx_ptr, g_sprite.ptr);
+			mlx_destroy_image(g_mlx_ptr, g_sprite.ptr);
 			g_sprite.ptr = 0;
 			free(g_sprite.x);
 			free(g_sprite.y);
@@ -57,7 +59,7 @@ static	void	free_sprite()
 	}
 }
 
-static	void	free_texture()
+static	void	free_texture(void)
 {
 	int	i;
 
@@ -75,16 +77,15 @@ static	void	free_texture()
 		while (++i < NUM_TEXTURE)
 		{
 			if (g_texture[i].texture_ptr)
-				mlx_destroy_image (g_mlx_ptr, g_texture[i].texture_ptr);
+				mlx_destroy_image(g_mlx_ptr, g_texture[i].texture_ptr);
 		}
 	}
 }
 
-int		freeAll(int codeReturn)
+int				free_all(int code_return)
 {
 	if (g_info->begin)
-		ft_lstclear(&g_info->begin, &freeContentNode);
-	/* free_struct(g_info, codeReturn); */
+		ft_lstclear(&g_info->begin, &free_content_node);
 	free_map();
 	free_texture();
 	free_sprite();
@@ -93,11 +94,11 @@ int		freeAll(int codeReturn)
 		mlx_clear_window(g_mlx_ptr, g_win_mlx);
 		mlx_destroy_window(g_mlx_ptr, g_win_mlx);
 		if (g_img_ptr)
-			mlx_destroy_image (g_mlx_ptr, g_img_ptr);
+			mlx_destroy_image(g_mlx_ptr, g_img_ptr);
 	}
 	g_mlx_ptr = 0;
 	g_win_mlx = 0;
 	g_img_ptr = 0;
 	g_info->begin = 0;
-	return (codeReturn);
+	return (code_return);
 }

@@ -6,7 +6,7 @@
 /*   By: user42 <mkayumba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 17:12:43 by user42            #+#    #+#             */
-/*   Updated: 2020/08/05 17:13:22 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/06 12:43:08 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int			get_image_path(t_list **begin, char *name, int n, char **dest)
 	if (check_file_extension(line, ".xpm") == ERROR)
 		return (ERROR);
 	dest[0] = ft_strdup(line);
-	ft_list_remove_one_if(begin, node->content, &ft_strcmp, &freeContentNode);
+	ft_list_remove_one_if(begin, node->content, &ft_strcmp, &free_content_node);
 	(void)dest;
 	return (SUCCESS);
 }

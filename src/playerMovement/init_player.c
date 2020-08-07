@@ -6,7 +6,7 @@
 /*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 10:51:48 by lenox             #+#    #+#             */
-/*   Updated: 2020/08/06 18:57:54 by lenox            ###   ########.fr       */
+/*   Updated: 2020/08/07 11:06:34 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static void		player_position(t_player *player)
 
 void			init_player(t_player *player)
 {
-	player->radius = 5;
+	player->radius = 4;
 	player->turn_direction = 0;
 	player->walk_direction = 0;
 	player_position(player);

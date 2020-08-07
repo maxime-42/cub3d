@@ -6,7 +6,7 @@
 /*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 14:58:05 by lenox             #+#    #+#             */
-/*   Updated: 2020/08/06 19:00:04 by lenox            ###   ########.fr       */
+/*   Updated: 2020/08/07 12:06:51 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,34 +24,6 @@ static int	choice_of_texture(t_ray *ray)
 		return (3);
 	(void)ray;
 	return (0);
-}
-
-static void	draw_ceiling(t_wall *wall, int column_id)
-{
-	int	top;
-	int	color;
-
-	top = 0;
-	color = g_info->color_ceiling;
-	while (top < wall->wall_top)
-	{
-		g_image_data[top * g_window_width + column_id] = color;
-		top++;
-	}
-}
-
-static void	draw_floor(t_wall *wall, int column_id)
-{
-	int	bottom;
-	int	color;
-
-	color = g_info->color_floor;
-	bottom = (int)wall->wall_bottom;
-	while (bottom < g_window_height)
-	{
-		g_image_data[(bottom * g_window_width) + column_id] = color;
-		bottom++;
-	}
 }
 
 static void	draw_wall(t_ray *ray, t_wall *wall, int column_id)
@@ -100,7 +72,9 @@ void		render3d_projection(t_ray *ray, int column_id, t_sprite *sprite)
 	wall.wall_bottom = (g_window_height / 2) + (wall.wall_strip_height / 2);
 	if (wall.wall_bottom > g_window_height)
 		wall.wall_bottom = g_window_height;
-	draw_ceiling(&wall, column_id);
-	draw_wall(ray, &wall, column_id);
-	draw_floor(&wall, column_id);
+	/* ft_ceiling(); */
+	/* draw_ceiling(&wall, column_id); */
+	/* draw_floor(&wall, column_id); */
+	draw_wall(ray, &wall, column_id);	
+	/* ft_floor(); */	
 }

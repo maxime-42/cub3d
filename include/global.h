@@ -6,7 +6,7 @@
 /*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 17:09:43 by lenox             #+#    #+#             */
-/*   Updated: 2020/08/06 18:55:56 by lenox            ###   ########.fr       */
+/*   Updated: 2020/08/07 09:14:35 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ int				g_window_width;
 int				g_window_height;
 float			g_num_rays;
 float			g_fov_angle;
-
+int				g_size;
 #endif

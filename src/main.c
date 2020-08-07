@@ -6,11 +6,55 @@
 /*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:07:47 by lenox             #+#    #+#             */
-/*   Updated: 2020/08/06 19:32:15 by lenox            ###   ########.fr       */
+/*   Updated: 2020/08/07 11:24:14 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	ft_floor(void)
+{
+	int i;
+	int j;
+	int	color;
+
+	i = 0;
+	j = 0;
+	color = g_info->color_floor;
+	while (i < (g_window_height / 2))
+	{
+		while (j < g_window_width)
+		{
+			g_image_data[(i + g_window_height / 2) *
+			g_window_width + (j + 0)] = color;
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+}
+
+
+void	ft_ceiling(void)
+{
+	int i;
+	int j;
+	int	color;
+
+	i = 0;
+	j = 0;
+	color = g_info->color_ceiling;
+	while (i < (g_window_height / 2))
+	{
+		while (j < g_window_width)
+		{
+			g_image_data[(i + 0) * g_window_width + (j + 0)] = color;
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+}
 
 static	void	create_image(void *mlx_ptr, void *img_ptr, void *image_data)
 {
@@ -26,6 +70,7 @@ static	void	create_image(void *mlx_ptr, void *img_ptr, void *image_data)
 		free_all(ERROR);
 	}
 	image_data = (int *)mlx_get_data_addr(img_ptr, &bpp, &size_line, &endian);
+	g_size = size_line;
 	if (!image_data)
 	{
 		ft_putstr_fd("Error\nfaile to get image data", STDOUT);
@@ -42,6 +87,8 @@ int				game_loop(t_info *info)
 
 	create_image(g_mlx_ptr, g_img_ptr, g_image_data);
 	player_movement(&g_player);
+	ft_ceiling();//
+	ft_floor();//
 	ft_putsprite(&g_sprite, &g_player);
 	cast_all_rays(&g_player, &ray, &g_sprite);
 	mini_map(&g_player, g_info->map);

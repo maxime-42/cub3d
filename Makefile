@@ -5,7 +5,7 @@ RM	= rm -f
 
 INCLIB=$(INC)./minilibx-linux/lib
 
-CC = gcc -g -Wall -Wextra -Werror -I./include/
+CC = gcc -g -fsanitize=address -Wall -Wextra -Werror -I./include/
 
 CFLAGS= -I$(INC) -O3 -I../minilibx-linux
 
@@ -35,7 +35,7 @@ SRC	=	./src/main.c\
 		./src/cast_All_Rays/ray_horizontal.c\
 		./src/cast_All_Rays/distance_between_points.c\
 		./src/cast_All_Rays/ray_vertical.c\
-		./src/render_3d/render_3d_projection.c\
+		./src/cast_All_Rays/render_3d_projection.c\
 		./src/screenshot/bmp_exporter.c\
 		./src/sprite/init_sprite.c\
 		./src/sprite/init_sprite_utile.c\

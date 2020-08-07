@@ -6,7 +6,7 @@
 /*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 17:04:41 by lenox             #+#    #+#             */
-/*   Updated: 2020/08/06 17:09:06 by lenox            ###   ########.fr       */
+/*   Updated: 2020/08/07 14:54:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void		print_list(t_list *tmp);
 t_list		*get_node(t_list **begin, char *search, int n);
 int			get_color(t_list **begin, char *name, int *num_color);
 int			get_image_path(t_list **begin, char *name, int n, char **dest);
+void		draw_floor(void);
+void		draw_ceiling(void);
 int			check_header_footer(t_list **begin);
 int			put_the_same_number_of_column(t_list **begin);
 int			check_file_extension(char *line, char *extension_name);

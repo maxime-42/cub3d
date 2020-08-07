@@ -19,6 +19,7 @@ SRC	=	./src/main.c\
 		./src/utile/normalize_angle.c\
 		./src/utile/check_argument.c\
 		./src/utile/free_all.c\
+		./src/utile/distance_between_points.c\
 		./src/parsing/parsing.c\
 		./src/parsing/utile.c\
 		./src/parsing/get_window_size.c\
@@ -32,8 +33,8 @@ SRC	=	./src/main.c\
 		./src/playerMovement/has_wall_at.c\
 		./src/playerMovement/init_player.c\
 		./src/cast_All_Rays/cast_all_rays.c\
+		./src/cast_All_Rays/draw_ceiling_and_floor.c\
 		./src/cast_All_Rays/ray_horizontal.c\
-		./src/cast_All_Rays/distance_between_points.c\
 		./src/cast_All_Rays/ray_vertical.c\
 		./src/cast_All_Rays/render_3d_projection.c\
 		./src/screenshot/bmp_exporter.c\
@@ -48,12 +49,15 @@ OBJ = $(SRC:.c=.o)
 all	:$(NAME)
 
 $(NAME)	:$(OBJ)
+	make bonus -C ./libft
 	$(CC) -o $(NAME) $(OBJ) -L./libft -lft -L./minilibx-linux/ -lmlx -L$(INCLIB) -lXext -lX11 -lm -lbsd
 
 clean	:
+	make clean -C ./libft
 	rm -f $(NAME) $(OBJ) *~ core *.core
 
 fclean:	clean
+	make fclean -C ./libft
 	$(RM) $(NAME)
 
 re	: clean all

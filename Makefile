@@ -40,9 +40,9 @@ SRC	=	./src/main.c\
 		./src/screenshot/bmp_exporter.c\
 		./src/sprite/init_sprite.c\
 		./src/sprite/init_sprite_utile.c\
-		./src/sprite/sprite_utile.c\
 		./src/sprite/sprite.c\
-
+		./src/sprite/sprite_utile1.c\
+		./src/sprite/sprite_utile2.c\
 
 OBJ = $(SRC:.c=.o)
 

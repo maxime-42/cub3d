@@ -6,7 +6,7 @@
 /*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 15:52:42 by lenox             #+#    #+#             */
-/*   Updated: 2020/08/07 17:00:24 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/07 18:23:48 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static	void	draw_map_utile(int *ly, int *lx, int j, int color)
 		x = -1;
 		while (++x < g_tile_size * MINIMAP_SCALE_FACTOR)
 		{
-			g_image_data[*ly  * g_window_width + *lx] = color;
+			g_image_data[*ly * g_window_width + *lx] = color;
 			*lx += 1;
 		}
 		*ly += 1;
@@ -92,7 +92,8 @@ static void		orientation_line(int cor_y, int cor_x,
 	y = 0;
 	while (i < distance)
 	{
-		if (&g_image_data[(cor_y + y) * g_window_width + (cor_x + x)] < g_image_data)
+		if (&g_image_data[(cor_y + y) * g_window_width +
+		(cor_x + x)] < g_image_data)
 			return ;
 		g_image_data[(cor_y + y) * g_window_width + (cor_x + x)] = 0xff0000;
 		x = cos(angle) * longeur;
@@ -105,7 +106,9 @@ static void		orientation_line(int cor_y, int cor_x,
 void			mini_map(t_player *player, char **map)
 {
 	draw_map(map);
-	player_rect(player->x * MINIMAP_SCALE_FACTOR, player->y * MINIMAP_SCALE_FACTOR, player->radius, player->radius);
-	orientation_line(player->y * MINIMAP_SCALE_FACTOR, player->x * MINIMAP_SCALE_FACTOR,
-	10, player->rotation_angle);
+	player_rect(player->x * MINIMAP_SCALE_FACTOR, player->y *
+	MINIMAP_SCALE_FACTOR, player->radius, player->radius);
+	orientation_line(player->y * MINIMAP_SCALE_FACTOR,
+	player->x * MINIMAP_SCALE_FACTOR,
+	9, player->rotation_angle);
 }

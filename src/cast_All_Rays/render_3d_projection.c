@@ -6,7 +6,7 @@
 /*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 14:58:05 by lenox             #+#    #+#             */
-/*   Updated: 2020/08/07 12:06:51 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/07 18:26:06 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,5 @@ void		render3d_projection(t_ray *ray, int column_id, t_sprite *sprite)
 	wall.wall_bottom = (g_window_height / 2) + (wall.wall_strip_height / 2);
 	if (wall.wall_bottom > g_window_height)
 		wall.wall_bottom = g_window_height;
-	/* ft_ceiling(); */
-	/* draw_ceiling(&wall, column_id); */
-	/* draw_floor(&wall, column_id); */
-	draw_wall(ray, &wall, column_id);	
-	/* ft_floor(); */	
+	draw_wall(ray, &wall, column_id);
 }

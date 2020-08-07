@@ -6,7 +6,7 @@
 /*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 17:10:25 by lenox             #+#    #+#             */
-/*   Updated: 2020/08/07 19:00:06 by lenox            ###   ########.fr       */
+/*   Updated: 2020/08/07 18:52:15 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 # define RAYCASTING_H
 # include "cub3d.h"
 
-int		key_pressed(int keycode);
+int		key_pressed(int keyCode);
 int		get_file_descriptor(t_info *info, char *name_file);
-void	get_positionplayer(char **map, int *y, int *x);
-int		key_release(int keycode);
+void	get_PositionPlayer(char **map, int *y, int *x);
+int		key_release(int keyCode);
 float	distance_between_points(float x1, float y1, float x2, float y2);
 void	player_movement(t_player *player);
-void	init_player(t_player *player);
-void	drawline(int cory, int corx, float distance, int color, float angle);
-void	drawrect(int corx, int cory, int width, int height, int color);
+void	init_player(t_player *player);;
+void	drawline(int corY, int corX, float distance, int color, float angle);
+void	drawRect(int corX, int corY, int width, int height, int color);
 void	cast_all_rays(t_player *player, t_ray *ray, t_sprite *sprite);
 void	ray_horizontal(t_ray *ray, t_player *player);
 void	ray_vertical(t_ray *ray, t_player *player);
-void	render3d_projection(t_ray *ray, int columnid, t_sprite *sprite);
-void	put_sprite(t_ray *ray, int top, int wallstripheight,
-		int wallbottom, int columnid);
-void	playerposition(t_player *player);
+void	render3d_projection(t_ray *ray, int columnId, t_sprite *sprite);
+void	put_sprite(t_ray *ray, int top, int wallStripHeight, int wallBottom,
+		int columnId);
+void	playerPosition(t_player *player);
 float	normalize_angle(float angle);
 void	bmp_exporter(char *file_name);
 void	mini_map(t_player *player, char **map);
@@ -52,5 +52,4 @@ int		has_wall_at(float y, float x);
 int		close_window(int keycode);
 void	init_vecteur_north(t_sprite *sprite);
 void	ft_spritedistance(t_sprite *sprite, t_player *player);
-
 #endif

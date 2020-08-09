@@ -6,7 +6,7 @@
 /*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 17:10:25 by lenox             #+#    #+#             */
-/*   Updated: 2020/08/07 19:00:06 by lenox            ###   ########.fr       */
+/*   Updated: 2020/08/09 14:08:41 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,6 @@ int		has_wall_at(float y, float x);
 int		close_window(int keycode);
 void	init_vecteur_north(t_sprite *sprite);
 void	ft_spritedistance(t_sprite *sprite, t_player *player);
-
+void	draw_floor(void);
+void	draw_ceiling(void);
 #endif

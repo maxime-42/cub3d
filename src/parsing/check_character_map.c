@@ -6,7 +6,7 @@
 /*   By: user42 <mkayumba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 17:50:48 by user42            #+#    #+#             */
-/*   Updated: 2020/08/05 18:04:59 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/09 15:53:14 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static	int		check_last_character(char character)
 {
 	if (character != '1')
 	{
-		ft_putstr_fd("Error\nlast charecter of column must be wall", STDOUT);
+		ft_putstr_fd("Error\nlast charecter of column must be wall\n", STDOUT);
 		return (ERROR);
 	}
 	return (SUCCESS);
@@ -50,44 +50,43 @@ static int		is_valide_character(char *orientation, char character)
 				*orientation = character;
 			else
 			{
-				ft_putstr_fd("Error\nto many direction\n", STDOUT);
+				ft_putstr_fd("Error\nduplicate starting direction\n", STDOUT);
 				return (ERROR);
 			}
 		}
 	}
 	else
 	{
-		ft_putstr_fd("Error\nunknown character ", STDOUT);
+		ft_putstr_fd("Error\nunknown character\n", STDOUT);
 		return (ERROR);
 	}
 	return (SUCCESS);
 }
 
-int				check_character_map(int nb_line, char *orientation)
+int				check_character_map(char *orientation)
 {
 	int			i;
 	int			j;
 	int			save;
 
-	i = 0;
+	i = 1;
 	save = 0;
-	if (is_wall(g_map[0]) == ERROR || is_wall(g_map[nb_line - 1]) == ERROR)
-		return (ERROR);
-	while (g_map[i + 1] && g_map[++i])
+	while (g_map[i + 1])
 	{
 		if ((j = check_first_character(g_map[i])) == ERROR)
 			return (ERROR);
 		while (g_map[i][++j])
 		{
-			if ((save = is_valide_character(orientation, g_map[i][j])) == ERROR)
+			if ((is_valide_character(orientation, g_map[i][j])) == ERROR)
 				return (ERROR);
-			if (check_around_character(g_map, i, j) == ERROR)
+			if (check_character_around(g_map, i, j) == ERROR)
 				return (ERROR);
 			if (g_map[i][j] != ' ')
 				save = j;
 		}
 		if (check_last_character(g_map[i][save]) == ERROR)
 			return (ERROR);
+		i++;
 	}
 	return (SUCCESS);
 }

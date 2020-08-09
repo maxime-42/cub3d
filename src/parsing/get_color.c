@@ -6,7 +6,7 @@
 /*   By: user42 <mkayumba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 17:02:35 by user42            #+#    #+#             */
-/*   Updated: 2020/08/06 12:44:23 by lenox            ###   ########.fr       */
+/*   Updated: 2020/08/09 14:30:08 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static char		*get_value_color(int *ptr, char *line, int column)
 	}
 	else
 	{
-		ft_putstr_fd("Error\nnwrong character for color\n", STDOUT);
+		ft_putstr_fd("Error\nwrong character for color\n", STDOUT);
 		return (0);
 	}
 	return ((line = utile_get_value_color(line, column)));

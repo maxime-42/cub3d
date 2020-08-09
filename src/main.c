@@ -6,7 +6,7 @@
 /*   By: lenox <mkayumba@student.42.fr>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 16:07:47 by lenox             #+#    #+#             */
-/*   Updated: 2020/08/07 15:04:19 by user42           ###   ########.fr       */
+/*   Updated: 2020/08/09 14:38:32 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ static	void	create_image(void *mlx_ptr, void *img_ptr, void *image_data)
 	endian = 0;
 	if (!(img_ptr = mlx_new_image(mlx_ptr, g_window_width, g_window_height)))
 	{
-		ft_putstr_fd("Error\nfaile to get image pointer", STDOUT);
+		ft_putstr_fd("Error\nfailure to get image pointer", STDOUT);
 		free_all(ERROR);
 	}
 	image_data = (int *)mlx_get_data_addr(img_ptr, &bpp, &size_line, &endian);
 	g_size = size_line;
 	if (!image_data)
 	{
-		ft_putstr_fd("Error\nfaile to get image data", STDOUT);
+		ft_putstr_fd("Error\nfailure to get image data", STDOUT);
 		free_all(ERROR);
 		exit(ERROR);
 	}

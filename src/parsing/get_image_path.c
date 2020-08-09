@@ -6,7 +6,7 @@
 /*   By: user42 <mkayumba@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/05 17:12:43 by user42            #+#    #+#             */
-/*   Updated: 2020/08/06 12:43:08 by lenox            ###   ########.fr       */
+/*   Updated: 2020/08/09 15:21:26 by lenox            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int			get_image_path(t_list **begin, char *name, int n, char **dest)
 
 	if (!(node = get_node(begin, name, n)))
 	{
-		ft_putstr_fd("Error\nit is not possible to load image\n", STDOUT);
+		ft_putstr_fd("Error\nit is not possible to get image\n", STDOUT);
 		return (ERROR);
 	}
 	line = (char *)node->content;

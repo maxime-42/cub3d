@@ -28,7 +28,6 @@ SRC	=	./src/main.c\
 		./src/parsing/check_character_map_utile.c\
 		./src/parsing/check_character_map.c\
 		./src/parsing/get_fd.c\
-		./src/parsing/check_header_footer_map.c\
 		./src/playerMovement/player_movement.c\
 		./src/playerMovement/has_wall_at.c\
 		./src/playerMovement/init_player.c\
@@ -43,6 +42,7 @@ SRC	=	./src/main.c\
 		./src/sprite/sprite.c\
 		./src/sprite/sprite_utile1.c\
 		./src/sprite/sprite_utile2.c\
+		./src/parsing/parsing_utile.c\
 
 OBJ = $(SRC:.c=.o)
 
@@ -54,7 +54,7 @@ $(NAME)	:$(OBJ)
 
 clean	:
 	make clean -C ./libft
-	rm -f $(NAME) $(OBJ) *~ core *.core
+	rm -f $(NAME) $(OBJ)
 
 fclean:	clean
 	make fclean -C ./libft
